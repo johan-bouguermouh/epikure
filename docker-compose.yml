@@ -1,0 +1,71 @@
+version: "3.8"
+
+services:
+  minio:
+    image: minio/minio:latest
+    command: server /data --console-address ":9001"
+    env_file: .env
+    volumes:
+      - minio_data:/data
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+
+  createbuckets:
+    image: minio/mc
+    depends_on:
+      - minio
+    env_file: .env
+    entrypoint: >
+      /bin/sh -c "
+      until (/usr/bin/mc alias set myminio http://$MINIO_ENDPOINT:$MINIO_PORT $MINIO_ACCESS_KEY $MINIO_SECRET_KEY) do echo '...waiting...' && sleep 1; done;
+      if ! (/usr/bin/mc ls myminio/$MINIO_BUCKET_NAME); then
+        /usr/bin/mc mb myminio/$MINIO_BUCKET_NAME;
+        /usr/bin/mc policy set public myminio/$MINIO_BUCKET_NAME;
+        echo -e '\033[0;34mBucket created: http://127.0.0.1:9001/minio/$MINIO_BUCKET_NAME\033[0m';
+      else
+        echo -e '\033[0;34mBucket already exists: http://127.0.0.1:9001/minio/$MINIO_BUCKET_NAME\033[0m';
+      fi;
+      echo 'Please open your browser and navigate to http://127.0.0.1:9001/minio/$MINIO_BUCKET_NAME';
+      exit 0;
+      "
+
+  database:
+    image: mysql:8
+    restart: always
+    env_file: .env
+    environment:
+      MYSQL_ROOT_PASSWORD: $MYSQL_ROOT_PASSWORD
+      MYSQL_DATABASE: $MYSQL_DATABASE
+      MYSQL_USER: $MYSQL_USER
+      MYSQL_PASSWORD: $MYSQL_PASSWORD
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+  nestjs:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    depends_on:
+      - minio
+      - createbuckets
+      - database
+    env_file:
+      - ./.env
+    develop:
+      watch:
+        - action: sync
+          path: ./backend
+          target: /usr/src/app
+          ignore:
+            - node_modules
+        - action: rebuild
+          path: ./backend/package.json
+
+volumes:
+  minio_data:
+  mysql_data:
