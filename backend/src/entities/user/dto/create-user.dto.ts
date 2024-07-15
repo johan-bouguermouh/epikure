@@ -1,10 +1,13 @@
 //Création du DTO CreateUser
-import { IsEmail, IsString } from 'class-validator';
+import {
+  IsBoolean,
+  IsEmail,
+  IsInt,
+  IsString,
+  IsStrongPassword,
+} from 'class-validator';
 
 export class CreateUserDto {
-  @IsString()
-  name: string;
-
   @IsEmail(
     {},
     {
@@ -12,4 +15,51 @@ export class CreateUserDto {
     },
   )
   email: string;
+
+  @IsStrongPassword(
+    {
+      minLength: 8,
+      minLowercase: 1,
+      minUppercase: 1,
+      minNumbers: 1,
+      minSymbols: 1,
+    },
+    {
+      message: 'Password is too weak',
+    },
+  )
+  password: string;
+
+  @IsBoolean()
+  isActive: boolean;
+
+  @IsBoolean()
+  isFarmer: boolean;
+
+  @IsInt()
+  role: number;
+}
+
+export class bodyCreateUserDto {
+  @IsEmail(
+    {},
+    {
+      message: 'Email is invalid',
+    },
+  )
+  email: string;
+
+  @IsStrongPassword(
+    {
+      minLength: 8,
+      minLowercase: 1,
+      minUppercase: 1,
+      minNumbers: 1,
+      minSymbols: 1,
+    },
+    {
+      message: 'Password is too weak',
+    },
+  )
+  password: string;
 }

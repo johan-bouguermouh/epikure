@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "module": "commonjs",
+    "module": "commonjs", // Utilisation de CommonJS pour la compatibilité avec Node.js
     "declaration": true,
     "removeComments": true,
     "emitDecoratorMetadata": true,
@@ -19,7 +19,9 @@
     "noFallthroughCasesInSwitch": false,
     "paths": {
       "@nestjs/*": ["node_modules/@nestjs/*"]
-    }
+    },
+    "esModuleInterop": true, // Ajout de cette option pour permettre l'importation de modules ES
+    "resolveJsonModule": true // Ajout de cette option pour permettre l'importation de fichiers JSON
   },
   "include": ["src/**/*"],
   "exclude": ["node_modules", "dist"]
