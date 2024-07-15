@@ -1,7 +1,7 @@
 import React from 'react'
 import {Text, View} from 'react-native'
 
-function Produits() {
+function MapScreen() {
     return (
         <View>
           
@@ -10,4 +10,4 @@ function Produits() {
       )
 }
 
-export default Produits
+export default MapScreen
