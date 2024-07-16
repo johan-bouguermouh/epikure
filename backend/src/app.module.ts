@@ -12,6 +12,7 @@ import { RoleModule } from './entities/roles/role.module';
 import { FarmerModule } from './entities/farmer/farmer.module';
 import { CategoryProductModule } from './entities/category-product/category-prodyuct.module';
 import { ProductModule } from './entities/product/product.module';
+import { PlaceModule } from './entities/place/place.module';
 
 @Module({
   imports: [
@@ -24,6 +25,7 @@ import { ProductModule } from './entities/product/product.module';
     FarmerModule,
     CategoryProductModule,
     ProductModule,
+    PlaceModule,
   ],
   controllers: [AppController, UploadController],
   providers: [AppService, UploadService],

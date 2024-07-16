@@ -1,5 +1,4 @@
 import { Controller, Get, Post, Body, Put } from '@nestjs/common';
-import { CreateFarmerDto } from './dto/create-farme.dto';
 import { FarmerService } from './farmer.services';
 import { Farmer } from './farmer.entity';
 import { GetIforFarmerDto } from './dto/get-ifor-farmer.dto';
