@@ -1,11 +1,13 @@
 import React from 'react'
-import {Text, View} from 'react-native'
+import {Button,Text, View} from 'react-native'
 
-function MapScreen() {
+function MapScreen({navigation}) {
     return (
         <View>
-          
           <Text>Test</Text>
+          <Button  
+           title="Go to Magasin"
+            onPress={() => navigation.navigate('Magasin')}/>
         </View>
       )
 }
