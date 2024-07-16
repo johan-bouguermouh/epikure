@@ -5,13 +5,22 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
   OneToMany,
+  OneToOne,
+  JoinColumn,
+  Unique,
 } from 'typeorm';
 import { CreateFarmerDto } from './dto/create-farme.dto';
+import { User } from '../user/user.entity';
 
 @Entity()
+@Unique(['siretNumber', 'sireneNumber'])
 export class Farmer {
   @PrimaryGeneratedColumn()
   id: number;
+
+  @OneToOne(() => User)
+  @JoinColumn()
+  user: User;
 
   /**
    * Raison social du producteur
@@ -100,13 +109,13 @@ export class Farmer {
   /**
    * Position de la latitude du producteur en float
    */
-  @Column({ nullable: true })
+  @Column('decimal', { precision: 10, scale: 8 })
   latitude: number;
 
   /**
    * Position de la longitude du producteur en float
    */
-  @Column({ nullable: true })
+  @Column('decimal', { precision: 10, scale: 8 })
   longitude: number;
 
   setFarmer(farmer: Farmer | CreateFarmerDto) {

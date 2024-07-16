@@ -3,6 +3,8 @@ import { In, Repository } from 'typeorm';
 import { Farmer } from './farmer.entity';
 import { CreateFarmerDto } from './dto/create-farme.dto';
 import { Interface } from 'readline';
+import { User } from '../user/user.entity';
+import { BodyCreateFarmerDto } from './dto/body-create-farmer.dto';
 
 //on créer l'interface pour le siret et le siren
 interface SiretOrSiren {
@@ -29,11 +31,17 @@ export class FarmerService {
   constructor(
     @Inject('FARMER_REPOSITORY')
     private farmerRepository: Repository<Farmer>,
+    @Inject('USER_REPOSITORY')
+    private userRepository: Repository<User>,
   ) {}
 
-  async create(createFarmerDto: CreateFarmerDto): Promise<Farmer> {
+  async create(BodyCreateFarmerDto: BodyCreateFarmerDto): Promise<Farmer> {
+    const { userId, ...farmerData } = BodyCreateFarmerDto;
+    const user = await this.userRepository.findOne({
+      where: { id: userId },
+    });
     const farmer = new Farmer();
-    farmer.setFarmer(createFarmerDto);
+    farmer.setFarmer({ ...farmerData, user });
     return this.farmerRepository.save(farmer);
   }
 
@@ -57,13 +65,15 @@ export class FarmerService {
         return data;
       });
 
+    console.log(response);
+
     switch (siretOrSirenNumber.type) {
       case 'siret':
-        return response.filter(
+        return response.results.filter(
           (etablissement: any) => etablissement.siege.siret === siretorSiren,
         );
       case 'siren':
-        return response.filter(
+        return response.results.filter(
           (etablissement: any) => etablissement.siren === siretorSiren,
         );
       default:

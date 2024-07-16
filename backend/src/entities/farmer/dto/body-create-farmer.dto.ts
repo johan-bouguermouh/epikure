@@ -1,13 +1,13 @@
 import { IsBoolean, IsNumber } from '@nestjs/class-validator';
 import { IsString, IsOptional, IsNumberString, IsInt } from 'class-validator';
-import { User } from 'src/entities/user/user.entity';
 
-export class CreateFarmerDto {
+export class BodyCreateFarmerDto {
   @IsString()
   socialReasonName: string;
 
   /** Id du compte principale de l'utilisateur */
-  user: User;
+  @IsInt()
+  userId: number;
 
   /** Création du regex pour le SIRET */
   @IsNumberString()

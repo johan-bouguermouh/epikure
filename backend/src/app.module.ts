@@ -9,6 +9,7 @@ import { UploadController } from './upload/controllers/upload.controller';
 import { UploadService } from './upload/services/upload.service';
 import { UserModule } from './entities/user/user.module';
 import { RoleModule } from './entities/roles/role.module';
+import { FarmerModule } from './entities/farmer/farmer.module';
 
 @Module({
   imports: [
@@ -18,6 +19,7 @@ import { RoleModule } from './entities/roles/role.module';
     DatabaseModule,
     UserModule,
     RoleModule,
+    FarmerModule,
   ],
   controllers: [AppController, UploadController],
   providers: [AppService, UploadService],
