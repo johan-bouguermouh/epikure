@@ -8,9 +8,12 @@ import {
   OneToOne,
   JoinColumn,
   Unique,
+  ManyToMany,
+  JoinTable,
 } from 'typeorm';
 import { CreateFarmerDto } from './dto/create-farme.dto';
 import { User } from '../user/user.entity';
+import { Product } from '../product/product.entity';
 
 @Entity()
 @Unique(['siretNumber', 'sireneNumber'])
@@ -118,7 +121,12 @@ export class Farmer {
   @Column('decimal', { precision: 10, scale: 8 })
   longitude: number;
 
+  @ManyToMany(() => Product)
+  @JoinTable()
+  products: Product[];
+
   setFarmer(farmer: Farmer | CreateFarmerDto) {
+    this.user = farmer.user;
     this.socialReasonName = farmer.socialReasonName;
     this.siretNumber = farmer.siretNumber;
     this.sireneNumber = farmer.sireneNumber;

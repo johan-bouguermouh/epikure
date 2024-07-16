@@ -16,8 +16,8 @@ export class UserController {
       email: bodyCreateUserDto.email,
       password: hashedPassword,
       isActive: true,
-      isFarmer: false,
-      role: 1,
+      isFarmer: bodyCreateUserDto.isFarmer,
+      role: bodyCreateUserDto.isFarmer === true ? 2 : 1,
     };
 
     return this.userService.create(createUserDto);

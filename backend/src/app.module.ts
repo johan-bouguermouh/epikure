@@ -10,6 +10,8 @@ import { UploadService } from './upload/services/upload.service';
 import { UserModule } from './entities/user/user.module';
 import { RoleModule } from './entities/roles/role.module';
 import { FarmerModule } from './entities/farmer/farmer.module';
+import { CategoryProductModule } from './entities/category-product/category-prodyuct.module';
+import { ProductModule } from './entities/product/product.module';
 
 @Module({
   imports: [
@@ -20,6 +22,8 @@ import { FarmerModule } from './entities/farmer/farmer.module';
     UserModule,
     RoleModule,
     FarmerModule,
+    CategoryProductModule,
+    ProductModule,
   ],
   controllers: [AppController, UploadController],
   providers: [AppService, UploadService],

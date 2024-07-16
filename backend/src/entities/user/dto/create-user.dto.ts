@@ -3,7 +3,7 @@ import {
   IsBoolean,
   IsEmail,
   IsInt,
-  IsString,
+  IsOptional,
   IsStrongPassword,
 } from 'class-validator';
 
@@ -62,4 +62,7 @@ export class bodyCreateUserDto {
     },
   )
   password: string;
+
+  @IsOptional()
+  isFarmer: boolean;
 }

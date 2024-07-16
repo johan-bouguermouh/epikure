@@ -6,7 +6,6 @@ import {
   OneToOne,
 } from 'typeorm';
 import { Role } from '../roles/role.entity';
-import { Farmer } from '../farmer/farmer.entity';
 
 @Entity()
 export class User {
