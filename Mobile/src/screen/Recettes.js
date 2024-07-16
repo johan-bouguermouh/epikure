@@ -1,17 +1,17 @@
-import React from 'react'
-import {Button,Text, View} from 'react-native'
+import React from "react";
+import { Button, Text, View } from "react-native";
 
-function Recettes({navigation}) {
-    return (
-        <View>
-          
-          <Text>Test</Text>
-          <Button  
-           title="Go to Recette"
-            onPress={() => navigation.navigate('Recette')}/>
-        </View>
-
-      )
+function Recettes({ navigation }) {
+  console.log("Recettes", navigation);
+  return (
+    <View>
+      <Text>Test</Text>
+      <Button
+        title="Go to Recette"
+        onPress={() => navigation.push("Recette")}
+      />
+    </View>
+  );
 }
 
-export default Recettes
+export default Recettes;
