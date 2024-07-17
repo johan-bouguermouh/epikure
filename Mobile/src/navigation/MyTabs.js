@@ -1,24 +1,18 @@
 import React from "react";
 import Feather from "@expo/vector-icons/Feather";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { createStackNavigator } from "@react-navigation/stack";
 import { StackActions } from "@react-navigation/native";
 
-import Recettes from "../screen/Recettes";
-import MapScreen from "../screen/MapScreen";
-import Produits from "../screen/Produits";
-import Favoris from "../screen/Favoris";
-import Notifications from "../screen/Notifications";
-
-import Product from "../components/products/Product";
-import Recipe from "../components/Recipes/Recipe";
-import Store from "../components/Stores/Store";
+import ProductTab from "./ProductTab";
+import RecipeTab from "./RecipeTab";
+import MapTab from "./MapTab";
+import FavoriteTab from "./FavoriteTab";
+import NotifTab from "./NotifTab";
 
 import { TouchableOpacity } from "react-native";
-import Productor from "../components/Productors/Productor";
 
 const Tab = createBottomTabNavigator();
-const Stack = createStackNavigator();
+
 const renderHeaderLeft = ({ navigation }) => {
   const handleGoBack = () => {
     navigation.goBack();
@@ -28,129 +22,6 @@ const renderHeaderLeft = ({ navigation }) => {
     <TouchableOpacity onPress={handleGoBack} style={{ marginLeft: 10 }}>
       <Feather name="chevron-left" size={24} color="black" />
     </TouchableOpacity>
-  );
-};
-
-const ProductTab = () => {
-  return (
-    <Stack.Navigator initialRouteName="Produits">
-      <Stack.Group screenOptions={{ headerTitleAlign: "center" }}>
-        <Stack.Screen name="Produits" component={Produits} />
-        <Stack.Screen
-          name="Produit"
-          component={Product}
-          options={({ navigation }) => ({
-            headerLeft: () => renderHeaderLeft({ navigation }),
-          })}
-        />
-        <Stack.Screen
-          name="Recette"
-          component={Recipe}
-          options={({ navigation }) => ({
-            headerLeft: () => renderHeaderLeft({ navigation }),
-          })}
-        />
-      </Stack.Group>
-    </Stack.Navigator>
-  );
-};
-
-const RecipeTab = () => {
-  return (
-    <Stack.Navigator initialRouteName="RecettesStack">
-      <Stack.Group>
-        <Stack.Screen name="RecettesStack" component={Recettes} />
-        <Stack.Screen
-          name="Recette"
-          component={Recipe}
-          options={({ navigation }) => ({
-            headerLeft: () => renderHeaderLeft({ navigation }),
-          })}
-        />
-      </Stack.Group>
-    </Stack.Navigator>
-  );
-};
-
-const MapTab = () => {
-  return (
-    <Stack.Navigator
-      initialRouteName="Map"
-      // screenOptions={{ headerShown : false }}
-    >
-      <Stack.Group>
-        <Stack.Screen name="Map" component={MapScreen} />
-        <Stack.Screen
-          name="Magasin"
-          component={Store}
-          options={({ navigation }) => ({
-            headerLeft: () => renderHeaderLeft({ navigation }),
-          })}
-        />
-        <Stack.Screen
-          name="Produit"
-          component={Product}
-          options={({ navigation }) => ({
-            headerLeft: () => renderHeaderLeft({ navigation }),
-          })}
-        />
-        <Stack.Screen
-          name="Producteur"
-          component={Productor}
-          options={({ navigation }) => ({
-            headerLeft: () => renderHeaderLeft({ navigation }),
-          })}
-        />
-      </Stack.Group>
-    </Stack.Navigator>
-  );
-};
-
-const FavoriteTab = () => {
-  return (
-    <Stack.Navigator initialRouteName="Mes Favoris">
-      <Stack.Group>
-        <Stack.Screen name="Mes favoris" component={Favoris} />
-        <Stack.Screen
-          name="Magasin"
-          component={Store}
-          options={({ navigation }) => ({
-            headerLeft: () => renderHeaderLeft({ navigation }),
-          })}
-        />
-        <Stack.Screen
-          name="Produit"
-          component={Product}
-          options={({ navigation }) => ({
-            headerLeft: () => renderHeaderLeft({ navigation }),
-          })}
-        />
-        <Stack.Screen
-          name="Recette"
-          component={Recipe}
-          options={({ navigation }) => ({
-            headerLeft: () => renderHeaderLeft({ navigation }),
-          })}
-        />
-        <Stack.Screen
-          name="Producteur"
-          component={Productor}
-          options={({ navigation }) => ({
-            headerLeft: () => renderHeaderLeft({ navigation }),
-          })}
-        />
-      </Stack.Group>
-    </Stack.Navigator>
-  );
-};
-
-const NotifTab = () => {
-  return (
-    <Stack.Navigator initialRouteName="Notifications">
-      <Stack.Group>
-        <Stack.Screen name="Notifications" component={Notifications} />
-      </Stack.Group>
-    </Stack.Navigator>
   );
 };
 
@@ -174,28 +45,28 @@ function MyTabs() {
     >
       <Tab.Screen
         name="Products"
-        children={() => <ProductTab />}
+        children={() => <ProductTab renderHeaderLeft={renderHeaderLeft} />}
         listeners={resetTabStacksOnBlur}
       />
       <Tab.Screen
         name="Recettes"
-        children={() => <RecipeTab />}
+        children={() => <RecipeTab renderHeaderLeft={renderHeaderLeft} />}
         listeners={resetTabStacksOnBlur}
       />
       <Tab.Screen
         name="MapTab"
         screenOptions={{ unmountOnBlur: true }}
-        children={() => <MapTab />}
+        children={() => <MapTab renderHeaderLeft={renderHeaderLeft} />}
         listeners={resetTabStacksOnBlur}
       />
       <Tab.Screen
         name="Favoris"
-        children={() => <FavoriteTab />}
+        children={() => <FavoriteTab renderHeaderLeft={renderHeaderLeft} />}
         listeners={resetTabStacksOnBlur}
       />
       <Tab.Screen
         name="NotifTab"
-        children={() => <NotifTab />}
+        children={() => <NotifTab renderHeaderLeft={renderHeaderLeft} />}
         listeners={resetTabStacksOnBlur}
       />
     </Tab.Navigator>
