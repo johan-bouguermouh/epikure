@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import "./gesture-handler";
-import { StatusBar } from "expo-status-bar";
 import { Button, StyleSheet, Text, View } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { NavigationContainer } from "@react-navigation/native";
@@ -14,7 +13,8 @@ export default function App() {
   const checkOnBoarding = async () => {
     try {
       const value = await AsyncStorage.getItem("onBoarded");
-      if (value !== null) {
+      if (value) {
+        console.log("VALUE", value);
         setOnBoarded(true);
       }
       setLoading(false);
@@ -23,18 +23,17 @@ export default function App() {
     }
   };
 
-  const removeOnBoarding = async () => {
-    try {
-      await AsyncStorage.removeItem("onBoarded");
-      setOnBoarded(false);
-    } catch (e) {
-      console.log(e);
-    }
-  };
+  // SI BESOIN DE SUPPRIMER LE ONBOARDING POUR LE REVOIR (Dans une version avec profil utilisateur éventuellement)
+  // const removeOnBoarding = async () => {
+  //   try {
+  //     await AsyncStorage.removeItem("onBoarded");
+  //     setOnBoarded(false);
+  //   } catch (e) {
+  //     console.log(e);
+  //   }
+  // };
 
   useEffect(() => {
-    console.log("CHECKING ONBOARDING");
-    console.log("ONBOARDED", onBoarded);
     checkOnBoarding();
   }, [onBoarded]);
 
@@ -42,19 +41,23 @@ export default function App() {
     return <Text style={styles.container}>Loading...</Text>;
   }
 
+  if (onBoarded) {
+    return (
+      <NavigationContainer>
+        <MyTabs />
+      </NavigationContainer>
+
+      // <View style={styles.container}>
+      //   <Text>APPLICATION</Text>
+      //   <Text>OnBoarding Completed</Text>
+      //   <Button title="Remove OnBoarding" onPress={removeOnBoarding} />
+      // </View>
+    );
+  }
+
   return (
     <View style={styles.container}>
-      {onBoarded ? (
-        // <NavigationContainer>
-        //   <MyTabs />
-        // </NavigationContainer>
-        <View>
-          <Text>APPLICATION</Text>
-          <Button title="Remove OnBoarding" onPress={removeOnBoarding} />
-        </View>
-      ) : (
-        <OnBoarding onBoarded={onBoarded} setOnBoarded={setOnBoarded} />
-      )}
+      <OnBoarding setOnBoarded={setOnBoarded} />
     </View>
   );
 }

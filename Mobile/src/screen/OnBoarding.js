@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from "react";
-import { Text, View, Button, StyleSheet } from "react-native";
+import { View, StyleSheet } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import uuid from "react-native-uuid";
+
 import FirstScreen from "../components/onBoarding/FirstScreen";
 import SecondScreen from "../components/onBoarding/SecondScreen";
 import LastScreen from "../components/onBoarding/LastScreen";
 import Stepper from "../components/onBoarding/Stepper";
 
-function OnBoarding({ onBoarded, setOnBoarded }) {
+function OnBoarding({ setOnBoarded }) {
   const [step, setStep] = useState(0);
   const onBoarding = [
     { id: 0, component: <FirstScreen step={step} /> },
@@ -19,16 +21,13 @@ function OnBoarding({ onBoarded, setOnBoarded }) {
 
   const setLocalStorage = async () => {
     try {
-      await AsyncStorage.setItem("onBoarded", "true");
+      const id = uuid.v4();
+      await AsyncStorage.setItem("onBoarded", id);
       setOnBoarded(true);
     } catch (e) {
       console.log(e);
     }
   };
-
-  useEffect(() => {
-    console.log("OnBoarded HERE", onBoarded);
-  }, [onBoarded]);
 
   return (
     <View style={styles.container}>

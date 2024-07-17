@@ -5,7 +5,11 @@ import { Entypo } from "@expo/vector-icons";
 function Stepper({ step, setStep, onBoarding, setLocalStorage }) {
   return (
     <View style={styles.container}>
-      {step > 0 && <Button title="Back" onPress={() => setStep(step - 1)} />}
+      <Button
+        title="Back"
+        onPress={() => setStep(step - 1)}
+        disabled={step === 0}
+      />
       {onBoarding.map((dot, index) => (
         <TouchableOpacity key={index} onPress={() => setStep(index)}>
           <Entypo
