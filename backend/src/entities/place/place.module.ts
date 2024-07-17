@@ -1,5 +1,5 @@
 import { Module } from '@nestjs/common';
-import { PlaceService } from './place.service.dto';
+import { PlaceService } from './place.service';
 import { PlaceController } from './place.controller';
 import { placeProvider } from './place.provider';
 import { DatabaseModule } from 'src/database/database.module';

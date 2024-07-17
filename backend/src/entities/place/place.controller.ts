@@ -1,5 +1,5 @@
 import { Controller, Get, Post, Body, Put, Query, Param } from '@nestjs/common';
-import { PlaceService } from './place.service.dto';
+import { PlaceService } from './place.service';
 import { Place } from './place.entity';
 import { BodyCreatePlaceDto } from './dto/body-create-place.dto';
 import { QueryParamsAutocompleteDto } from './dto/query-params-autocomplete.dto';
