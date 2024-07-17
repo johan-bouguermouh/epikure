@@ -32,6 +32,8 @@ ou
 nvm use node 
 ```
 
+# Install expo go sur le téléphone
+
 # Install expo cli 
 
 On vérifie d'abord d'avoir npm installé :
@@ -46,7 +48,16 @@ Si npm est bien installé :
 npm install -g expo-cli
 ```
 
+# Installer les dépendances
 
+```
+npm i
+```
 
+# Lancer le projet dans mobile 
+
+```
+npm start
+```
 
 
