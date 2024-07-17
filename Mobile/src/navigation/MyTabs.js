@@ -168,9 +168,10 @@ function MyTabs() {
   });
 
   return (
-    <Tab.Navigator screenOptions={{ headerShown: false }}>
-      {/* <Tab.Screen name="Home" component={Home} />
-      <Tab.Screen name="Profile" component={Profile} /> */}
+    <Tab.Navigator
+      initialRouteName="MapTab"
+      screenOptions={{ headerShown: false }}
+    >
       <Tab.Screen
         name="Products"
         children={() => <ProductTab />}
