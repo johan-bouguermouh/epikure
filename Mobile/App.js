@@ -1,24 +1,72 @@
-import './gesture-handler';
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
-import MyStack from './src/navigation/MyStack';
-import MyTabs from './src/navigation/MyTabs';
+import { useState, useEffect } from "react";
+import "./gesture-handler";
+import { Button, StyleSheet, Text, View } from "react-native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { NavigationContainer } from "@react-navigation/native";
+import MyTabs from "./src/navigation/MyTabs";
+import OnBoarding from "./src/screen/OnBoarding";
 
 export default function App() {
+  const [loading, setLoading] = useState(true);
+  const [onBoarded, setOnBoarded] = useState(false);
+
+  const checkOnBoarding = async () => {
+    try {
+      const value = await AsyncStorage.getItem("onBoarded");
+      if (value) {
+        console.log("VALUE", value);
+        setOnBoarded(true);
+      }
+      setLoading(false);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  // SI BESOIN DE SUPPRIMER LE ONBOARDING POUR LE REVOIR (Dans une version avec profil utilisateur éventuellement)
+  // const removeOnBoarding = async () => {
+  //   try {
+  //     await AsyncStorage.removeItem("onBoarded");
+  //     setOnBoarded(false);
+  //   } catch (e) {
+  //     console.log(e);
+  //   }
+  // };
+
+  useEffect(() => {
+    checkOnBoarding();
+  }, [onBoarded]);
+
+  if (loading) {
+    return <Text style={styles.container}>Loading...</Text>;
+  }
+
+  if (onBoarded) {
+    return (
+      <NavigationContainer>
+        <MyTabs />
+      </NavigationContainer>
+
+      // <View style={styles.container}>
+      //   <Text>APPLICATION</Text>
+      //   <Text>OnBoarding Completed</Text>
+      //   <Button title="Remove OnBoarding" onPress={removeOnBoarding} />
+      // </View>
+    );
+  }
+
   return (
-    <NavigationContainer>
-      {/* <MyStack /> */}
-      <MyTabs />
-    </NavigationContainer>
+    <View style={styles.container}>
+      <OnBoarding setOnBoarded={setOnBoarded} />
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: 50,
   },
 });
