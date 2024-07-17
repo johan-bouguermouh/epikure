@@ -2,6 +2,7 @@ import React from "react";
 import Feather from "@expo/vector-icons/Feather";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createStackNavigator } from "@react-navigation/stack";
+import { StackActions } from "@react-navigation/native";
 import Home from "../screen/Home";
 import Profile from "../screen/Profile";
 import Recettes from "../screen/Recettes";
@@ -57,9 +58,9 @@ const ProductTab = () => {
 
 const RecipeTab = () => {
   return (
-    <Stack.Navigator initialRouteName="Recettes">
+    <Stack.Navigator initialRouteName="RecettesStack">
       <Stack.Group>
-        <Stack.Screen name="Recettes" component={Recettes} />
+        <Stack.Screen name="RecettesStack" component={Recettes} />
         <Stack.Screen
           name="Recette"
           component={Recipe}
@@ -132,6 +133,13 @@ const FavoriteTab = () => {
             headerLeft: () => renderHeaderLeft({ navigation }),
           })}
         />
+        <Stack.Screen
+          name="Producteur"
+          component={Productor}
+          options={({ navigation }) => ({
+            headerLeft: () => renderHeaderLeft({ navigation }),
+          })}
+        />
       </Stack.Group>
     </Stack.Navigator>
   );
@@ -148,6 +156,18 @@ const NotifTab = () => {
 };
 
 function MyTabs() {
+  const resetTabStacksOnBlur = ({ navigation }) => ({
+    blur: () => {
+      const state = navigation.getState();
+
+      state.routes.forEach((route, tabIndex) => {
+        if (state?.index !== tabIndex && route.state?.index > 0) {
+          navigation.dispatch(StackActions.popToTop());
+        }
+      });
+    },
+  });
+
   return (
     <Tab.Navigator screenOptions={{ headerShown: false }}>
       {/* <Tab.Screen name="Home" component={Home} />
@@ -155,77 +175,28 @@ function MyTabs() {
       <Tab.Screen
         name="Products"
         children={() => <ProductTab />}
-        listeners={({ navigation }) => ({
-          tabPress: (e) => {
-            // e.preventDefault();
-            if (navigation.canGoBack()) {
-              navigation.reset({
-                index: 0,
-                routes: [{ name: "Produits" }],
-              });
-            }
-          },
-        })}
+        listeners={resetTabStacksOnBlur}
       />
       <Tab.Screen
         name="Recettes"
         children={() => <RecipeTab />}
-        listeners={({ navigation }) => ({
-          tabPress: (e) => {
-            // e.preventDefault();
-            if (navigation.canGoBack()) {
-              navigation.reset({
-                index: 0,
-                routes: [{ name: "Recettes" }],
-              });
-            }
-          },
-        })}
+        listeners={resetTabStacksOnBlur}
       />
       <Tab.Screen
         name="MapTab"
+        screenOptions={{ unmountOnBlur: true }}
         children={() => <MapTab />}
-        listeners={({ navigation }) => ({
-          tabPress: (e) => {
-            // e.preventDefault();
-            if (navigation.canGoBack()) {
-              navigation.reset({
-                index: 0,
-                routes: [{ name: "Map" }],
-              });
-            }
-          },
-        })}
+        listeners={resetTabStacksOnBlur}
       />
       <Tab.Screen
         name="Favoris"
         children={() => <FavoriteTab />}
-        listeners={({ navigation }) => ({
-          tabPress: (e) => {
-            // e.preventDefault();
-            if (navigation.canGoBack()) {
-              navigation.reset({
-                index: 0,
-                routes: [{ name: "Mes favoris" }],
-              });
-            }
-          },
-        })}
+        listeners={resetTabStacksOnBlur}
       />
       <Tab.Screen
         name="NotifTab"
         children={() => <NotifTab />}
-        listeners={({ navigation }) => ({
-          tabPress: (e) => {
-            // e.preventDefault();
-            if (navigation.canGoBack()) {
-              navigation.reset({
-                index: 0,
-                routes: [{ name: "Notifications" }],
-              });
-            }
-          },
-        })}
+        listeners={resetTabStacksOnBlur}
       />
     </Tab.Navigator>
   );
