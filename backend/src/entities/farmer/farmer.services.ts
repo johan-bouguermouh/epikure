@@ -56,7 +56,6 @@ export class FarmerService {
     const farmer = new Farmer();
     farmer.setFarmer({ ...farmerData, user });
 
-    console.log('on verifie que le User soit présent', farmer);
     return this.farmerRepository.save(farmer);
   }
 
@@ -79,8 +78,6 @@ export class FarmerService {
       .then((data) => {
         return data;
       });
-
-    console.log(response);
 
     switch (siretOrSirenNumber.type) {
       case 'siret':
@@ -112,8 +109,6 @@ export class FarmerService {
     const newProducts = await this.productRepository.find({
       where: { id: In(productIds) },
     });
-
-    console.log(newProducts);
 
     await this.farmerRepository
       .createQueryBuilder()

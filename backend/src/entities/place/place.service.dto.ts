@@ -122,28 +122,23 @@ export class PlaceService {
 
   async getPlaceByPlaceId(params: QueryParamsPlaceIdDto): Promise<Place> {
     const { placeId } = params;
-    console.log('Je verifie mon placeID', placeId);
     const API_KEY = process.env.GOOGLE_API_KEY;
 
     const place = await this.placeRepository.findOne({
       where: { googlePlaceId: placeId },
     });
 
-    console.log('Je verifie mon place', place);
-
     if (place) {
       return place;
     }
     const placeData = await findPlaceById(placeId);
 
-    console.log('Je verifie mon placeData', placeData);
     //On traite l'iamge pour qu'elle puisse être tourner au client
     const imagePlace: PhotoAPIGoogle = placeData.photos[0];
     const cleanUrl = imagePlace.name.split('/photos/')[1];
 
     const urlthumb = `https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${cleanUrl}&key=${API_KEY}`;
     const resultImage = await fetch(urlthumb);
-    console.log(resultImage.url);
 
     const newPlace = new Place();
     newPlace.googlePlaceId = placeId;
