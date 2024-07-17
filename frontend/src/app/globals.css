@@ -101,3 +101,15 @@ blockquote {
 /* @apply bg-background text-foreground; */
 /* } */
 /* } */
+
+.logo-container::before {
+  content: '';
+  position: absolute;
+  top: -45px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 320px;
+  height: 100px;
+  background-color: #3b82f6;
+  border-radius: 50%;
+}
