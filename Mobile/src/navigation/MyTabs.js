@@ -3,8 +3,7 @@ import Feather from "@expo/vector-icons/Feather";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createStackNavigator } from "@react-navigation/stack";
 import { StackActions } from "@react-navigation/native";
-import Home from "../screen/Home";
-import Profile from "../screen/Profile";
+
 import Recettes from "../screen/Recettes";
 import MapScreen from "../screen/MapScreen";
 import Produits from "../screen/Produits";
