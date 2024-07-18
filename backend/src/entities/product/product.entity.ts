@@ -1,7 +1,14 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from 'typeorm';
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  ManyToOne,
+  OneToMany,
+} from 'typeorm';
 import { CategoryProduct } from '../category-product/category-product.entity';
 import { NutriScoreDto } from './dto/nutritiscore.dto';
 import { CreateProductDto } from './dto/create-product.dto';
+import { CommandProduct } from 'src/entities/command-product/command-product.entity';
 
 @Entity()
 export class Product {
@@ -43,6 +50,9 @@ export class Product {
   /** Nutriscore du produit */
   @Column({ type: 'simple-json', nullable: false })
   nutriscore: NutriScoreDto[];
+
+  @OneToMany(() => CommandProduct, (commandProduct) => commandProduct.product)
+  commandProducts: CommandProduct[];
 
   setProduct(product: Product | CreateProductDto) {
     this.name = product.name;

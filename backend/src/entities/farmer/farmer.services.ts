@@ -1,8 +1,6 @@
 import { Injectable, Inject, NotFoundException } from '@nestjs/common';
 import { In, Repository } from 'typeorm';
 import { Farmer } from './farmer.entity';
-import { CreateFarmerDto } from './dto/create-farme.dto';
-import { Interface } from 'readline';
 import { User } from '../user/user.entity';
 import { BodyCreateFarmerDto } from './dto/body-create-farmer.dto';
 import { Product } from '../product/product.entity';
