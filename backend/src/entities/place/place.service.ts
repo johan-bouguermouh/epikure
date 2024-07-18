@@ -81,7 +81,7 @@ export class PlaceService {
     newPlace.latitude = placeData.location.latitude;
     newPlace.longitude = placeData.location.longitude;
     newPlace.urlImage = image.url;
-    newPlace.openingHours = { periods: placeData.currentOpeningHours.periods };
+    newPlace.openingHours = { periods: placeData.regularOpeningHours.periods };
     newPlace.rating = placeData.rating;
     newPlace.farmers = [farmer];
 
@@ -131,6 +131,7 @@ export class PlaceService {
     if (place) {
       return place;
     }
+
     const placeData = await findPlaceById(placeId);
 
     //On traite l'iamge pour qu'elle puisse être tourner au client
@@ -147,7 +148,7 @@ export class PlaceService {
     newPlace.latitude = placeData.location.latitude;
     newPlace.longitude = placeData.location.longitude;
     newPlace.urlImage = resultImage.url;
-    newPlace.openingHours = { periods: placeData.currentOpeningHours.periods };
+    newPlace.openingHours = { periods: placeData.regularOpeningHours.periods };
     newPlace.rating = placeData.rating;
 
     return newPlace;

@@ -4,6 +4,7 @@ import {
   Column,
   ManyToOne,
   OneToMany,
+  JoinColumn,
 } from 'typeorm';
 import { CategoryProduct } from '../category-product/category-product.entity';
 import { NutriScoreDto } from './dto/nutritiscore.dto';
@@ -24,7 +25,8 @@ export class Product {
   description: string;
 
   /** Appartenance à une catégorie */
-  @ManyToOne(() => CategoryProduct, (categoryProduct) => categoryProduct.id)
+  @ManyToOne(() => CategoryProduct)
+  @JoinColumn()
   categoryProduct: CategoryProduct;
 
   /** Date de début de récolte */

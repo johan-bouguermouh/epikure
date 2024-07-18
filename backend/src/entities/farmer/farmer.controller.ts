@@ -1,9 +1,10 @@
-import { Controller, Get, Post, Body, Put } from '@nestjs/common';
+import { Controller, Get, Post, Body, Put, Param, Query } from '@nestjs/common';
 import { FarmerService } from './farmer.services';
 import { Farmer } from './farmer.entity';
 import { GetIforFarmerDto } from './dto/get-ifor-farmer.dto';
 import { BodyCreateFarmerDto } from './dto/body-create-farmer.dto';
 import { BodyUpdateProductFarmerDto } from './dto/body-update-product-farme.dto';
+import { query } from 'express';
 
 @Controller('farmer')
 export class FarmerController {
@@ -34,5 +35,13 @@ export class FarmerController {
     @Body() body: BodyUpdateProductFarmerDto,
   ): Promise<Farmer> {
     return await this.farmerService.updateFarmerProducts(body);
+  }
+
+  @Get('/public/:id')
+  async getPublicFarmer(
+    @Param('id') id: number,
+    @Query('query') query: any,
+  ): Promise<any> {
+    return await this.farmerService.getPublicFarmer(id, query);
   }
 }

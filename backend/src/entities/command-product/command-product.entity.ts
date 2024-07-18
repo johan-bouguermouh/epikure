@@ -49,14 +49,10 @@ export class CommandProduct {
     let { conservationTime } = product;
     const endedDate = new Date(startedDate);
 
-    console.log('startedDate', startedDate);
-    console.log('conservationTime', conservationTime);
     //On passe conservationTime en number
     conservationTime = Number(conservationTime);
     //On ajoute le nombre de jours de conservation au startedDate
     endedDate.setDate(endedDate.getDate() + conservationTime.valueOf());
-
-    console.log('retour endedDate', endedDate);
 
     this.product = product;
     this.endedDate = endedDate;

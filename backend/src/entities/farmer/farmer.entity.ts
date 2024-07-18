@@ -7,10 +7,12 @@ import {
   Unique,
   ManyToMany,
   JoinTable,
+  OneToMany,
 } from 'typeorm';
 import { CreateFarmerDto } from './dto/create-farme.dto';
 import { User } from '../user/user.entity';
 import { Product } from '../product/product.entity';
+import { Command } from '../command/command.entity';
 
 @Entity()
 @Unique(['siretNumber', 'sireneNumber'])
@@ -121,6 +123,9 @@ export class Farmer {
   @ManyToMany(() => Product)
   @JoinTable()
   products: Product[];
+
+  @OneToMany(() => Command, (command) => command.farmer)
+  command: Command[];
 
   setFarmer(farmer: Farmer | CreateFarmerDto) {
     this.user = farmer.user;

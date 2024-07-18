@@ -5,6 +5,8 @@ import { User } from '../user/user.entity';
 import { BodyCreateFarmerDto } from './dto/body-create-farmer.dto';
 import { Product } from '../product/product.entity';
 import { BodyUpdateProductFarmerDto } from './dto/body-update-product-farme.dto';
+import { haversineDistance } from 'src/utils/distance.service';
+import { isOpen } from 'src/utils/openHourPlaces.service';
 
 //on créer l'interface pour le siret et le siren
 interface SiretOrSiren {
@@ -119,5 +121,102 @@ export class FarmerService {
 
     farmer.products = newProducts;
     return this.farmerRepository.save(farmer);
+  }
+
+  async getPublicFarmer(id: number, query: any): Promise<any> {
+    const dateNow = new Date();
+    const numberMounthNow = dateNow.getMonth() + 1;
+    const userLatitude = 43.3101197;
+    const userLongitude = 5.3632159;
+
+    const farmer = await this.farmerRepository.findOne({
+      where: { id },
+      relations: [
+        'command',
+        'command.commandProducts',
+        'command.commandProducts.product',
+        'command.commandProducts.product.categoryProduct',
+        'command.places',
+        'products',
+        'products.categoryProduct',
+      ],
+    });
+
+    if (!farmer) {
+      throw new NotFoundException('Farmer not found');
+    }
+
+    const simplifyProducts = farmer.products.map((product) => {
+      if (
+        product.harvestStartMounth.valueOf() <= numberMounthNow &&
+        product.harvestEndMounth.valueOf() >= numberMounthNow
+      ) {
+        return {
+          id: product.id,
+          name: product.name,
+          categoryProduct: product.categoryProduct,
+          thumbnail: product.thumbnail,
+        };
+      } else return false;
+    });
+
+    const filteredPlacesByCurrentCommand = farmer.command.filter((command) => {
+      const dateCommand = new Date(command.startedDate);
+      const commandProductWhereDLCisNotPassed = command.commandProducts.filter(
+        (commandProduct) => {
+          const dateDLC = new Date(commandProduct.endedDate);
+          return dateDLC > dateNow;
+        },
+      );
+      if (
+        commandProductWhereDLCisNotPassed.length > 0 &&
+        dateCommand < dateNow
+      ) {
+        return true;
+      } else return false;
+    });
+
+    let currentPlacesWithProducts = [];
+
+    filteredPlacesByCurrentCommand.forEach((command) => {
+      const { places } = command;
+      places.forEach((place) => {
+        if (
+          currentPlacesWithProducts.find(
+            (currentPlace) => currentPlace.id === place.id,
+          ) === undefined
+        ) {
+          const { latitude, longitude } = place;
+          const distance = haversineDistance(
+            { latitude: userLatitude, longitude: userLongitude },
+            { latitude, longitude },
+          );
+          currentPlacesWithProducts.push({
+            id: place.id,
+            name: place.name,
+            distance: Math.round(distance),
+            opening: isOpen(place.openingHours),
+          });
+        }
+      });
+    });
+
+    //On splimpifie la vue du farmer
+    let simplifyFarmer: any = {
+      id: farmer.id,
+      publicName: farmer.publicName,
+      avatarUrl: farmer.avatarUrl,
+      bannerUrl: farmer.bannerUrl,
+      shortDescription: farmer.shortDescription,
+      description: farmer.description,
+      localisation: {
+        latitude: farmer.latitude,
+        longitude: farmer.longitude,
+      },
+      products: simplifyProducts,
+      places: currentPlacesWithProducts,
+    };
+
+    return simplifyFarmer;
   }
 }
