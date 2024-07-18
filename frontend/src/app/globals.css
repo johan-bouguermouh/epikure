@@ -27,14 +27,9 @@ blockquote {
   @apply font-nunito text-lg font-normal;
 }
 
-
-
-
-
-
-
-
-
+a {
+  @apply text-dark-primary-500;
+}
 
 /* @layer base { */
 /* :root { */
@@ -103,13 +98,13 @@ blockquote {
 /* } */
 
 .logo-container::before {
-  content: '';
+  content: "";
   position: absolute;
   top: -45px;
   left: 50%;
   transform: translateX(-50%);
   width: 320px;
   height: 100px;
-  background-color: #3b82f6;
+  background-color: #ffb7a4;
   border-radius: 50%;
 }
