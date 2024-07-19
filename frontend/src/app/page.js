@@ -1,22 +1,25 @@
-import NavComponent from "../components/NavComponent";
-import HeroBannerComponent from "../components/HeroBannerComponent";
-import FooterComponent from "../components/FooterComponent";
+"use client";
 
-export default function Home() {
-  // const navigateToProducts = () => {
-  //   // Action to navigate to products
-  // };
+import React from 'react';
+import { useIsProducerContext } from '../context/IsProducerContext';
+import HeroBannerComponent from '../components/HeroBannerComponent';
+import ExplanationCardComponent from '../components/ExplanationCardComponent';
+import CommentaryComponent from '../components/CommentaryComponent';
 
-  // const navigateToServices = () => {
-  //   // Action to navigate to services
-  // };
+export default function HomePage() {
+  const { isProducer } = useIsProducerContext();
+
   return (
-    <>
-      <NavComponent />
-
-      <HeroBannerComponent />
-      
-      <FooterComponent />
-    </>
+    <main className="min-h-screen bg-slate-50">
+      <HeroBannerComponent
+        isProducer={isProducer}
+      />
+      <ExplanationCardComponent
+        isProducer={isProducer}
+      />
+      <CommentaryComponent
+        isProducer={isProducer}
+      />
+    </main>
   );
 }
