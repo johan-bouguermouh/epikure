@@ -1,0 +1,318 @@
+{
+    "clientName": "Thunder Client",
+    "collectionName": "Epikure",
+    "collectionId": "1eecc53e-56e6-44a7-b263-caad8b06e607",
+    "dateExported": "2024-07-18T19:03:16.910Z",
+    "version": "1.2",
+    "folders": [
+        {
+            "_id": "c8d338a5-e465-4b82-8d47-61782adac7ee",
+            "name": "Farmer",
+            "containerId": "",
+            "created": "2024-07-15T14:47:28.033Z",
+            "sortNum": 10000
+        },
+        {
+            "_id": "1ce3ca51-5321-403f-a188-5550dc593fa3",
+            "name": "Users",
+            "containerId": "",
+            "created": "2024-07-15T15:44:41.844Z",
+            "sortNum": 20000
+        },
+        {
+            "_id": "d0821eda-7502-4425-b0ea-d5a6b78801a1",
+            "name": "Category-product",
+            "containerId": "",
+            "created": "2024-07-16T11:02:48.769Z",
+            "sortNum": 30000
+        },
+        {
+            "_id": "f08231cb-797e-4649-80b7-8ce80e903272",
+            "name": "Role",
+            "containerId": "",
+            "created": "2024-07-16T11:06:43.589Z",
+            "sortNum": 40000
+        },
+        {
+            "_id": "965b8630-bbb9-47fd-8f3d-2b009b55d15c",
+            "name": "Product",
+            "containerId": "",
+            "created": "2024-07-16T11:37:06.126Z",
+            "sortNum": 50000
+        },
+        {
+            "_id": "cafa0b5c-a073-4495-b40d-03d5aa274b66",
+            "name": "Place",
+            "containerId": "",
+            "created": "2024-07-16T15:33:48.563Z",
+            "sortNum": 60000
+        },
+        {
+            "_id": "accb8c47-6dc9-425e-9720-91015e5efad2",
+            "name": "Command",
+            "containerId": "",
+            "created": "2024-07-18T08:51:13.136Z",
+            "sortNum": 70000
+        }
+    ],
+    "requests": [
+        {
+            "_id": "0cb6cd9c-2579-4fd3-a5ba-a2ca3bcf2dfe",
+            "colId": "1eecc53e-56e6-44a7-b263-caad8b06e607",
+            "containerId": "1ce3ca51-5321-403f-a188-5550dc593fa3",
+            "name": "Add User",
+            "url": "http://localhost:3000/user",
+            "method": "POST",
+            "sortNum": 10000,
+            "created": "2024-07-13T21:41:26.868Z",
+            "modified": "2024-07-18T08:45:45.907Z",
+            "headers": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"email\" : \"johanFarmer@mail.fr\",\n  \"password\" : \"Johan123!best\",\n  \"isFarmer\" : true\n}",
+                "form": []
+            }
+        },
+        {
+            "_id": "d4140e37-2308-4434-8ff6-fc8ee0908f3d",
+            "colId": "1eecc53e-56e6-44a7-b263-caad8b06e607",
+            "containerId": "c8d338a5-e465-4b82-8d47-61782adac7ee",
+            "name": "Get info farmer",
+            "url": "http://localhost:3000/farmer/info",
+            "method": "POST",
+            "sortNum": 20000,
+            "created": "2024-07-15T14:48:13.729Z",
+            "modified": "2024-07-17T12:35:42.364Z",
+            "headers": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"denomination\" : \"les paniers marseillais\",\n  \"siretorSiren\" : \"50367137200012\"\n}",
+                "form": []
+            }
+        },
+        {
+            "_id": "5c790bdd-4439-42f0-918f-7b1b684a873e",
+            "colId": "1eecc53e-56e6-44a7-b263-caad8b06e607",
+            "containerId": "c8d338a5-e465-4b82-8d47-61782adac7ee",
+            "name": "Get all farmer",
+            "url": "http://localhost:3000/farmer",
+            "method": "GET",
+            "sortNum": 30000,
+            "created": "2024-07-15T15:30:31.736Z",
+            "modified": "2024-07-15T15:30:46.638Z",
+            "headers": []
+        },
+        {
+            "_id": "529b5d92-9338-4801-91d2-c4c50610d503",
+            "colId": "1eecc53e-56e6-44a7-b263-caad8b06e607",
+            "containerId": "c8d338a5-e465-4b82-8d47-61782adac7ee",
+            "name": "Add farmers",
+            "url": "http://localhost:3000/farmer",
+            "method": "POST",
+            "sortNum": 40000,
+            "created": "2024-07-15T15:35:13.540Z",
+            "modified": "2024-07-18T08:47:54.703Z",
+            "headers": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"userId\" : 1,\n  \"siretNumber\" : \"50367137200012\",\n  \"sireneNumber\" : \"503671372\",\n  \"socialReasonName\" : \"LES PANIERS MARSEILLAIS\",\n  \"address\": \"CITE DES ASSOCIATIONS BOITE 199 93 VOIE LA CANEBIERE 13001 MARSEILLE\",\n  \"zipCode\": \"13001\",\n  \"city\" : \"MARSEILLE\",\n  \"isBio\": true,\n  \"managerLastName\" : \"Bouguermouh\",\n  \"managerFirstName\" : \"Johan\",\n  \"publicName\" : \"La Famille Bouguermouh\",\n  \"avatarUrl\" : \"https://www.boredpanda.com/blog/wp-content/uploads/2018/12/ai-image-generation-fake-faces-people-nvidia-5c18b20b472c2__700.jpg\",\n  \"bannerUrl\" : \"https://img.freepik.com/premium-photo/portrait-senior-hardworking-farmer-generator-by-ai_911060-48332.jpg\",\n  \"shortDescription\" : \"Nous sommes une famille cultivant la terre de génération en génération\",\n  \"description\" : \"Dans le doux murmure des champs, nous trouvons notre raison d'être. Ensemble, nous embrassons la terre, chaque grain de sable, chaque brin d'herbe, comme un précieux trésor. Nos mains caressent la vie naissante, nos cœurs battent à l'unisson avec le rythme des saisons. Dans l'harmonie de l'agriculture raisonnée, nous célébrons la générosité de la nature, respectant chaque créature, chaque goutte de rosée. Nous semons avec espoir, nous récoltons avec gratitude, bénissant le sol fertile qui nourrit nos rêves. Ici, l'amour de la terre et la passion de cultiver s'unissent pour créer un avenir lumineux et prospère, empreint de respect et de tendresse.\",\n  \"latitude\" : 43.298128,\n  \"longitude\" : 5.381708\n}",
+                "form": []
+            },
+            "docs": "@IsString()\n  socialReasonName: string;\n\n  /** Id du compte principale de l'utilisateur */\n  @IsInt()\n  userId: number;\n\n  /** Création du regex pour le SIRET */\n  @IsNumberString()\n  siretNumber: string;\n\n  /** Création du regex pour le SIREN */\n  @IsNumberString()\n  sireneNumber: string;\n\n  /** Adresse du producteur */\n  @IsString()\n  address: string;\n\n  /** Code postal du producteur */\n  @IsNumberString()\n  zipCode: string;\n\n  /** Ville du producteur */\n  @IsString()\n  city: string;\n\n  /** Si le producteur et bio */\n  @IsBoolean()\n  isBio: boolean;\n\n  /** Nom de famille du gérant d'entreprise */\n  @IsString()\n  managerLastName: string;\n\n  /** Prénom du gérant d'entreprise */\n  @IsString()\n  managerFirstName: string;\n\n  /** Nom présenté sur la fiche publique du producteur */\n  @IsString()\n  publicName: string;\n\n  /** Url de son image avatar */\n  @IsOptional()\n  @IsString()\n  avatarUrl: string;\n\n  /** Url de sa banniere de présentation de sa fiche publique */\n  @IsOptional()\n  @IsString()\n  bannerUrl: string;\n\n  /**  Description du producteur */\n  @IsString()\n  description: string;\n\n  /** Description courte du producteur */\n  @IsString()\n  shortDescription: string;\n\n  /** Position de la latitude du producteur en float */\n  @IsNumber()\n  latitude: number;\n\n  /** Position de la longitude du producteur en float */\n  @IsNumber()\n  longitude: number;"
+        },
+        {
+            "_id": "1519ad68-d736-4c6d-a96c-b70a51243e7a",
+            "colId": "1eecc53e-56e6-44a7-b263-caad8b06e607",
+            "containerId": "d0821eda-7502-4425-b0ea-d5a6b78801a1",
+            "name": "add category product",
+            "url": "http://localhost:3000/category-product",
+            "method": "POST",
+            "sortNum": 50000,
+            "created": "2024-07-16T11:03:00.536Z",
+            "modified": "2024-07-16T11:06:04.811Z",
+            "headers": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"name\" : \"Fruit\"\n}",
+                "form": []
+            }
+        },
+        {
+            "_id": "d44bd412-44b5-44d2-af45-d249db22671c",
+            "colId": "1eecc53e-56e6-44a7-b263-caad8b06e607",
+            "containerId": "c8d338a5-e465-4b82-8d47-61782adac7ee",
+            "name": "Update products Farmers",
+            "url": "http://localhost:3000/farmer/products",
+            "method": "PUT",
+            "sortNum": 70000,
+            "created": "2024-07-16T11:31:40.639Z",
+            "modified": "2024-07-18T15:13:08.636Z",
+            "headers": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"farmerId\" : 1,\n    \"productIds\" : [\n    1, 2\n    ]\n}",
+                "form": []
+            }
+        },
+        {
+            "_id": "26d28e61-d089-443e-b7a5-40329743c184",
+            "colId": "1eecc53e-56e6-44a7-b263-caad8b06e607",
+            "containerId": "965b8630-bbb9-47fd-8f3d-2b009b55d15c",
+            "name": "Add product",
+            "url": "http://localhost:3000/product",
+            "method": "POST",
+            "sortNum": 80000,
+            "created": "2024-07-16T11:37:14.366Z",
+            "modified": "2024-07-18T08:50:16.279Z",
+            "headers": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"name\": \"tomate\",\n  \"description\": \"Rond et savoureux, il fait partie des fruits et légumes d’été préférés des Français. Il se consomme aujourd’hui surtout comme un fruit, mais agrémente également des préparations salées.\",\n  \"categoryProductId\":  1,\n  \"harvestStartMounth\": 6,\n  \"harvestEndMounth\": 9,\n  \"thumbnail\": \"https://www.lesfruitsetlegumesfrais.com/media/lfm-media/Produits/Produit/Melon-descrip.jpg\",\n  \"urlBannerImage\": \"https://www.lesfruitsetlegumesfrais.com/media/lfm-media/Produits/Produit/Melon-banniere.jpg\",\n  \"conservationTime\": 6,\n  \"nutriscore\": [\n    {\n      \"name\": \"Provitamine A Béta-carotène\",\n      \"value\": \"2500 µg\"\n    },\n    {\n      \"name\": \"Vitamine B9\",\n      \"value\": \"58,90 µg\"\n    },\n    {\n      \"name\": \"Potassium\",\n      \"value\": \"380 mg\"\n    }\n  ]\n}\n",
+                "form": []
+            }
+        },
+        {
+            "_id": "e0635fee-f60b-4c4d-b3ac-c2909aa0f616",
+            "colId": "1eecc53e-56e6-44a7-b263-caad8b06e607",
+            "containerId": "cafa0b5c-a073-4495-b40d-03d5aa274b66",
+            "name": "Create Place",
+            "url": "http://localhost:3000/place",
+            "method": "POST",
+            "sortNum": 90000,
+            "created": "2024-07-16T15:33:57.205Z",
+            "modified": "2024-07-18T10:13:02.265Z",
+            "headers": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"placeId\" : \"ChIJVVXJBm_HyRIR9vTxQyCCA0U\",\n  \"farmerId\" : 1\n}",
+                "form": []
+            }
+        },
+        {
+            "_id": "065b8274-8778-4355-b51d-e803daae74cd",
+            "colId": "1eecc53e-56e6-44a7-b263-caad8b06e607",
+            "containerId": "cafa0b5c-a073-4495-b40d-03d5aa274b66",
+            "name": "Get Auto-complete",
+            "url": "http://localhost:3000/place/auto-complete/?input=\"Vente fruit et legume Marseille\"&location=43.3091364,5.376953",
+            "method": "GET",
+            "sortNum": 100000,
+            "created": "2024-07-17T09:06:26.931Z",
+            "modified": "2024-07-17T12:37:48.219Z",
+            "headers": [],
+            "params": [
+                {
+                    "name": "input",
+                    "value": "\"Vente fruit et legume Marseille\"",
+                    "isPath": false
+                },
+                {
+                    "name": "location",
+                    "value": "43.3091364,5.376953",
+                    "isPath": false
+                }
+            ]
+        },
+        {
+            "_id": "85da0fb9-2919-4c39-b257-7f015528e6ac",
+            "colId": "1eecc53e-56e6-44a7-b263-caad8b06e607",
+            "containerId": "cafa0b5c-a073-4495-b40d-03d5aa274b66",
+            "name": "Geat détail place",
+            "url": "http://localhost:3000/place/details/ChIJu7CCOKHByRIR-2iYQlLWZjs",
+            "method": "GET",
+            "sortNum": 110000,
+            "created": "2024-07-17T11:57:19.430Z",
+            "modified": "2024-07-17T11:59:33.279Z",
+            "headers": []
+        },
+        {
+            "_id": "f7234630-6e16-4def-9a8f-2e505b543af3",
+            "colId": "1eecc53e-56e6-44a7-b263-caad8b06e607",
+            "containerId": "accb8c47-6dc9-425e-9720-91015e5efad2",
+            "name": "Add new command",
+            "url": "http://localhost:3000/command",
+            "method": "POST",
+            "sortNum": 120000,
+            "created": "2024-07-18T10:10:13.349Z",
+            "modified": "2024-07-18T15:15:16.743Z",
+            "headers": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"farmerId\" : 1,\n  \"startedDate\" : \"2024-07-18T20:48:00.000Z\",\n  \"productIds\" : [ 1, 2],\n  \"placeIds\" : [ 2 ]\n}",
+                "form": []
+            }
+        },
+        {
+            "_id": "1f157425-8582-4448-bfb3-2016740e19bb",
+            "colId": "1eecc53e-56e6-44a7-b263-caad8b06e607",
+            "containerId": "accb8c47-6dc9-425e-9720-91015e5efad2",
+            "name": "get command by places",
+            "url": "http://localhost:3000/command/place/1",
+            "method": "GET",
+            "sortNum": 121250,
+            "created": "2024-07-18T11:40:27.867Z",
+            "modified": "2024-07-18T11:40:43.249Z",
+            "headers": []
+        },
+        {
+            "_id": "86a82b08-e2d8-446a-bd3d-f198b9cc15ac",
+            "colId": "1eecc53e-56e6-44a7-b263-caad8b06e607",
+            "containerId": "accb8c47-6dc9-425e-9720-91015e5efad2",
+            "name": "Get Commands by farmer",
+            "url": "http://localhost:3000/command/farmer/1",
+            "method": "GET",
+            "sortNum": 122500,
+            "created": "2024-07-18T11:39:57.343Z",
+            "modified": "2024-07-18T11:40:13.481Z",
+            "headers": []
+        },
+        {
+            "_id": "0fab0a19-046a-4d78-a74b-839a7ae0f69c",
+            "colId": "1eecc53e-56e6-44a7-b263-caad8b06e607",
+            "containerId": "accb8c47-6dc9-425e-9720-91015e5efad2",
+            "name": "Get command by id",
+            "url": "http://localhost:3000/command/1",
+            "method": "GET",
+            "sortNum": 130000,
+            "created": "2024-07-18T11:34:17.335Z",
+            "modified": "2024-07-18T11:36:43.373Z",
+            "headers": []
+        },
+        {
+            "_id": "6b611076-550e-42f7-8eeb-f6619db9b1ec",
+            "colId": "1eecc53e-56e6-44a7-b263-caad8b06e607",
+            "containerId": "accb8c47-6dc9-425e-9720-91015e5efad2",
+            "name": "Get all command",
+            "url": "http://localhost:3000/command/",
+            "method": "GET",
+            "sortNum": 140000,
+            "created": "2024-07-18T11:37:20.137Z",
+            "modified": "2024-07-18T11:37:46.796Z",
+            "headers": []
+        },
+        {
+            "_id": "808fe7ad-97e6-44bf-988b-2007933718bc",
+            "colId": "1eecc53e-56e6-44a7-b263-caad8b06e607",
+            "containerId": "c8d338a5-e465-4b82-8d47-61782adac7ee",
+            "name": "get public info farmer",
+            "url": "http://localhost:3000/farmer/public/1",
+            "method": "GET",
+            "sortNum": 170000,
+            "created": "2024-07-18T12:40:44.991Z",
+            "modified": "2024-07-18T12:41:13.754Z",
+            "headers": []
+        },
+        {
+            "_id": "b5011de0-baf2-4e9d-8ef4-7885fdf53a0e",
+            "colId": "1eecc53e-56e6-44a7-b263-caad8b06e607",
+            "containerId": "965b8630-bbb9-47fd-8f3d-2b009b55d15c",
+            "name": "Get all products",
+            "url": "http://localhost:3000/product",
+            "method": "GET",
+            "sortNum": 180000,
+            "created": "2024-07-18T14:02:34.357Z",
+            "modified": "2024-07-18T14:02:57.100Z",
+            "headers": []
+        }
+    ],
+    "ref": "lGSYgdT9lGa20wTZrjXGd9-1u64nJ_gDDJR7bSLSizievjn4WaEDBzGK4My6kmuN3WRBtrqtuhGsYhYOCcY-EA"
+}
