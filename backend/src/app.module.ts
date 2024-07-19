@@ -9,6 +9,12 @@ import { UploadController } from './upload/controllers/upload.controller';
 import { UploadService } from './upload/services/upload.service';
 import { UserModule } from './entities/user/user.module';
 import { RoleModule } from './entities/roles/role.module';
+import { FarmerModule } from './entities/farmer/farmer.module';
+import { CategoryProductModule } from './entities/category-product/category-prodyuct.module';
+import { ProductModule } from './entities/product/product.module';
+import { PlaceModule } from './entities/place/place.module';
+import { CommandModule } from './entities/command/command.module';
+import { CommandProductModule } from './entities/command-product/command-product.module';
 
 @Module({
   imports: [
@@ -18,6 +24,12 @@ import { RoleModule } from './entities/roles/role.module';
     DatabaseModule,
     UserModule,
     RoleModule,
+    FarmerModule,
+    CategoryProductModule,
+    ProductModule,
+    PlaceModule,
+    CommandModule,
+    CommandProductModule,
   ],
   controllers: [AppController, UploadController],
   providers: [AppService, UploadService],
