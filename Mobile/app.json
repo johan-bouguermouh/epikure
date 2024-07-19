@@ -24,6 +24,17 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "plugins": [
+      [
+        "expo-location",
+        {
+          "locationAlwaysAndWhenInUsePermission": "Allow Epikure to use your location.",
+          "locationWhenInUsePermission": "Allow Epikure to use your location.",
+          "locationAlwaysPermission": "Allow Epikure to use your location.",
+          "usesBackgroundLocation": true
+        }
+      ]
+    ]
   }
 }
