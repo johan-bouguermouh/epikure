@@ -5,6 +5,7 @@ import {
   IsJSON,
   IsArray,
   ValidateNested,
+  IsOptional,
 } from 'class-validator';
 import { NutriScoreDto } from './nutritiscore.dto';
 import { Type } from 'class-transformer';
@@ -23,7 +24,7 @@ export class BodyCreateProductDto {
   thumbnail: string;
 
   @IsString()
-  @IsNotEmpty()
+  @IsOptional()
   urlBannerImage: string;
 
   @IsNumber()

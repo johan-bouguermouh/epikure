@@ -21,7 +21,7 @@ export class Product {
   name: string;
 
   /** Courte description du produit */
-  @Column({ nullable: false, length: 255 })
+  @Column({ nullable: false, length: 1000 })
   description: string;
 
   /** Appartenance à une catégorie */
@@ -42,7 +42,7 @@ export class Product {
   thumbnail: string;
 
   /** Url de la banière du produit */
-  @Column({ nullable: false })
+  @Column({ nullable: true, default: null })
   urlBannerImage: string;
 
   /** Temps de conservation du produit en nombre de jours */

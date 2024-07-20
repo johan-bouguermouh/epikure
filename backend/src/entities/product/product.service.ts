@@ -32,4 +32,14 @@ export class ProductService {
       relations: ['categoryProduct'],
     });
   }
+
+  async insertCategoryProduct(name: string): Promise<CategoryProduct> {
+    const categoryProduct = new CategoryProduct();
+    categoryProduct.name = name;
+    return this.categoryProductRepository.save(categoryProduct);
+  }
+
+  async findAllCategoryProduct(): Promise<CategoryProduct[]> {
+    return this.categoryProductRepository.find();
+  }
 }

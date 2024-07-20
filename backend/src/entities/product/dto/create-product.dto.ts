@@ -4,6 +4,7 @@ import {
   IsNumber,
   IsJSON,
   IsObject,
+  IsOptional,
 } from 'class-validator';
 import { NutriScoreDto } from './nutritiscore.dto';
 import { CategoryProduct } from 'src/entities/category-product/category-product.entity';
@@ -22,7 +23,7 @@ export class CreateProductDto {
   thumbnail: string;
 
   @IsNumber()
-  @IsNotEmpty()
+  @IsOptional()
   urlBannerImage: string;
 
   @IsObject()
