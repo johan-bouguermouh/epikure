@@ -15,19 +15,26 @@ export class UserService {
   ) {}
 
   async create(createUserDto: CreateUserDto): Promise<User> {
+    const role: Role = createUserDto.isFarmer
+      ? await this.roleRepository.findOne({ where: { name: 'FARMER' } })
+      : await this.roleRepository.findOne({ where: { name: 'USER' } });
+
     const user = new User();
     user.email = createUserDto.email;
     user.password = createUserDto.password;
     user.isActive = createUserDto.isActive;
     user.isFarmer = createUserDto.isFarmer;
-    user.role = await this.roleRepository.findOne({
-      where: { id: createUserDto.role },
-    });
-
+    user.role = role;
     return this.userRepository.save(user);
   }
 
   async findAll(): Promise<User[]> {
     return this.userRepository.find();
+  }
+
+  async insertRole(name: string): Promise<Role> {
+    const role = new Role();
+    role.name = name;
+    return this.roleRepository.save(role);
   }
 }

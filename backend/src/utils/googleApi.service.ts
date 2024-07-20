@@ -10,6 +10,8 @@ export async function findPlaceById(placeId: string): Promise<any> {
       'X-Goog-Api-Key': API_KEY,
       'X-Goog-FieldMask': '*',
     },
+  }).catch((error) => {
+    throw console.error('Goog-Api-Key Api error :', error);
   });
 
   //on récupère les données

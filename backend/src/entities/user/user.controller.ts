@@ -4,6 +4,7 @@ import { UserService } from './user.service';
 import { bodyCreateUserDto, CreateUserDto } from './dto/create-user.dto';
 import { User } from './user.entity';
 import * as bcrypt from 'bcrypt';
+import { Role } from '../roles/role.entity';
 
 @Controller('user')
 export class UserController {
@@ -26,5 +27,10 @@ export class UserController {
   @Get()
   async findAll(): Promise<User[]> {
     return this.userService.findAll();
+  }
+
+  @Post('/role')
+  async addRole(@Body() body: { name: string }): Promise<Role> {
+    return this.userService.insertRole(body.name);
   }
 }
