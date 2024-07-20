@@ -59,6 +59,10 @@ npm run seed [entity_name]
 | place           | insertPlaces.ts          |
 | command         | insertCommand.ts         |
 
+## Ressources supplémentaires
+
+Un dossier data est présent et certain type de données difficiles à générée son disponnible dans les données afin de pouvoir les inserrées individuellement au besoin.
+
 ## Dépendances
 
 Le projet utilise les dépendances suivantes :
@@ -67,7 +71,7 @@ Le projet utilise les dépendances suivantes :
 - csvtojson
 - dotenv
 - fs
-- openai
+- openai _(optional)_
 
 ## Auteur
 

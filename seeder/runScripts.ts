@@ -56,18 +56,6 @@ function runScript(scriptPath: string): Promise<void> {
   });
 }
 
-// Liste des scripts à exécuter dans l'ordre
-// const scripts = [
-//   "insertRole.ts",
-//   "insertCategoryProduct.ts",
-//   "insertProducts.ts",
-//   "insertUser.ts",
-//   "insertFarmers.ts",
-//   "updateProductFarmer.ts",
-//   "insertPlaces.ts",
-//   "insertCommand.ts",
-// ];
-
 const scriptsToRun = entity ? [scriptMap[entity]] : Object.values(scriptMap);
 
 // Fonction pour exécuter les scripts séquentiellement
