@@ -1,4 +1,4 @@
-import { IsNumber, IsString } from 'class-validator';
+import { IsArray, IsNumber, IsString } from 'class-validator';
 
 export class BodyCreatePlaceDto {
   /** Id google de l'endroit */
@@ -6,6 +6,7 @@ export class BodyCreatePlaceDto {
   placeId: string;
 
   /** Id du farmer a l'origine de la demande */
-  @IsNumber()
-  farmerId: number;
+  @IsArray()
+  @IsNumber({}, { each: true })
+  farmerIds: number[];
 }

@@ -2,7 +2,7 @@
     "clientName": "Thunder Client",
     "collectionName": "Epikure",
     "collectionId": "1eecc53e-56e6-44a7-b263-caad8b06e607",
-    "dateExported": "2024-07-18T19:03:16.910Z",
+    "dateExported": "2024-07-20T13:37:13.389Z",
     "version": "1.2",
     "folders": [
         {
@@ -180,11 +180,11 @@
             "method": "POST",
             "sortNum": 90000,
             "created": "2024-07-16T15:33:57.205Z",
-            "modified": "2024-07-18T10:13:02.265Z",
+            "modified": "2024-07-19T05:21:49.070Z",
             "headers": [],
             "body": {
                 "type": "json",
-                "raw": "{\n  \"placeId\" : \"ChIJVVXJBm_HyRIR9vTxQyCCA0U\",\n  \"farmerId\" : 1\n}",
+                "raw": "{\n  \"placeId\" : \"ChIJVVXJBm_HyRIR9vTxQyCCA0U\",\n  \"farmerIds\" : [ 1 ]\n}",
                 "form": []
             }
         },
@@ -193,16 +193,16 @@
             "colId": "1eecc53e-56e6-44a7-b263-caad8b06e607",
             "containerId": "cafa0b5c-a073-4495-b40d-03d5aa274b66",
             "name": "Get Auto-complete",
-            "url": "http://localhost:3000/place/auto-complete/?input=\"Vente fruit et legume Marseille\"&location=43.3091364,5.376953",
+            "url": "http://localhost:3000/place/auto-complete/?input=\"Biocoop La Joliette 13002 Marseille\"&location=43.3091364,5.376953",
             "method": "GET",
             "sortNum": 100000,
             "created": "2024-07-17T09:06:26.931Z",
-            "modified": "2024-07-17T12:37:48.219Z",
+            "modified": "2024-07-20T07:48:59.491Z",
             "headers": [],
             "params": [
                 {
                     "name": "input",
-                    "value": "\"Vente fruit et legume Marseille\"",
+                    "value": "\"Biocoop La Joliette 13002 Marseille\"",
                     "isPath": false
                 },
                 {
@@ -217,11 +217,11 @@
             "colId": "1eecc53e-56e6-44a7-b263-caad8b06e607",
             "containerId": "cafa0b5c-a073-4495-b40d-03d5aa274b66",
             "name": "Geat détail place",
-            "url": "http://localhost:3000/place/details/ChIJu7CCOKHByRIR-2iYQlLWZjs",
+            "url": "http://localhost:3000/place/details/ChIJF2VVV3vAyRIRRp89Ox47fgo",
             "method": "GET",
             "sortNum": 110000,
             "created": "2024-07-17T11:57:19.430Z",
-            "modified": "2024-07-17T11:59:33.279Z",
+            "modified": "2024-07-20T07:48:21.345Z",
             "headers": []
         },
         {
@@ -294,11 +294,11 @@
             "colId": "1eecc53e-56e6-44a7-b263-caad8b06e607",
             "containerId": "c8d338a5-e465-4b82-8d47-61782adac7ee",
             "name": "get public info farmer",
-            "url": "http://localhost:3000/farmer/public/1",
+            "url": "http://localhost:3000/farmer/public/31",
             "method": "GET",
             "sortNum": 170000,
             "created": "2024-07-18T12:40:44.991Z",
-            "modified": "2024-07-18T12:41:13.754Z",
+            "modified": "2024-07-20T10:44:31.821Z",
             "headers": []
         },
         {
@@ -312,7 +312,31 @@
             "created": "2024-07-18T14:02:34.357Z",
             "modified": "2024-07-18T14:02:57.100Z",
             "headers": []
+        },
+        {
+            "_id": "12682162-1085-4425-b91c-69e5bc3e3d6b",
+            "colId": "1eecc53e-56e6-44a7-b263-caad8b06e607",
+            "containerId": "c8d338a5-e465-4b82-8d47-61782adac7ee",
+            "name": "get Farmer products",
+            "url": "http://localhost:3000/farmer/31/products",
+            "method": "GET",
+            "sortNum": 190000,
+            "created": "2024-07-20T08:48:16.687Z",
+            "modified": "2024-07-20T08:48:42.601Z",
+            "headers": []
+        },
+        {
+            "_id": "b4363e16-f619-4dc7-ac69-9f4d518fc4b4",
+            "colId": "1eecc53e-56e6-44a7-b263-caad8b06e607",
+            "containerId": "c8d338a5-e465-4b82-8d47-61782adac7ee",
+            "name": "Get farmer places",
+            "url": "http://localhost:3000/farmer/31/places",
+            "method": "GET",
+            "sortNum": 200000,
+            "created": "2024-07-20T08:50:17.128Z",
+            "modified": "2024-07-20T08:50:30.609Z",
+            "headers": []
         }
     ],
-    "ref": "lGSYgdT9lGa20wTZrjXGd9-1u64nJ_gDDJR7bSLSizievjn4WaEDBzGK4My6kmuN3WRBtrqtuhGsYhYOCcY-EA"
+    "ref": "lGSYgdT9lGa20wTZrjXGdyVtddEWsvfUgF_IWSakQInmhVzSVQ1qhhpP5KjiqG-65kM5U8a1ANVzjS7V6nmWiw"
 }

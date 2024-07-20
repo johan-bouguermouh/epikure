@@ -60,7 +60,9 @@ export class FarmerService {
   }
 
   async findAll(): Promise<Farmer[]> {
-    return this.farmerRepository.find();
+    return this.farmerRepository.find({
+      relations: ['places', 'products'],
+    });
   }
 
   async getInfoFarmer(
@@ -146,7 +148,7 @@ export class FarmerService {
       throw new NotFoundException('Farmer not found');
     }
 
-    const simplifyProducts = farmer.products.map((product) => {
+    let simplifyProducts = farmer.products.map((product) => {
       if (
         product.harvestStartMounth.valueOf() <= numberMounthNow &&
         product.harvestEndMounth.valueOf() >= numberMounthNow
@@ -159,6 +161,8 @@ export class FarmerService {
         };
       } else return false;
     });
+
+    simplifyProducts = simplifyProducts.filter((product) => product !== false);
 
     const filteredPlacesByCurrentCommand = farmer.command.filter((command) => {
       const dateCommand = new Date(command.startedDate);
@@ -218,5 +222,31 @@ export class FarmerService {
     };
 
     return simplifyFarmer;
+  }
+
+  async getProducts(id: number): Promise<any> {
+    const farmer = await this.farmerRepository.findOne({
+      where: { id },
+      relations: ['products', 'products.categoryProduct'],
+    });
+
+    if (!farmer) {
+      throw new NotFoundException('Farmer not found');
+    }
+
+    return farmer.products;
+  }
+
+  async getPlaces(id: number): Promise<any> {
+    const farmer = await this.farmerRepository.findOne({
+      where: { id },
+      relations: ['places'],
+    });
+
+    if (!farmer) {
+      throw new NotFoundException('Farmer not found');
+    }
+
+    return farmer.places;
   }
 }

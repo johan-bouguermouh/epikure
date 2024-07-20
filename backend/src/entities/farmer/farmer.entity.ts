@@ -13,6 +13,7 @@ import { CreateFarmerDto } from './dto/create-farme.dto';
 import { User } from '../user/user.entity';
 import { Product } from '../product/product.entity';
 import { Command } from '../command/command.entity';
+import { Place } from '../place/place.entity';
 
 @Entity()
 @Unique(['siretNumber', 'sireneNumber'])
@@ -126,6 +127,9 @@ export class Farmer {
 
   @OneToMany(() => Command, (command) => command.farmer)
   command: Command[];
+
+  @ManyToMany(() => Place, (place) => place.farmers)
+  places: Place[];
 
   setFarmer(farmer: Farmer | CreateFarmerDto) {
     this.user = farmer.user;

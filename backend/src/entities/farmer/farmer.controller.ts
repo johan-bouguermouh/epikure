@@ -44,4 +44,14 @@ export class FarmerController {
   ): Promise<any> {
     return await this.farmerService.getPublicFarmer(id, query);
   }
+
+  @Get(':id/products')
+  async getProducts(@Param('id') id: number): Promise<any> {
+    return await this.farmerService.getProducts(id);
+  }
+
+  @Get(':id/places')
+  async getPlaces(@Param('id') id: number): Promise<any> {
+    return await this.farmerService.getPlaces(id);
+  }
 }

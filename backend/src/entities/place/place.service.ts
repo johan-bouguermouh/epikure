@@ -1,5 +1,5 @@
 import { Inject, Injectable, NotFoundException } from '@nestjs/common';
-import { Repository } from 'typeorm';
+import { In, Repository } from 'typeorm';
 import { Place } from './place.entity';
 import { BodyCreatePlaceDto } from './dto/body-create-place.dto';
 import { UploadModule } from 'src/upload/upload.module';
@@ -33,44 +33,56 @@ export class PlaceService {
   ) {}
 
   async create(bodyCreatePlace: BodyCreatePlaceDto): Promise<any> {
-    const { farmerId, placeId } = bodyCreatePlace;
+    const { farmerIds, placeId } = bodyCreatePlace;
     //on récupère la clef API dans le .env
     const API_KEY = process.env.GOOGLE_API_KEY;
 
     //on récupère le farmer
-    const farmer = await this.farmerRepository.findOne({
-      where: { id: farmerId },
+    const farmers: Farmer[] = await this.farmerRepository.find({
+      where: { id: In(farmerIds) },
     });
 
-    if (!farmer) {
+    if (farmers.length === 0) {
       throw new NotFoundException('Farmer not found');
     }
 
     //on récupère les données
     const placeData = await findPlaceById(placeId);
 
-    //on traite l'image pour la stocker en local
-    const imagePlace: PhotoAPIGoogle = placeData.photos[0];
-    const cleanUrl = imagePlace.name.split('/photos/')[1];
+    if (!placeData || placeData.error) {
+      if (placeData.error) {
+        throw new NotFoundException(placeData.error);
+      }
+      throw new NotFoundException('Place not found');
+    }
 
-    const urlthumb = `https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${cleanUrl}&key=${API_KEY}`;
-    const resultImage = await fetch(urlthumb);
-    const arrayBuffer = await resultImage.arrayBuffer();
-    const buffer: Buffer = Buffer.from(arrayBuffer);
+    let image = {
+      url: 'https://cdn.midjourney.com/0105acd1-f5e2-474b-a908-baf9c1302250/0_0.png',
+    };
 
-    //à présent on utilise notre service upload pour stocker l'image
-    let image = await this.uploadService.uploadImage({
-      fieldname: 'image',
-      originalname: cleanUrl,
-      encoding: '7bit',
-      mimetype: 'image/jpeg',
-      size: buffer.length,
-      buffer: buffer,
-    });
+    if (placeData.photos && placeData.photos.length > 0) {
+      //on traite l'image pour la stocker en local
+      const imagePlace: PhotoAPIGoogle = placeData.photos[0];
+      const cleanUrl = imagePlace.name.split('/photos/')[1];
 
-    //si on est en mode dev on change minio par http://localhost:
-    if (process.env.MODE === 'dev') {
-      image.url = image.url.replace('minio', 'http://localhost');
+      const urlthumb = `https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${cleanUrl}&key=${API_KEY}`;
+      const resultImage = await fetch(urlthumb);
+      const arrayBuffer = await resultImage.arrayBuffer();
+      const buffer: Buffer = Buffer.from(arrayBuffer);
+
+      //à présent on utilise notre service upload pour stocker l'image
+      image = await this.uploadService.uploadImage({
+        fieldname: 'image',
+        originalname: cleanUrl,
+        encoding: '7bit',
+        mimetype: 'image/jpeg',
+        size: buffer.length,
+        buffer: buffer,
+      });
+
+      if (process.env.MODE === 'dev') {
+        image.url = image.url.replace('minio', 'http://localhost');
+      }
     }
 
     // fini par créer le place
@@ -83,7 +95,7 @@ export class PlaceService {
     newPlace.urlImage = image.url;
     newPlace.openingHours = { periods: placeData.regularOpeningHours.periods };
     newPlace.rating = placeData.rating;
-    newPlace.farmers = [farmer];
+    newPlace.farmers = farmers;
 
     return this.placeRepository.save(newPlace);
   }
@@ -134,12 +146,27 @@ export class PlaceService {
 
     const placeData = await findPlaceById(placeId);
 
-    //On traite l'iamge pour qu'elle puisse être tourner au client
-    const imagePlace: PhotoAPIGoogle = placeData.photos[0];
-    const cleanUrl = imagePlace.name.split('/photos/')[1];
+    if (!placeData || placeData.error) {
+      if (placeData.error) {
+        throw new NotFoundException(placeData.error);
+      }
+      throw new NotFoundException('Place not found');
+    } else {
+      console.log('placeData', placeData);
+    }
 
-    const urlthumb = `https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${cleanUrl}&key=${API_KEY}`;
-    const resultImage = await fetch(urlthumb);
+    let resultImage = {
+      url: 'https://cdn.midjourney.com/0105acd1-f5e2-474b-a908-baf9c1302250/0_0.png',
+    };
+
+    if (placeData.photos && placeData.photos.length > 0) {
+      //On traite l'iamge pour qu'elle puisse être tourner au client
+      const imagePlace: PhotoAPIGoogle = placeData.photos[0];
+      const cleanUrl = imagePlace.name.split('/photos/')[1];
+
+      const urlthumb = `https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${cleanUrl}&key=${API_KEY}`;
+      resultImage = await fetch(urlthumb);
+    }
 
     const newPlace = new Place();
     newPlace.googlePlaceId = placeId;
@@ -148,7 +175,7 @@ export class PlaceService {
     newPlace.latitude = placeData.location.latitude;
     newPlace.longitude = placeData.location.longitude;
     newPlace.urlImage = resultImage.url;
-    newPlace.openingHours = { periods: placeData.regularOpeningHours.periods };
+    newPlace.openingHours = { periods: placeData.regularOpeningHours };
     newPlace.rating = placeData.rating;
 
     return newPlace;

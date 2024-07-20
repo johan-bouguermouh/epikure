@@ -1,7 +1,10 @@
 # compiled output
 /dist
 /node_modules
-/extractJs
+extractJs/node_modules
+extractJs/.env
+seeder/node_modules
+seeder/.env
 
 # Logs
 logs
