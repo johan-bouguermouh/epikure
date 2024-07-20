@@ -49,7 +49,10 @@ export class PlaceService {
     //on récupère les données
     const placeData = await findPlaceById(placeId);
 
-    if (!placeData) {
+    if (!placeData || placeData.error) {
+      if (placeData.error) {
+        throw new NotFoundException(placeData.error);
+      }
       throw new NotFoundException('Place not found');
     }
 
@@ -57,7 +60,7 @@ export class PlaceService {
       url: 'https://cdn.midjourney.com/0105acd1-f5e2-474b-a908-baf9c1302250/0_0.png',
     };
 
-    if (placeData.photos.length > 0) {
+    if (placeData.photos && placeData.photos.length > 0) {
       //on traite l'image pour la stocker en local
       const imagePlace: PhotoAPIGoogle = placeData.photos[0];
       const cleanUrl = imagePlace.name.split('/photos/')[1];
@@ -143,12 +146,27 @@ export class PlaceService {
 
     const placeData = await findPlaceById(placeId);
 
-    //On traite l'iamge pour qu'elle puisse être tourner au client
-    const imagePlace: PhotoAPIGoogle = placeData.photos[0];
-    const cleanUrl = imagePlace.name.split('/photos/')[1];
+    if (!placeData || placeData.error) {
+      if (placeData.error) {
+        throw new NotFoundException(placeData.error);
+      }
+      throw new NotFoundException('Place not found');
+    } else {
+      console.log('placeData', placeData);
+    }
 
-    const urlthumb = `https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${cleanUrl}&key=${API_KEY}`;
-    const resultImage = await fetch(urlthumb);
+    let resultImage = {
+      url: 'https://cdn.midjourney.com/0105acd1-f5e2-474b-a908-baf9c1302250/0_0.png',
+    };
+
+    if (placeData.photos && placeData.photos.length > 0) {
+      //On traite l'iamge pour qu'elle puisse être tourner au client
+      const imagePlace: PhotoAPIGoogle = placeData.photos[0];
+      const cleanUrl = imagePlace.name.split('/photos/')[1];
+
+      const urlthumb = `https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${cleanUrl}&key=${API_KEY}`;
+      resultImage = await fetch(urlthumb);
+    }
 
     const newPlace = new Place();
     newPlace.googlePlaceId = placeId;
@@ -157,7 +175,7 @@ export class PlaceService {
     newPlace.latitude = placeData.location.latitude;
     newPlace.longitude = placeData.location.longitude;
     newPlace.urlImage = resultImage.url;
-    newPlace.openingHours = { periods: placeData.regularOpeningHours.periods };
+    newPlace.openingHours = { periods: placeData.regularOpeningHours };
     newPlace.rating = placeData.rating;
 
     return newPlace;

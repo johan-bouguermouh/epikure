@@ -49,7 +49,7 @@ export class Place {
   @Column('decimal', { precision: 2, scale: 1 })
   rating: number;
 
-  @ManyToMany(() => Farmer)
+  @ManyToMany(() => Farmer, (farmer) => farmer.places)
   @JoinTable()
   farmers: Farmer[];
 }

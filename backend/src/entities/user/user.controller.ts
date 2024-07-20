@@ -33,4 +33,9 @@ export class UserController {
   async addRole(@Body() body: { name: string }): Promise<Role> {
     return this.userService.insertRole(body.name);
   }
+
+  @Get('/role')
+  async getRoles(): Promise<Role[]> {
+    return this.userService.getRoles();
+  }
 }

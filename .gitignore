@@ -3,6 +3,8 @@
 /node_modules
 extractJs/node_modules
 extractJs/.env
+seeder/node_modules
+seeder/.env
 
 # Logs
 logs

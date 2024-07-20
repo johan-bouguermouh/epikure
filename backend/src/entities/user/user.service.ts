@@ -37,4 +37,8 @@ export class UserService {
     role.name = name;
     return this.roleRepository.save(role);
   }
+
+  async getRoles(): Promise<Role[]> {
+    return this.roleRepository.find();
+  }
 }
