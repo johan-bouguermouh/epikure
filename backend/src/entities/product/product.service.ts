@@ -4,6 +4,7 @@ import { Product } from './product.entity';
 import { CategoryProduct } from '../category-product/category-product.entity';
 import { BodyCreateProductDto } from './dto/body-create-pruduct.dto';
 import { CreateProductDto } from './dto/create-product.dto';
+import { plainToClass } from 'class-transformer';
 
 @Injectable()
 export class ProductService {
@@ -41,5 +42,30 @@ export class ProductService {
 
   async findAllCategoryProduct(): Promise<CategoryProduct[]> {
     return this.categoryProductRepository.find();
+  }
+
+  filterProductByPeriodHarvest(
+    products: Product[],
+    ProductDto?: new () => any,
+  ): Product[] | any[] {
+    const dateNow = new Date();
+    const numberMounthNow = dateNow.getMonth();
+
+    const filteredProducts = products.filter((product) => {
+      if (
+        product.harvestStartMounth.valueOf() <= numberMounthNow &&
+        product.harvestEndMounth.valueOf() >= numberMounthNow
+      ) {
+        return product;
+      }
+    });
+
+    if (ProductDto) {
+      return filteredProducts.map((product) =>
+        plainToClass(ProductDto, product),
+      );
+    }
+
+    return filteredProducts;
   }
 }
