@@ -3,15 +3,29 @@ import { Button, Text, View, StyleSheet, TouchableOpacity } from "react-native";
 import MapView, { Marker, Callout } from "react-native-maps";
 import { UserContext } from "../contexts/UserContext";
 import cursor from "../../assets/curser map.png";
+import image_shop from "../../assets/image_shop.png";
 import ModalPlace from "../components/map/ModalPlace";
 
 function MapScreen({ navigation }) {
   const { location, errorMsg } = useContext(UserContext);
-  const [modalOpen, setModalOpen] = useState(true);
+  const [modalOpen, setModalOpen] = useState(false);
   const [modalContent, setModalContent] = useState({
-    title: "Magasin",
-    description: "Magasin de produits locaux",
+    title: null,
+    image: null,
+    address: {
+      street: null,
+      postalCode: null,
+      city: null,
+    },
+    description: null,
   });
+
+  const handleCloseModal = (e) => {
+    if (e.nativeEvent.action !== "marker-press") {
+      setModalOpen(false);
+      setModalContent(null);
+    }
+  };
 
   if (errorMsg) {
     return (
@@ -21,17 +35,10 @@ function MapScreen({ navigation }) {
     );
   }
 
-  useEffect(() => {
-    console.log("MODAL OPEN", modalOpen);
-  }, [modalOpen]);
-
-  useEffect(() => {
-    console.log("MODAL CONTENT", modalContent);
-  }, [modalContent]);
-
   return (
     <View style={styles.container}>
       <MapView
+        onPress={(e) => handleCloseModal(e)}
         style={styles.map}
         region={{
           latitude: location.latitude,
@@ -44,13 +51,26 @@ function MapScreen({ navigation }) {
         loadingIndicatorColor="#AD59AD"
       >
         <Marker
+          className="marker"
           coordinate={{
             latitude: location.latitude,
             longitude: location.longitude,
           }}
           image={cursor}
-          title="Magasin"
-          description="Magasin de produits locaux"
+          onPress={() => {
+            setModalContent({
+              title: "L'ilot vert",
+              image: image_shop,
+              address: {
+                street: "299 Av. de Mazargues",
+                postalCode: "13009",
+                city: "Marseille",
+              },
+              description:
+                "lundi: 9h-12h30, 15h-19h\nmardi: 9h-12h30, 15h-19h\nmercredi: 9h-12h30, 15h-19h\njeudi: 9h-12h30, 15h-19h\nvendredi: 9h-12h30, 15h-19h\nsamedi: 9h-12h30, 15h-19h\n",
+            });
+            setModalOpen(true);
+          }}
         >
           <Callout tooltip />
         </Marker>
@@ -58,48 +78,26 @@ function MapScreen({ navigation }) {
 
       {modalOpen && (
         <View style={styles.modal}>
-          <ModalPlace content={modalContent} />
+          <ModalPlace content={modalContent} navigation={navigation} />
         </View>
       )}
-
-      {/* <TouchableOpacity
-        onPress={() => navigation.push("Magasin")}
-        style={{ position: "absolute", bottom: 20, right: 20 }}
-      >
-        <Text>Magasin</Text>
-      </TouchableOpacity> */}
-      {/* <Text>Map</Text>
-      <Button
-        title="Go to Magasin"
-        onPress={() => navigation.push("Magasin")}
-      /> */}
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  // container: {
-  //   display: "flex",
-  //   flex: 1,
-  //   flexDirection: "column",
-  //   justifyContent: "center",
-  //   alignItems: "center",
-  // },
   map: {
     width: "100%",
     height: "100%",
-    // zIndex: 0,
   },
   modal: {
     position: "absolute",
     top: 0,
     left: 0,
-    // bottom: 0,
-    // right: 0,
     width: "100%",
     height: "50%",
-    backgroundColor: "white",
-    opacity: 0.5,
+    backgroundColor: "#FFFFFF",
+    opacity: 0.92,
     zIndex: 1,
   },
 });
