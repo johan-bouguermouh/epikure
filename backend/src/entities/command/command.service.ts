@@ -147,34 +147,33 @@ export class CommandService {
       relations: ['commandProducts', 'commandProducts.product', 'farmer'],
     });
   }
+}
 
-  filterCommandPlaceByCurrentCommand<T>(
-    commands: Command[],
-    CommandDto?: new () => T,
-  ): T[] {
-    const dateNow = new Date();
-    const filteredPlacesByCurrentCommand = commands.filter((command) => {
-      const dateCommand = new Date(command.startedDate);
-      const commandProductWhereDLCisNotPassed = command.commandProducts.filter(
-        (commandProduct) => {
-          const dateDLC = new Date(commandProduct.endedDate);
-          return dateDLC > dateNow;
-        },
-      );
-      if (
-        commandProductWhereDLCisNotPassed.length > 0 &&
-        dateCommand < dateNow
-      ) {
-        return true;
-      } else return false;
-    });
+interface CommandCallBack {
+  <T>(place: Command[]): T[];
+}
 
-    if (CommandDto) {
-      return filteredPlacesByCurrentCommand.map((command) =>
-        plainToClass(CommandDto, command),
-      );
-    }
+export function filterCommandPlaceByCurrentCommand<T>(
+  commands: Command[],
+  callback?: CommandCallBack,
+): T[] {
+  const dateNow = new Date();
+  const filteredPlacesByCurrentCommand = commands.filter((command) => {
+    const dateCommand = new Date(command.startedDate);
+    const commandProductWhereDLCisNotPassed = command.commandProducts.filter(
+      (commandProduct) => {
+        const dateDLC = new Date(commandProduct.endedDate);
+        return dateDLC > dateNow;
+      },
+    );
+    if (commandProductWhereDLCisNotPassed.length > 0 && dateCommand < dateNow) {
+      return true;
+    } else return false;
+  });
 
-    return filteredPlacesByCurrentCommand as unknown as T[];
+  if (callback) {
+    return callback as unknown as T[];
   }
+
+  return filteredPlacesByCurrentCommand as unknown as T[];
 }

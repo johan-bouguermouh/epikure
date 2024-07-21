@@ -5,11 +5,13 @@ import {
   ManyToOne,
   OneToMany,
   JoinColumn,
+  ManyToMany,
 } from 'typeorm';
 import { CategoryProduct } from '../category-product/category-product.entity';
 import { NutriScoreDto } from './dto/nutritiscore.dto';
 import { CreateProductDto } from './dto/create-product.dto';
 import { CommandProduct } from 'src/entities/command-product/command-product.entity';
+import { Guest } from '../guest/guest.entity';
 
 @Entity()
 export class Product {
@@ -55,6 +57,9 @@ export class Product {
 
   @OneToMany(() => CommandProduct, (commandProduct) => commandProduct.product)
   commandProducts: CommandProduct[];
+
+  @ManyToMany(() => Guest, (guest) => guest.products)
+  guests: Guest[];
 
   setProduct(product: Product | CreateProductDto) {
     this.name = product.name;

@@ -5,6 +5,8 @@ import { CategoryProduct } from '../category-product/category-product.entity';
 import { BodyCreateProductDto } from './dto/body-create-pruduct.dto';
 import { CreateProductDto } from './dto/create-product.dto';
 import { plainToClass } from 'class-transformer';
+import { ClassDeclaration } from 'typescript';
+import { PublicProductDto } from './dto/public-product.dto';
 
 @Injectable()
 export class ProductService {
@@ -43,29 +45,29 @@ export class ProductService {
   async findAllCategoryProduct(): Promise<CategoryProduct[]> {
     return this.categoryProductRepository.find();
   }
+}
 
-  filterProductByPeriodHarvest(
-    products: Product[],
-    ProductDto?: new () => any,
-  ): Product[] | any[] {
-    const dateNow = new Date();
-    const numberMounthNow = dateNow.getMonth();
+export function filterProductByPeriodHarvest(products: Product[]): Product[] {
+  const dateNow = new Date();
+  const numberMonthNow = dateNow.getMonth();
 
-    const filteredProducts = products.filter((product) => {
-      if (
-        product.harvestStartMounth.valueOf() <= numberMounthNow &&
-        product.harvestEndMounth.valueOf() >= numberMounthNow
-      ) {
-        return product;
-      }
-    });
-
-    if (ProductDto) {
-      return filteredProducts.map((product) =>
-        plainToClass(ProductDto, product),
-      );
+  const filteredProducts: Product[] = products.filter((product) => {
+    if (
+      product.harvestStartMounth.valueOf() <= numberMonthNow &&
+      product.harvestEndMounth.valueOf() >= numberMonthNow
+    ) {
+      return product;
     }
+  });
 
-    return filteredProducts;
-  }
+  return filteredProducts;
+}
+
+export function sanitizeToPublicProduct(
+  products: Product[],
+): PublicProductDto[] {
+  return products.map((product) => {
+    const publicProduct = new PublicProductDto(product);
+    return publicProduct;
+  });
 }

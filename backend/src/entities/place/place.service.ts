@@ -8,6 +8,9 @@ import { Farmer } from '../farmer/farmer.entity';
 import { QueryParamsAutocompleteDto } from './dto/query-params-autocomplete.dto';
 import { findPlaceById } from 'src/utils/googleApi.service';
 import { QueryParamsPlaceIdDto } from './dto/query-params-placeid.dto';
+import { Command } from '../command/command.entity';
+import { plainToClass } from 'class-transformer';
+import { isOpen } from 'src/utils/openHourPlaces.service';
 
 interface AuthorAttribution {
   displayName: string;
@@ -151,8 +154,6 @@ export class PlaceService {
         throw new NotFoundException(placeData.error);
       }
       throw new NotFoundException('Place not found');
-    } else {
-      console.log('placeData', placeData);
     }
 
     let resultImage = {
@@ -180,4 +181,34 @@ export class PlaceService {
 
     return newPlace;
   }
+}
+
+// create inerface of callBack
+interface PlaceCallBack {
+  (place: Place[]): any;
+}
+
+export function cleanDuplicatedPlaceByCommand<T>(
+  commands: Command[],
+  callBack?: PlaceCallBack,
+): T[] {
+  let currentPlacesWithProducts: Place[] = [];
+
+  commands.forEach((command) => {
+    const { places } = command;
+    places.forEach((place) => {
+      if (
+        currentPlacesWithProducts.find(
+          (currentPlace) => currentPlace.id === place.id,
+        ) === undefined
+      )
+        currentPlacesWithProducts.push(place);
+    });
+  });
+
+  if (callBack) {
+    return callBack(currentPlacesWithProducts);
+  }
+
+  return currentPlacesWithProducts as unknown as T[];
 }

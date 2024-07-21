@@ -7,6 +7,16 @@ import { Product } from '../product/product.entity';
 import { BodyUpdateProductFarmerDto } from './dto/body-update-product-farme.dto';
 import { haversineDistance } from 'src/utils/distance.service';
 import { isOpen } from 'src/utils/openHourPlaces.service';
+import { PublicProductDto } from '../product/dto/public-product.dto';
+import {
+  filterProductByPeriodHarvest,
+  sanitizeToPublicProduct,
+} from '../product/product.service';
+import { filterCommandPlaceByCurrentCommand } from '../command/command.service';
+import { Command } from '../command/command.entity';
+import { cleanDuplicatedPlaceByCommand } from '../place/place.service';
+import { PublicPlaceDto } from '../place/dto/public-place.dto';
+import { Place } from '../place/place.entity';
 
 //on créer l'interface pour le siret et le siren
 interface SiretOrSiren {
@@ -148,62 +158,34 @@ export class FarmerService {
       throw new NotFoundException('Farmer not found');
     }
 
-    let simplifyProducts = farmer.products.map((product) => {
-      if (
-        product.harvestStartMounth.valueOf() <= numberMounthNow &&
-        product.harvestEndMounth.valueOf() >= numberMounthNow
-      ) {
-        return {
-          id: product.id,
-          name: product.name,
-          categoryProduct: product.categoryProduct,
-          thumbnail: product.thumbnail,
-        };
-      } else return false;
-    });
+    const filteredProducts: Product[] = filterProductByPeriodHarvest(
+      farmer.products,
+    );
+    const simplifyProducts: PublicProductDto[] =
+      sanitizeToPublicProduct(filteredProducts);
 
-    simplifyProducts = simplifyProducts.filter((product) => product !== false);
+    const filteredPlacesByCurrentCommand: Command[] =
+      filterCommandPlaceByCurrentCommand(farmer.command);
 
-    const filteredPlacesByCurrentCommand = farmer.command.filter((command) => {
-      const dateCommand = new Date(command.startedDate);
-      const commandProductWhereDLCisNotPassed = command.commandProducts.filter(
-        (commandProduct) => {
-          const dateDLC = new Date(commandProduct.endedDate);
-          return dateDLC > dateNow;
+    const currentPlacesWithProducts: PublicPlaceDto[] =
+      cleanDuplicatedPlaceByCommand(
+        filteredPlacesByCurrentCommand,
+        (places: Place[]) => {
+          return places.map((place) => {
+            const { latitude, longitude } = place;
+            const distance = haversineDistance(
+              { latitude: userLatitude, longitude: userLongitude },
+              { latitude, longitude },
+            );
+            return {
+              id: place.id,
+              name: place.name,
+              distance: Math.round(distance),
+              opening: isOpen(place.openingHours),
+            };
+          });
         },
       );
-      if (
-        commandProductWhereDLCisNotPassed.length > 0 &&
-        dateCommand < dateNow
-      ) {
-        return true;
-      } else return false;
-    });
-
-    let currentPlacesWithProducts = [];
-
-    filteredPlacesByCurrentCommand.forEach((command) => {
-      const { places } = command;
-      places.forEach((place) => {
-        if (
-          currentPlacesWithProducts.find(
-            (currentPlace) => currentPlace.id === place.id,
-          ) === undefined
-        ) {
-          const { latitude, longitude } = place;
-          const distance = haversineDistance(
-            { latitude: userLatitude, longitude: userLongitude },
-            { latitude, longitude },
-          );
-          currentPlacesWithProducts.push({
-            id: place.id,
-            name: place.name,
-            distance: Math.round(distance),
-            opening: isOpen(place.openingHours),
-          });
-        }
-      });
-    });
 
     //On splimpifie la vue du farmer
     let simplifyFarmer: any = {

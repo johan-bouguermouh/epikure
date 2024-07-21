@@ -2,7 +2,7 @@
     "clientName": "Thunder Client",
     "collectionName": "Epikure",
     "collectionId": "1eecc53e-56e6-44a7-b263-caad8b06e607",
-    "dateExported": "2024-07-20T13:37:13.389Z",
+    "dateExported": "2024-07-21T17:46:41.599Z",
     "version": "1.2",
     "folders": [
         {
@@ -53,6 +53,13 @@
             "containerId": "",
             "created": "2024-07-18T08:51:13.136Z",
             "sortNum": 70000
+        },
+        {
+            "_id": "4f7986ed-15f9-4617-af8c-72dc40c7f826",
+            "name": "Guest",
+            "containerId": "",
+            "created": "2024-07-21T12:38:00.105Z",
+            "sortNum": 80000
         }
     ],
     "requests": [
@@ -65,13 +72,14 @@
             "method": "POST",
             "sortNum": 10000,
             "created": "2024-07-13T21:41:26.868Z",
-            "modified": "2024-07-18T08:45:45.907Z",
+            "modified": "2024-07-21T17:46:02.587Z",
             "headers": [],
             "body": {
                 "type": "json",
-                "raw": "{\n  \"email\" : \"johanFarmer@mail.fr\",\n  \"password\" : \"Johan123!best\",\n  \"isFarmer\" : true\n}",
+                "raw": "{\n  \"email\" : \"johanGuest@mail.fr\",\n  \"password\" : \"Johan123!best\",\n  \"guestUuid\": \"40030390-f4af-4dab-98b4-7f8e5d48da05\"\n}",
                 "form": []
-            }
+            },
+            "docs": "### Pour enregistrer un Farmer : \n```\n{\n  \"email\" : \"johanFarmer@mail.fr\",\n  \"password\" : \"Johan123!best\",\n  \"isFarmer\" : true\n}\n```\n---\n\n### Pour enregistrer un guest\n\n```\n{\n  \"email\" : \"johanGuest@mail.fr\",\n  \"password\" : \"Johan123!best\",\n  \"guestUuid\": \"40030390-f4af-4dab-98b4-7f8e5d48da05\"\n}\n```"
         },
         {
             "_id": "d4140e37-2308-4434-8ff6-fc8ee0908f3d",
@@ -294,11 +302,11 @@
             "colId": "1eecc53e-56e6-44a7-b263-caad8b06e607",
             "containerId": "c8d338a5-e465-4b82-8d47-61782adac7ee",
             "name": "get public info farmer",
-            "url": "http://localhost:3000/farmer/public/31",
+            "url": "http://localhost:3000/farmer/public/7",
             "method": "GET",
             "sortNum": 170000,
             "created": "2024-07-18T12:40:44.991Z",
-            "modified": "2024-07-20T10:44:31.821Z",
+            "modified": "2024-07-21T12:31:35.909Z",
             "headers": []
         },
         {
@@ -336,7 +344,195 @@
             "created": "2024-07-20T08:50:17.128Z",
             "modified": "2024-07-20T08:50:30.609Z",
             "headers": []
+        },
+        {
+            "_id": "11961971-3a85-474e-95f9-f24f61415e5b",
+            "colId": "1eecc53e-56e6-44a7-b263-caad8b06e607",
+            "containerId": "4f7986ed-15f9-4617-af8c-72dc40c7f826",
+            "name": "Inser new guest",
+            "url": "http://localhost:3000/guest",
+            "method": "POST",
+            "sortNum": 210000,
+            "created": "2024-07-21T12:38:10.400Z",
+            "modified": "2024-07-21T12:47:28.481Z",
+            "headers": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"uuid\" : \"40030390-f4af-4dab-98b4-7f8e5d48da05\"\n}",
+                "form": []
+            }
+        },
+        {
+            "_id": "c40fbec8-b46c-404c-a87a-8129afdb6002",
+            "colId": "1eecc53e-56e6-44a7-b263-caad8b06e607",
+            "containerId": "4f7986ed-15f9-4617-af8c-72dc40c7f826",
+            "name": "Get all uuid",
+            "url": "http://localhost:3000/guest",
+            "method": "GET",
+            "sortNum": 220000,
+            "created": "2024-07-21T12:48:27.018Z",
+            "modified": "2024-07-21T12:48:43.513Z",
+            "headers": []
+        },
+        {
+            "_id": "83d6023f-e298-48ed-9aa4-026ade55134e",
+            "colId": "1eecc53e-56e6-44a7-b263-caad8b06e607",
+            "containerId": "4f7986ed-15f9-4617-af8c-72dc40c7f826",
+            "name": "Find One Guest",
+            "url": "http://localhost:3000/guest/40030390-f4af-4dab-98b4-7f8e5d48da05",
+            "method": "GET",
+            "sortNum": 230000,
+            "created": "2024-07-21T12:49:35.921Z",
+            "modified": "2024-07-21T12:49:45.678Z",
+            "headers": []
+        },
+        {
+            "_id": "d448ee35-39f3-423f-9d41-dff1719f3034",
+            "colId": "1eecc53e-56e6-44a7-b263-caad8b06e607",
+            "containerId": "4f7986ed-15f9-4617-af8c-72dc40c7f826",
+            "name": "Add favorite products",
+            "url": "http://localhost:3000/guest/40030390-f4af-4dab-98b4-7f8e5d48da05/products",
+            "method": "POST",
+            "sortNum": 237500,
+            "created": "2024-07-21T14:07:39.397Z",
+            "modified": "2024-07-21T14:18:00.575Z",
+            "headers": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"productId\" : 1\n}",
+                "form": []
+            }
+        },
+        {
+            "_id": "2433193d-d514-4852-8731-f796f58bc14d",
+            "colId": "1eecc53e-56e6-44a7-b263-caad8b06e607",
+            "containerId": "4f7986ed-15f9-4617-af8c-72dc40c7f826",
+            "name": "Get Favorites Product",
+            "url": "http://localhost:3000/guest/40030390-f4af-4dab-98b4-7f8e5d48da05/products",
+            "method": "GET",
+            "sortNum": 240000,
+            "created": "2024-07-21T12:50:14.488Z",
+            "modified": "2024-07-21T12:50:44.360Z",
+            "headers": []
+        },
+        {
+            "_id": "f66e6308-bb59-448f-a819-3767fd9cbf9c",
+            "colId": "1eecc53e-56e6-44a7-b263-caad8b06e607",
+            "containerId": "4f7986ed-15f9-4617-af8c-72dc40c7f826",
+            "name": "Delete Favorite Products",
+            "url": "http://localhost:3000/guest/40030390-f4af-4dab-98b4-7f8e5d48da05/products/1",
+            "method": "DELETE",
+            "sortNum": 247500,
+            "created": "2024-07-21T16:48:31.349Z",
+            "modified": "2024-07-21T16:48:43.959Z",
+            "headers": []
+        },
+        {
+            "_id": "1247f735-85dd-4b57-aafa-344c2b7972f6",
+            "colId": "1eecc53e-56e6-44a7-b263-caad8b06e607",
+            "containerId": "4f7986ed-15f9-4617-af8c-72dc40c7f826",
+            "name": "Add Favorite Place",
+            "url": "http://localhost:3000/guest/40030390-f4af-4dab-98b4-7f8e5d48da05/places",
+            "method": "POST",
+            "sortNum": 255000,
+            "created": "2024-07-21T14:45:43.427Z",
+            "modified": "2024-07-21T14:58:23.658Z",
+            "headers": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"placeId\" : 1,\n  \"userLatitude\" : 43.2504832,\n  \"userLongitude\": 5.3805056\n}",
+                "form": []
+            }
+        },
+        {
+            "_id": "2670ab18-407e-4777-b720-2af280293c45",
+            "colId": "1eecc53e-56e6-44a7-b263-caad8b06e607",
+            "containerId": "4f7986ed-15f9-4617-af8c-72dc40c7f826",
+            "name": "Get all Favorite Places",
+            "url": "http://localhost:3000/guest/40030390-f4af-4dab-98b4-7f8e5d48da05/places?latitude=43.2504832&longitude=5.3805056",
+            "method": "GET",
+            "sortNum": 270000,
+            "created": "2024-07-21T15:01:38.518Z",
+            "modified": "2024-07-21T15:09:04.092Z",
+            "headers": [],
+            "params": [
+                {
+                    "name": "latitude",
+                    "value": "43.2504832",
+                    "isPath": false
+                },
+                {
+                    "name": "longitude",
+                    "value": "5.3805056",
+                    "isPath": false
+                }
+            ]
+        },
+        {
+            "_id": "fc90b91a-ffce-4cce-b41e-b93ebe66be37",
+            "colId": "1eecc53e-56e6-44a7-b263-caad8b06e607",
+            "containerId": "4f7986ed-15f9-4617-af8c-72dc40c7f826",
+            "name": "Delete Favorite Places",
+            "url": "http://localhost:3000/guest/40030390-f4af-4dab-98b4-7f8e5d48da05/places/1",
+            "method": "DELETE",
+            "sortNum": 275000,
+            "created": "2024-07-21T16:47:42.045Z",
+            "modified": "2024-07-21T16:48:01.642Z",
+            "headers": []
+        },
+        {
+            "_id": "7a847dc7-0885-45f4-b84b-9ec8f047a71e",
+            "colId": "1eecc53e-56e6-44a7-b263-caad8b06e607",
+            "containerId": "4f7986ed-15f9-4617-af8c-72dc40c7f826",
+            "name": "Add Favorite Farmer",
+            "url": "http://localhost:3000/guest/40030390-f4af-4dab-98b4-7f8e5d48da05/farmers",
+            "method": "POST",
+            "sortNum": 280000,
+            "created": "2024-07-21T16:17:03.004Z",
+            "modified": "2024-07-21T16:23:01.020Z",
+            "headers": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"farmerId\": 1,\n  \"userLatitude\" : 43.2504832,\n  \"userLongitude\": 5.3805056\n}",
+                "form": []
+            }
+        },
+        {
+            "_id": "d2d6eccc-1731-402b-92d4-95003a854adf",
+            "colId": "1eecc53e-56e6-44a7-b263-caad8b06e607",
+            "containerId": "4f7986ed-15f9-4617-af8c-72dc40c7f826",
+            "name": "Delete Favorite Farmer",
+            "url": "http://localhost:3000/guest/40030390-f4af-4dab-98b4-7f8e5d48da05/farmers/1",
+            "method": "DELETE",
+            "sortNum": 290000,
+            "created": "2024-07-21T16:31:03.363Z",
+            "modified": "2024-07-21T16:32:23.911Z",
+            "headers": []
+        },
+        {
+            "_id": "9ffd2026-1a5f-4bf2-b077-0a699ea49d9d",
+            "colId": "1eecc53e-56e6-44a7-b263-caad8b06e607",
+            "containerId": "4f7986ed-15f9-4617-af8c-72dc40c7f826",
+            "name": "Get Favorite Farmers",
+            "url": "http://localhost:3000/guest/40030390-f4af-4dab-98b4-7f8e5d48da05/farmers?latitude=43.2504832&longitude=5.3805056",
+            "method": "GET",
+            "sortNum": 330000,
+            "created": "2024-07-21T16:58:14.687Z",
+            "modified": "2024-07-21T16:59:12.792Z",
+            "headers": [],
+            "params": [
+                {
+                    "name": "latitude",
+                    "value": "43.2504832",
+                    "isPath": false
+                },
+                {
+                    "name": "longitude",
+                    "value": "5.3805056",
+                    "isPath": false
+                }
+            ]
         }
     ],
-    "ref": "lGSYgdT9lGa20wTZrjXGdyVtddEWsvfUgF_IWSakQInmhVzSVQ1qhhpP5KjiqG-65kM5U8a1ANVzjS7V6nmWiw"
+    "ref": "lGSYgdT9lGa20wTZrjXGdxQc9jrAY7115kKRdB1mAVPspopqn6_EZFPPTvkFIibHqrsFKhoiY8xBrqmJz-XMtA"
 }

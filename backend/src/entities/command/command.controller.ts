@@ -1,7 +1,6 @@
-import { Controller, Get, Post, Body, Put, Param, Query } from '@nestjs/common';
+import { Controller, Get, Post, Body, Put, Param } from '@nestjs/common';
 import { CommandService } from './command.service';
 import { Command } from './command.entity';
-import { get } from 'http';
 import { BodyCreateCommandDto } from './dto/create-command.dto';
 
 @Controller('command')
