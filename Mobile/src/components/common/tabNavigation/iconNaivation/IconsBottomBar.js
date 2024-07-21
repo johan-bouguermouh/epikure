@@ -5,9 +5,6 @@ import { SvgXml } from "react-native-svg";
 export default function IconsBottomBar({ labelName, isFocused }) {
   const color = isFocused ? "#BD10BD" : "#0F172A";
 
-  console.log("labelName", labelName);
-  console.log("isFocused", isFocused);
-
   const mapperXml = [
     {
       name: "Products",
