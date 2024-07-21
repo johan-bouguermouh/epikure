@@ -15,6 +15,7 @@ import { ProductModule } from './entities/product/product.module';
 import { PlaceModule } from './entities/place/place.module';
 import { CommandModule } from './entities/command/command.module';
 import { CommandProductModule } from './entities/command-product/command-product.module';
+import { GuestModule } from './entities/guest/guest.module';
 
 @Module({
   imports: [
@@ -30,6 +31,7 @@ import { CommandProductModule } from './entities/command-product/command-product
     PlaceModule,
     CommandModule,
     CommandProductModule,
+    GuestModule,
   ],
   controllers: [AppController, UploadController],
   providers: [AppService, UploadService],

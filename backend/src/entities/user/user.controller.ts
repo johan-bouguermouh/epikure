@@ -18,10 +18,13 @@ export class UserController {
       password: hashedPassword,
       isActive: true,
       isFarmer: bodyCreateUserDto.isFarmer,
-      role: bodyCreateUserDto.isFarmer === true ? 2 : 1,
+      role:
+        bodyCreateUserDto.isFarmer === true && !bodyCreateUserDto.guestUuid
+          ? 2
+          : 1,
     };
 
-    return this.userService.create(createUserDto);
+    return this.userService.create(createUserDto, bodyCreateUserDto.guestUuid);
   }
 
   @Get()

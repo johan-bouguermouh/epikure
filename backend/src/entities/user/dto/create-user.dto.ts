@@ -4,6 +4,7 @@ import {
   IsEmail,
   IsInt,
   IsOptional,
+  IsString,
   IsStrongPassword,
 } from 'class-validator';
 
@@ -65,4 +66,8 @@ export class bodyCreateUserDto {
 
   @IsOptional()
   isFarmer: boolean;
+
+  @IsOptional()
+  @IsString()
+  guestUuid: string;
 }

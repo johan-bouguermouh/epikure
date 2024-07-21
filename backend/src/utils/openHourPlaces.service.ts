@@ -36,7 +36,9 @@ export function isOpen(
     if (period.open.day === day) {
       if (period.open.hour <= hours && period.close.hour >= hours) {
         isOpen = true;
-        message = `Ferme à ${period.close.hour}h${period.close.minute}`;
+        message = `Ferme à ${period.close.hour}h${
+          period.close.minute === 0 ? '00' : period.close.minute
+        }`;
       } else {
         const nextDay = day === 6 ? 0 : day + 1;
         const nextDayName = nameDay[nextDay];
@@ -53,3 +55,5 @@ export function isOpen(
     message,
   };
 }
+
+export { resultSearchPlaceIsOpen };

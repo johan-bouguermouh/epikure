@@ -28,5 +28,8 @@ export function haversineDistance(
 
   const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
 
-  return R * c; // Distance en mètres
+  const result = R * c; // Distance en mètres
+
+  //on retourne le resultat arrondi
+  return Math.round(result);
 }

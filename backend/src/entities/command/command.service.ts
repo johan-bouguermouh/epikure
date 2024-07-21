@@ -6,6 +6,7 @@ import { Product } from '../product/product.entity';
 import { Farmer } from '../farmer/farmer.entity';
 import { BodyCreateCommandDto } from './dto/create-command.dto';
 import { Place } from '../place/place.entity';
+import { plainToClass } from 'class-transformer';
 
 @Injectable()
 export class CommandService {
@@ -146,4 +147,33 @@ export class CommandService {
       relations: ['commandProducts', 'commandProducts.product', 'farmer'],
     });
   }
+}
+
+interface CommandCallBack {
+  <T>(place: Command[]): T[];
+}
+
+export function filterCommandPlaceByCurrentCommand<T>(
+  commands: Command[],
+  callback?: CommandCallBack,
+): T[] {
+  const dateNow = new Date();
+  const filteredPlacesByCurrentCommand = commands.filter((command) => {
+    const dateCommand = new Date(command.startedDate);
+    const commandProductWhereDLCisNotPassed = command.commandProducts.filter(
+      (commandProduct) => {
+        const dateDLC = new Date(commandProduct.endedDate);
+        return dateDLC > dateNow;
+      },
+    );
+    if (commandProductWhereDLCisNotPassed.length > 0 && dateCommand < dateNow) {
+      return true;
+    } else return false;
+  });
+
+  if (callback) {
+    return callback as unknown as T[];
+  }
+
+  return filteredPlacesByCurrentCommand as unknown as T[];
 }

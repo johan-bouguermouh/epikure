@@ -7,6 +7,7 @@ import {
 } from 'typeorm';
 import { OpeningHoursDto } from './dto/openinghours.dto';
 import { Farmer } from '../farmer/farmer.entity';
+import { Guest } from '../guest/guest.entity';
 
 @Entity()
 export class Place {
@@ -52,4 +53,8 @@ export class Place {
   @ManyToMany(() => Farmer, (farmer) => farmer.places)
   @JoinTable()
   farmers: Farmer[];
+
+  @ManyToMany(() => Guest, (guest) => guest.places)
+  @JoinTable()
+  guests: Guest[];
 }

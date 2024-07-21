@@ -1,9 +1,16 @@
 // Création du service User
-import { Injectable, Inject } from '@nestjs/common';
+import {
+  Injectable,
+  Inject,
+  NotAcceptableException,
+  UnauthorizedException,
+} from '@nestjs/common';
 import { Repository } from 'typeorm';
 import { User } from './user.entity';
 import { CreateUserDto } from './dto/create-user.dto';
 import { Role } from '../roles/role.entity';
+import { Guest } from '../guest/guest.entity';
+import { ExceptionsHandler } from '@nestjs/core/exceptions/exceptions-handler';
 
 @Injectable()
 export class UserService {
@@ -12,9 +19,28 @@ export class UserService {
     private userRepository: Repository<User>,
     @Inject('ROLE_REPOSITORY')
     private roleRepository: Repository<Role>,
+    @Inject('GUEST_REPOSITORY')
+    private guestRepository: Repository<Guest>,
   ) {}
 
-  async create(createUserDto: CreateUserDto): Promise<User> {
+  async create(
+    createUserDto: CreateUserDto,
+    guestUuid?: string,
+  ): Promise<User> {
+    const guest = guestUuid
+      ? await this.guestRepository.findOne({ where: { uuid: guestUuid } })
+      : false;
+
+    if (guest && createUserDto.isFarmer) {
+      throw new NotAcceptableException(
+        'Vous ne pouvez pas créer un utilisateur fermier pour un invité',
+      );
+    } else if (guest && guest.user !== null) {
+      throw new UnauthorizedException(
+        "L'enregistrement ne peut pas être effectué",
+      );
+    }
+
     const role: Role = createUserDto.isFarmer
       ? await this.roleRepository.findOne({ where: { name: 'FARMER' } })
       : await this.roleRepository.findOne({ where: { name: 'USER' } });
@@ -25,7 +51,14 @@ export class UserService {
     user.isActive = createUserDto.isActive;
     user.isFarmer = createUserDto.isFarmer;
     user.role = role;
-    return this.userRepository.save(user);
+    const userSaved: User = await this.userRepository.save(user);
+
+    if (!createUserDto.isFarmer && guest) {
+      guest.user = userSaved;
+      await this.guestRepository.save(guest);
+    }
+
+    return userSaved;
   }
 
   async findAll(): Promise<User[]> {
