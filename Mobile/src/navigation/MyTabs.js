@@ -10,6 +10,7 @@ import FavoriteTab from "./FavoriteTab";
 import NotifTab from "./NotifTab";
 
 import { TouchableOpacity } from "react-native";
+import TabNavigation from "../components/common/tabNavigation/TabNavigation";
 
 const Tab = createBottomTabNavigator();
 
@@ -42,6 +43,7 @@ function MyTabs() {
     <Tab.Navigator
       initialRouteName="MapTab"
       screenOptions={{ headerShown: false }}
+      tabBar={(props) => <TabNavigation {...props} />}
     >
       <Tab.Screen
         name="Products"
