@@ -64,6 +64,7 @@ export default function SeasonalFrieze({
                 justifyContent: "center",
                 alignItems: "center",
                 position: "relative",
+                borderRadius: 2,
               }}
             >
               {harvestStartMounth !== 0 && harvestEndMounth !== 11 && (
@@ -90,6 +91,7 @@ export default function SeasonalFrieze({
                 height: 42,
                 justifyContent: "center",
                 alignItems: "center",
+                borderRadius: 2,
               }}
             ></View>
           );
@@ -103,6 +105,7 @@ export default function SeasonalFrieze({
                 height: 42,
                 justifyContent: "center",
                 alignItems: "center",
+                borderRadius: 2,
               }}
             ></View>
           );
