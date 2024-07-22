@@ -6,7 +6,9 @@ const endpoint = "/product";
 export const getProducts = async (month = null) => {
   const query = month ? `?month=${month}` : "";
   try {
-    const response = await instance.get(`${endpoint}/season${query}`);
+    const response = await instance.get(`${endpoint}/season`, {
+      params: { month },
+    });
     return response.data;
   } catch (error) {
     if (axios.isAxiosError(error)) {

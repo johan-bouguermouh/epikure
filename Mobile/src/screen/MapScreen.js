@@ -5,9 +5,11 @@ import { UserContext } from "../contexts/UserContext";
 import cursor from "../../assets/curser map.png";
 import image_shop from "../../assets/image_shop.png";
 import ModalPlace from "../components/map/ModalPlace";
+import { getPlaces } from "../services/place.service";
 
 function MapScreen({ navigation }) {
   const { location, errorMsg } = useContext(UserContext);
+  const [places, setPlaces] = useState([]);
   const [modalOpen, setModalOpen] = useState(false);
   const [modalContent, setModalContent] = useState({
     title: null,
@@ -26,6 +28,16 @@ function MapScreen({ navigation }) {
       setModalContent(null);
     }
   };
+
+  useEffect(() => {
+    getPlaces().then((result) => {
+      setPlaces(result);
+    });
+  }, []);
+
+  useEffect(() => {
+    console.log(places);
+  }, [places]);
 
   if (errorMsg) {
     return (
