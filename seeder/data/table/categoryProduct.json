@@ -1,0 +1,310 @@
+[
+    {
+        "name": "Chou rouge",
+        "categoryProductId": 2
+    },
+    {
+        "name": "Choux de Bruxelles",
+        "categoryProductId": 2
+    },
+    {
+        "name": "Chou-fleur",
+        "categoryProductId": 2
+    },
+    {
+        "name": "Brocoli",
+        "categoryProductId": 2
+    },
+    {
+        "name": "Champignon de paris",
+        "categoryProductId": 2
+    },
+    {
+        "name": "Champignons cultivés",
+        "categoryProductId": 2
+    },
+    {
+        "name": "Oignon Primeur",
+        "categoryProductId": 2
+    },
+    {
+        "name": "Carotte primeur",
+        "categoryProductId": 2
+    },
+    {
+        "name": "Rutabaga",
+        "categoryProductId": 2
+    },
+    {
+        "name": "Topinambour",
+        "categoryProductId": 2
+    },
+    {
+        "name": "Panais",
+        "categoryProductId": 2
+    },
+    {
+        "name": "Radis",
+        "categoryProductId": 2
+    },
+    {
+        "name": "Pomme de terre",
+        "categoryProductId": 2
+    },
+    {
+        "name": "Asperge",
+        "categoryProductId": 2
+    },
+    {
+        "name": "Betterave",
+        "categoryProductId": 2
+    },
+    {
+        "name": "Carotte",
+        "categoryProductId": 2
+    },
+    {
+        "name": "Céleri-rave",
+        "categoryProductId": 2
+    },
+    {
+        "name": "Navet",
+        "categoryProductId": 2
+    },
+    {
+        "name": "Oignon",
+        "categoryProductId": 2
+    },
+    {
+        "name": "Poireau",
+        "categoryProductId": 2
+    },
+    {
+        "name": "Ail",
+        "categoryProductId": 2
+    },
+    {
+        "name": "Échalote",
+        "categoryProductId": 2
+    },
+    {
+        "name": "Salade",
+        "categoryProductId": 2
+    },
+    {
+        "name": "Épinard",
+        "categoryProductId": 2
+    },
+    {
+        "name": "Fenouil",
+        "categoryProductId": 2
+    },
+    {
+        "name": "Artichaut",
+        "categoryProductId": 2
+    },
+    {
+        "name": "Blette",
+        "categoryProductId": 2
+    },
+    {
+        "name": "Céleri-branche",
+        "categoryProductId": 2
+    },
+    {
+        "name": "Fève",
+        "categoryProductId": 2
+    },
+    {
+        "name": "Courges et potirons",
+        "categoryProductId": 2
+    },
+    {
+        "name": "Potiron",
+        "categoryProductId": 2
+    },
+    {
+        "name": "Coing",
+        "categoryProductId": 1
+    },
+    {
+        "name": "Poire",
+        "categoryProductId": 1
+    },
+    {
+        "name": "Pomme",
+        "categoryProductId": 1
+    },
+    {
+        "name": "Abricot",
+        "categoryProductId": 1
+    },
+    {
+        "name": "Cerise",
+        "categoryProductId": 1
+    },
+    {
+        "name": "Mirabelle",
+        "categoryProductId": 1
+    },
+    {
+        "name": "Pêche, Nectarine",
+        "categoryProductId": 1
+    },
+    {
+        "name": "Prune",
+        "categoryProductId": 1
+    },
+    {
+        "name": "Kiwi",
+        "categoryProductId": 1
+    },
+    {
+        "name": "Raisin",
+        "categoryProductId": 1
+    },
+    {
+        "name": "Noisette",
+        "categoryProductId": 1
+    },
+    {
+        "name": "Figue",
+        "categoryProductId": 1
+    },
+    {
+        "name": "Germe de haricot mungo Soja vert",
+        "categoryProductId": 2
+    },
+    {
+        "name": "Haricot vert",
+        "categoryProductId": 2
+    },
+    {
+        "name": "Lentille",
+        "categoryProductId": 2
+    },
+    {
+        "name": "Petit pois",
+        "categoryProductId": 2
+    },
+    {
+        "name": "Pois gourmand",
+        "categoryProductId": 2
+    },
+    {
+        "name": "Avocat",
+        "categoryProductId": 1
+    },
+    {
+        "name": "Grenade",
+        "categoryProductId": 1
+    },
+    {
+        "name": "Figue de Barbarie",
+        "categoryProductId": 1
+    },
+    {
+        "name": "Datte",
+        "categoryProductId": 1
+    },
+    {
+        "name": "Groseille",
+        "categoryProductId": 1
+    },
+    {
+        "name": "Mûre",
+        "categoryProductId": 1
+    },
+    {
+        "name": "Myrtille",
+        "categoryProductId": 1
+    },
+    {
+        "name": "Cassis",
+        "categoryProductId": 1
+    },
+    {
+        "name": "Fraise",
+        "categoryProductId": 1
+    },
+    {
+        "name": "Framboise",
+        "categoryProductId": 1
+    },
+    {
+        "name": "Orange",
+        "categoryProductId": 1
+    },
+    {
+        "name": "Clémentine, Mandarine",
+        "categoryProductId": 1
+    },
+    {
+        "name": "Citron, Citron vert",
+        "categoryProductId": 1
+    },
+    {
+        "name": "Pignon de pin",
+        "categoryProductId": 2
+    },
+    {
+        "name": "Amande",
+        "categoryProductId": 2
+    },
+    {
+        "name": "Châtaigne",
+        "categoryProductId": 2
+    },
+    {
+        "name": "Noix",
+        "categoryProductId": 2
+    },
+    {
+        "name": "Mâche",
+        "categoryProductId": 2
+    },
+    {
+        "name": "Pourpier",
+        "categoryProductId": 2
+    },
+    {
+        "name": "Laitue",
+        "categoryProductId": 2
+    },
+    {
+        "name": "Chicorée",
+        "categoryProductId": 2
+    },
+    {
+        "name": "Cresson",
+        "categoryProductId": 2
+    },
+    {
+        "name": "Endive",
+        "categoryProductId": 2
+    },
+    {
+        "name": "Aubergine",
+        "categoryProductId": 2
+    },
+    {
+        "name": "Pastèque",
+        "categoryProductId": 1
+    },
+    {
+        "name": "Concombre",
+        "categoryProductId": 2
+    },
+    {
+        "name": "Poivron",
+        "categoryProductId": 2
+    },
+    {
+        "name": "Tomate",
+        "categoryProductId": 2
+    },
+    {
+        "name": "Melon",
+        "categoryProductId": 1
+    }
+]

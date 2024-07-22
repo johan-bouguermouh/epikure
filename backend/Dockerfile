@@ -16,6 +16,14 @@ RUN npm install --legacy-peer-deps
 # Install typeorm and mysql2
 RUN npm install --save @nestjs/typeorm typeorm mysql2 --legacy-peer-deps
 
+# install bcrypt
+RUN npm install bcrypt --save --legacy-peer-deps
+RUN npm i -D @types/bcrypt --save --legacy-peer-deps
+RUN npm rebuild bcrypt
+
+RUN npm install @nestjs/jwt @nestjs/passport passport passport-jwt --legacy-peer-deps
+
+
 # Copy the rest of the application code
 COPY . .
 
