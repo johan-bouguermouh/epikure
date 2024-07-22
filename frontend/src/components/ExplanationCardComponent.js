@@ -57,7 +57,7 @@ const CardComponent = ({ isProducer }) => {
     ];
 
     return (
-        <section className="py-16 bg-gray-100">
+        <section className="py-16 bg-slate-50">
             <div className="container mx-auto px-8">
                 <h2 className="text-4xl font-bold mb-8 text-center">{isProducer ? 'Rejoignez-nous en tant que Producteur' : 'Chez EPIKURE, nous croyons en une alimentation saine, locale et durable.'}</h2>
                 <p className="text-lg text-center mb-8">{isProducer ? 'Commencez à vendre vos produits aujourd\'hui même.' : 'Nos valeurs fondamentales sont:'}</p>

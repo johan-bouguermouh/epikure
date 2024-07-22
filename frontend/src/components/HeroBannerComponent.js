@@ -45,7 +45,7 @@ function HeroBannerComponent({ isProducer, onConsoAction }) {
                     <button
                         key={index}
                         onClick={button.action}
-                        className={`p-4 font-semibold rounded ${index % 2 === 0 ? 'bg-primary/600 text-white' : 'border border-primary-600 text-primary-600'}`}
+                        className={`p-4 font-semibold rounded ${index % 2 === 0 ? 'bg-primary/500 text-white' : 'border border-primary-600 text-primary-600'}`}
                     >
                         {button.title}
                     </button>
