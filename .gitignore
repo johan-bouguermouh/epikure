@@ -1,6 +1,7 @@
 # compiled output
 /dist
 /node_modules
+Mobile/node_modules
 extractJs/node_modules
 extractJs/.env
 seeder/node_modules
