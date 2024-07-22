@@ -1,13 +1,15 @@
-import axios from 'axios';
-import Config from 'react-native-config';
+import axios from "axios";
+import Constants from "expo-constants";
 
+// Modification de l'import Config ne fonctionne pas sur Expo
+// const { expoConfig } = Constants;
+// const { API_BASE_URL, TIMEOUT } = expoConfig.extra;
 
 const instance = axios.create({
-  baseURL: Config.API_BASE_URL, // URL de base de l'API
-  timeout: parseInt(Config.TIMEOUT), // Temps d'attente maximal en millisecondes
+  baseURL: "http://192.168.1.27:3000", // URL de base de l'API
+  timeout: 5000, // Temps d'attente maximal en millisecondes
   headers: {
-    'Content-Type': 'application/json',
-    
+    "Content-Type": "application/json",
   },
 });
 
