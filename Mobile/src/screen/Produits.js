@@ -1,19 +1,35 @@
-import React from "react";
-import { Button, Text, View } from "react-native";
+import React, { useEffect, useState } from "react";
+import { SafeAreaView, StatusBar, Text } from "react-native";
+import { getProducts } from "../services/product.service";
+import ProductGridComponent from "../components/products/ProductGridComponent";
 
 function Produits({ navigation }) {
+  const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    getProducts().then((result) => {
+      setProducts(result);
+      setLoading(false);
+    });
+  }, []);
+
+  if (loading) {
+    return <Text>Loading...</Text>;
+  }
+
   return (
-    <View>
-      <Text>Test</Text>
-      <Button
-        title="Go to Produit"
-        onPress={() => navigation.push("Produit")}
-      />
-      <Button
-        title="Go to Recette"
-        onPress={() => navigation.push("Recette")}
-      />
-    </View>
+    <SafeAreaView
+      style={{
+        flex: 1,
+        marginTop: StatusBar.currentHeight || 0,
+        paddingHorizontal: 12,
+        width: "100%",
+      }}
+    >
+      <Text>Produits</Text>
+      <ProductGridComponent products={products} navigation={navigation} />
+    </SafeAreaView>
   );
 }
 

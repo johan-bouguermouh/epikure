@@ -1,12 +1,13 @@
-import React from 'react'
-import { Text, View } from 'react-native'
+import React from "react";
+import { Text, View } from "react-native";
+import { getProducts } from "../../services/product.service";
 
 function Product() {
   return (
     <View>
-        <Text>Produit</Text>
+      <Text>Products</Text>
     </View>
-  )
+  );
 }
 
-export default Product
+export default Product;
