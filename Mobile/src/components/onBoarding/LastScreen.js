@@ -1,13 +1,34 @@
 import React from "react";
-import { Text, View } from "react-native";
+import { View,StyleSheet,Text, Image } from "react-native";
+import {vh} from 'react-native-expo-viewport-units';
+import illustration_3 from '../../../assets/illustration_3.png';
 
-function LastScreen({ step }) {
+function FirstScreen({ step }) {
   return (
-    <View>
-      <Text>Last Screen</Text>
-      <Text>Step: {step}</Text>
+    
+    <View style={styles.container}>
+      <Image source={illustration_3} style={styles.image} />
+      <Text style={styles.text}><Text style={{fontWeight: 'bold', color: "#913C91"}}>Cuisinez de saison </Text>: découvrez des recettes inspirées par les fruits et légumes du moment.</Text>
     </View>
   );
 }
 
-export default LastScreen;
+const styles = StyleSheet.create({
+  container: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    
+    height: vh(80),
+    width: "80%",
+   }, 
+  image: {
+    width: 370,
+    height: 370,
+  },
+  text: {
+    fontSize: 20,
+  },
+});
+
+export default FirstScreen;
