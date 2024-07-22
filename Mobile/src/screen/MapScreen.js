@@ -1,11 +1,10 @@
 import React, { useState, useEffect, useContext } from "react";
-import { Button, Text, View, StyleSheet, TouchableOpacity } from "react-native";
+import { Text, View, StyleSheet } from "react-native";
 import MapView, { Marker, Callout } from "react-native-maps";
 import { UserContext } from "../contexts/UserContext";
 import cursor from "../../assets/curser map.png";
-import image_shop from "../../assets/image_shop.png";
 import ModalPlace from "../components/map/ModalPlace";
-import { getPlaces } from "../services/place.service";
+import { getMap } from "../services/place.service";
 
 function MapScreen({ navigation }) {
   const { location, errorMsg } = useContext(UserContext);
@@ -14,12 +13,8 @@ function MapScreen({ navigation }) {
   const [modalContent, setModalContent] = useState({
     title: null,
     image: null,
-    address: {
-      street: null,
-      postalCode: null,
-      city: null,
-    },
-    description: null,
+    address: null,
+    open: null,
   });
 
   const handleCloseModal = (e) => {
@@ -30,19 +25,25 @@ function MapScreen({ navigation }) {
   };
 
   useEffect(() => {
-    getPlaces().then((result) => {
-      setPlaces(result);
-    });
-  }, []);
-
-  useEffect(() => {
-    console.log(places);
-  }, [places]);
+    if (location.latitude) {
+      getMap(location).then((result) => {
+        setPlaces(result);
+      });
+    }
+  }, [location]);
 
   if (errorMsg) {
     return (
       <View style={styles.container}>
         <Text>{errorMsg}</Text>
+      </View>
+    );
+  }
+
+  if (!location.latitude) {
+    return (
+      <View style={styles.container}>
+        <Text>Loading...</Text>
       </View>
     );
   }
@@ -62,30 +63,27 @@ function MapScreen({ navigation }) {
         loadingEnabled
         loadingIndicatorColor="#AD59AD"
       >
-        <Marker
-          className="marker"
-          coordinate={{
-            latitude: location.latitude,
-            longitude: location.longitude,
-          }}
-          image={cursor}
-          onPress={() => {
-            setModalContent({
-              title: "L'ilot vert",
-              image: image_shop,
-              address: {
-                street: "299 Av. de Mazargues",
-                postalCode: "13009",
-                city: "Marseille",
-              },
-              description:
-                "lundi: 9h-12h30, 15h-19h\nmardi: 9h-12h30, 15h-19h\nmercredi: 9h-12h30, 15h-19h\njeudi: 9h-12h30, 15h-19h\nvendredi: 9h-12h30, 15h-19h\nsamedi: 9h-12h30, 15h-19h\n",
-            });
-            setModalOpen(true);
-          }}
-        >
-          <Callout tooltip />
-        </Marker>
+        {places.map((place) => (
+          <Marker
+            key={place.id}
+            coordinate={{
+              latitude: Number(place.latitude),
+              longitude: Number(place.longitude),
+            }}
+            image={cursor}
+            onPress={() => {
+              setModalContent({
+                title: place.name,
+                image: place.urlImage,
+                address: place.address,
+                open: place.openingHours,
+              });
+              setModalOpen(true);
+            }}
+          >
+            <Callout tooltip />
+          </Marker>
+        ))}
       </MapView>
 
       {modalOpen && (
@@ -107,10 +105,11 @@ const styles = StyleSheet.create({
     top: 0,
     left: 0,
     width: "100%",
-    height: "50%",
     backgroundColor: "#FFFFFF",
     opacity: 0.92,
     zIndex: 1,
+    borderBottomLeftRadius: 20,
+    borderBottomRightRadius: 20,
   },
 });
 
