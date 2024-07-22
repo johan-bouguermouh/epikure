@@ -36,6 +36,23 @@ export class ProductService {
     });
   }
 
+  async findAllBySeason(season?: number): Promise<PublicProductDto[]> {
+    const dateNow = new Date();
+    season = season ? season : dateNow.getMonth();
+
+    console.log('season', season);
+
+    const products = await this.productRepository.find({
+      relations: ['categoryProduct'],
+    });
+
+    const filteredProducts = filterProductByPeriodHarvest(products, season);
+
+    console.log('filteredProducts', filteredProducts);
+
+    return filteredProducts.map((product) => new PublicProductDto(product));
+  }
+
   async insertCategoryProduct(name: string): Promise<CategoryProduct> {
     const categoryProduct = new CategoryProduct();
     categoryProduct.name = name;
@@ -47,9 +64,12 @@ export class ProductService {
   }
 }
 
-export function filterProductByPeriodHarvest(products: Product[]): Product[] {
+export function filterProductByPeriodHarvest(
+  products: Product[],
+  month?: number,
+): Product[] {
   const dateNow = new Date();
-  const numberMonthNow = dateNow.getMonth();
+  const numberMonthNow = month ? month : dateNow.getMonth();
 
   const filteredProducts: Product[] = products.filter((product) => {
     if (

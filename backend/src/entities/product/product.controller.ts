@@ -1,8 +1,19 @@
-import { Controller, Get, Post, Body, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Param,
+  Delete,
+  Query,
+  UseInterceptors,
+  ClassSerializerInterceptor,
+} from '@nestjs/common';
 import { ProductService } from './product.service';
 import { Product } from './product.entity';
 import { BodyCreateProductDto } from './dto/body-create-pruduct.dto';
 import { CategoryProduct } from '../category-product/category-product.entity';
+import { PublicProductDto } from './dto/public-product.dto';
 
 @Controller('product')
 export class ProductController {
@@ -18,6 +29,14 @@ export class ProductController {
   @Get()
   async findAll(): Promise<Product[]> {
     return this.productService.findAll();
+  }
+
+  @UseInterceptors(ClassSerializerInterceptor)
+  @Get('/season')
+  async findAllBySeason(
+    @Query('month') month: number,
+  ): Promise<PublicProductDto[]> {
+    return this.productService.findAllBySeason(month);
   }
 
   @Post('/category')
