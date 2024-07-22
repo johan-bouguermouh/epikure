@@ -5,6 +5,7 @@ import { useIsProducerContext } from '../context/IsProducerContext';
 import HeroBannerComponent from '../components/HeroBannerComponent';
 import ExplanationCardComponent from '../components/ExplanationCardComponent';
 import CommentaryComponent from '../components/CommentaryComponent';
+import StepCardComponent from '@/components/StepCardCompenent';
 
 export default function HomePage() {
   const { isProducer } = useIsProducerContext();
@@ -27,6 +28,9 @@ export default function HomePage() {
       </div>
       <ExplanationCardComponent
         isProducer={isProducer}
+      />
+      <StepCardComponent
+      isProducer={isProducer} 
       />
       <CommentaryComponent
         isProducer={isProducer}
