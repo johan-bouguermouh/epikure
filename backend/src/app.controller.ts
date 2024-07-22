@@ -28,8 +28,6 @@ export class AppController {
   @Post('upload')
   @UseInterceptors(FileInterceptor('file'))
   uploadFile(@UploadedFile() file: Express.Multer.File) {
-    console.log(file);
-
     if (!file) {
       throw new HttpException('file not found', HttpStatus.BAD_REQUEST);
     } else if (
@@ -50,8 +48,6 @@ export class AppController {
       size: file.size,
       buffer: file.buffer,
     };
-
-    console.log(fileForS3);
 
     const bucketName: string = process.env.MINIO_BUCKET_NAME;
 

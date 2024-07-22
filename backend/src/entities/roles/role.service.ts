@@ -16,7 +16,6 @@ export class RoleService {
   }
 
   async findAll(): Promise<Role[]> {
-    console.log('findAll');
     return this.roleRepository.find();
   }
 
@@ -42,7 +41,6 @@ export class RoleService {
       (role) => !existingRoleNames.includes(role.name),
     );
     if (rolesToInsert.length === 0) {
-      console.log('No new roles to seed');
       return;
     }
 
@@ -50,7 +48,5 @@ export class RoleService {
       const roleEntity = this.roleRepository.create(role);
       await this.roleRepository.save(roleEntity);
     }
-
-    console.log('Roles seeded');
   }
 }

@@ -2,8 +2,8 @@ import {
   Entity,
   Column,
   PrimaryGeneratedColumn,
-  OneToMany,
   ManyToOne,
+  OneToOne,
 } from 'typeorm';
 import { Role } from '../roles/role.entity';
 

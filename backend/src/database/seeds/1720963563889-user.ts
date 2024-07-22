@@ -9,7 +9,6 @@ export class User1720963563889 implements Seeder {
     dataSource: DataSource,
     factoryManager: SeederFactoryManager,
   ): Promise<any> {
-    // console.log(dataSource.entityMetadatas);
     // const repository = dataSource.getRepository(User);
     // await repository.insert([
     //   {

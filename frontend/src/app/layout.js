@@ -3,7 +3,10 @@ import SideBarComponent from "@/components/SidebarComponent";
 import { ThemeProvider } from "@/components/ui/theme-provider";
 import { SidebarProvider } from "@/context/SidebarContext";
 import { Inter } from "next/font/google";
-import "./globals.css";
+import React from "react";
+import IsProducerProvider from '../context/IsProducerContext';
+import NavComponent from "../components/NavComponent";
+import FooterComponent from "../components/FooterComponent";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -17,7 +20,9 @@ export default function RootLayout({ children }) {
   return (
     <html lang="fr">
       <body className={inter.className}>
-        <ThemeProvider
+        <IsProducerProvider>
+          <NavComponent />
+          <ThemeProvider
           attribute="class"
           defaultTheme="system"
           enableSystem
@@ -33,6 +38,8 @@ export default function RootLayout({ children }) {
             </div>
           </SidebarProvider>
         </ThemeProvider>
+        </IsProducerProvider>
+        <FooterComponent />
       </body>
     </html>
   );

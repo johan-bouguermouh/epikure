@@ -12,22 +12,22 @@ function FooterComponent() {
       <div className="mx-auto py-4 px-8 flex justify-between items-start w-full">
         <div className="flex space-x-10">
           <div className="space-y-4">
-            <h2 className="text-lg font-bold text-black">EPIKURE</h2>
+            <h4>EPIKURE</h4>
             <ul>
               <li>
-                <a href="#" className="text-blue-500">
+                <a href="#">
                   Nos valeurs
                 </a>
               </li>
               <li>
-                <a href="#" className="text-blue-500">
+                <a href="#">
                   Nous contacter
                 </a>
               </li>
             </ul>
           </div>
           <div className="space-y-4">
-            <h2>Nos services</h2>
+            <h4>Nos services</h4>
             <ul>
               <li>
                 <a href="#">Espace Agriculteur</a>
@@ -39,9 +39,9 @@ function FooterComponent() {
           </div>
         </div>
         <div className="space-y-4">
-          <h2 className="mx-3 text-lg font-bold text-black">
+          <h4>
             Télécharger EPIKURE
-          </h2>
+          </h4>
           <p className="mx-3 text-black">
             Téléchargez l'application mobile pour accéder à tous nos services
           </p>
