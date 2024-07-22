@@ -1,0 +1,151 @@
+[
+  { "name": "Chou rouge", "conservation": "1 semaine au frais" },
+  {
+    "name": "Choux de Bruxelles",
+    "conservation": "7 jours dans le bac à légumes"
+  },
+  { "name": "Chou-fleur", "conservation": "2 à 3 jours dans le bac à légumes" },
+  {
+    "name": "Brocoli",
+    "conservation": "Entre 4 et 5 jours dans le bac à légumes"
+  },
+  {
+    "name": "Champignon de paris",
+    "conservation": "3 ou 4 jours au réfrigérateur"
+  },
+  {
+    "name": "Champignons cultivés",
+    "conservation": "4 jours max. dans le bac à légumes"
+  },
+  {
+    "name": "Oignon Primeur",
+    "conservation": "1 semaine dans le bac à légumes"
+  },
+  {
+    "name": "Carotte primeur",
+    "conservation": "8 jours maximum dans le bac à légumes du réfrigérateur"
+  },
+  { "name": "Rutabaga", "conservation": "10 jours dans le bac à légumes" },
+  {
+    "name": "Topinambour",
+    "conservation": "3 jours max. dans le bac à légumes"
+  },
+  { "name": "Panais", "conservation": "7 jours dans le bac à légumes" },
+  { "name": "Radis", "conservation": "Le jour même \n" },
+  { "name": "Pomme de terre", "conservation": "" },
+  { "name": "Asperge", "conservation": "3 jours dans le bac à légumes" },
+  { "name": "Betterave", "conservation": "Dans le bac à légumes\n" },
+  {
+    "name": "Carotte",
+    "conservation": "8 jours maximum dans le bac à légumes du réfrigérateur\n"
+  },
+  {
+    "name": "Céleri-rave",
+    "conservation": "6 jours max dans le bac à légumes"
+  },
+  { "name": "Navet", "conservation": "3 ou 4 jours dans le bac à légumes\n" },
+  { "name": "Oignon", "conservation": "1 à 2 mois à l’air ambiant" },
+  { "name": "Poireau", "conservation": "5 jours dans le bac à légumes\n" },
+  { "name": "Ail", "conservation": "6 mois à 1 an à l’abri de la lumière\n" },
+  {
+    "name": "Échalote",
+    "conservation": "1 ou 2 mois au sec, frais et ombre 2 à 3 jours dans le bac à légumes"
+  },
+  { "name": "Salade", "conservation": "3 à 6 jours max dans le bac à légumes" },
+  {
+    "name": "Épinard",
+    "conservation": "Pas plus de deux jours au réfrigérateur"
+  },
+  {
+    "name": "Fenouil",
+    "conservation": "Une semaine max dans le bac à légumes"
+  },
+  {
+    "name": "Artichaut",
+    "conservation": "Quelques jours dans le bac à légumes"
+  },
+  { "name": "Blette", "conservation": "Dans le bac à légumes\n" },
+  { "name": "Céleri-branche", "conservation": "5 jours dans le bac à légumes" },
+  { "name": "Fève", "conservation": "2 jours max dans le bac à légumes" },
+  {
+    "name": "Courges et potirons",
+    "conservation": "3 mois dans un endroit sec et frais"
+  },
+  { "name": "Potiron", "conservation": "" },
+  { "name": "Coing", "conservation": "Plusieurs semaines à l'air ambiant" },
+  { "name": "Poire", "conservation": "2 à 3 jours à l'air ambiant" },
+  { "name": "Pomme", "conservation": "7 à 8 jours à l’air ambiant" },
+  {
+    "name": "Abricot",
+    "conservation": "Quelques jours avant de les consommer"
+  },
+  { "name": "Cerise", "conservation": "3 jours à l’air ambiant" },
+  { "name": "Mirabelle", "conservation": "3 à 5 jours dans le bac à légumes" },
+  { "name": "Pêche, Nectarine", "conservation": "2 jours à l'air ambiant" },
+  { "name": "Prune", "conservation": "10 jours au réfrigérateur" },
+  { "name": "Kiwi", "conservation": "3 à 4 semaines dans le bac à légumes" },
+  { "name": "Raisin", "conservation": "5 jours dans le bac à légumes" },
+  { "name": "Noisette", "conservation": "Plusieurs semaines à l'air libre" },
+  {
+    "name": "Figue",
+    "conservation": "4 jours à l’air libre et 8 jours au réfrigérateur."
+  },
+  {
+    "name": "Germe de haricot mungo Soja vert",
+    "conservation": "2 jours dans le bac à légumes"
+  },
+  {
+    "name": "Haricot vert",
+    "conservation": "3 à 4 jours dans le bac à légumes"
+  },
+  { "name": "Lentille", "conservation": "1 à 2 jours dans le bac à légumes" },
+  { "name": "Petit pois", "conservation": "2 jours max dans le bac à légumes" },
+  { "name": "Pois gourmand", "conservation": "A consommer le jour même" },
+  { "name": "Avocat", "conservation": "Jusqu'à 5 jours à l'air ambiant" },
+  { "name": "Grenade", "conservation": "10 jours à l'air libre" },
+  {
+    "name": "Figue de Barbarie",
+    "conservation": "4 à 5 jours dans le bac à légumes"
+  },
+  { "name": "Datte", "conservation": "À température ambiante" },
+  { "name": "Groseille", "conservation": "2 à 3 jours dans le bac à légumes" },
+  { "name": "Mûre", "conservation": "2 à 3 jours dans le bac à légumes" },
+  { "name": "Myrtille", "conservation": "1 semaine au frais" },
+  { "name": "Cassis", "conservation": "1 à 2 jours dans le bac à légumes" },
+  { "name": "Fraise", "conservation": "2 jours max dans le bac à légumes" },
+  { "name": "Framboise", "conservation": "2 jours max dans le bac à légumes" },
+  { "name": "Orange", "conservation": "1 semaine à l'air libre" },
+  {
+    "name": "Clémentine, Mandarine",
+    "conservation": "6 jours à l'air ambiant"
+  },
+  {
+    "name": "Citron, Citron vert",
+    "conservation": "7 à 8 jours à l'air ambiant"
+  },
+  { "name": "Pignon de pin", "conservation": "Dans un endroit frais et sec" },
+  { "name": "Amande", "conservation": "Quelques jours à l'air ambiant" },
+  { "name": "Châtaigne", "conservation": "4 à 5 jours dans le bac à légumes" },
+  {
+    "name": "Noix",
+    "conservation": "2 jours dans le bac à légumes pour les noix fraîches"
+  },
+  { "name": "Mâche", "conservation": "2 à 3 jours au réfrigérateur" },
+  { "name": "Pourpier", "conservation": "2 jours max dans le bac à légumes" },
+  { "name": "Laitue", "conservation": "1 à 2 jours dans le bac à légumes" },
+  { "name": "Chicorée", "conservation": "2 jours dans le bac à légumes" },
+  { "name": "Cresson", "conservation": "2 jours max dans le bac à légumes" },
+  {
+    "name": "Endive",
+    "conservation": "6 jours dans le bac à légumes du réfrigérateur"
+  },
+  {
+    "name": "Aubergine",
+    "conservation": "Dans un endroit frais entre 10 et 12°C"
+  },
+  { "name": "Pastèque", "conservation": "7 jours à l'air ambiant" },
+  { "name": "Concombre", "conservation": "7 jours max dans le bac à légumes" },
+  { "name": "Poivron", "conservation": "8 jours dans le bac à légumes" },
+  { "name": "Tomate", "conservation": "3 à 4 jours à l'air ambiant" },
+  { "name": "Melon", "conservation": "6 jours max dans le bac à légumes" }
+]

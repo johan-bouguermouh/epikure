@@ -1,0 +1,387 @@
+[
+    {
+        "name": "Chou rouge",
+        "harvestStartMounth": 10,
+        "harvestEndMounth": 2
+    },
+    {
+        "name": "Choux de Bruxelles",
+        "harvestStartMounth": 1,
+        "harvestEndMounth": 12
+    },
+    {
+        "name": "Chou-fleur",
+        "harvestStartMounth": 1,
+        "harvestEndMounth": 12
+    },
+    {
+        "name": "Brocoli",
+        "harvestStartMounth": 1,
+        "harvestEndMounth": 12
+    },
+    {
+        "name": "Champignon de paris",
+        "harvestStartMounth": 1,
+        "harvestEndMounth": 12
+    },
+    {
+        "name": "Champignons cultivés",
+        "harvestStartMounth": 9,
+        "harvestEndMounth": 6
+    },
+    {
+        "name": "Oignon Primeur",
+        "harvestStartMounth": 10,
+        "harvestEndMounth": 12
+    },
+    {
+        "name": "Carotte primeur",
+        "harvestStartMounth": 5,
+        "harvestEndMounth": 6
+    },
+    {
+        "name": "Rutabaga",
+        "harvestStartMounth": 10,
+        "harvestEndMounth": 12
+    },
+    {
+        "name": "Topinambour",
+        "harvestStartMounth": 1,
+        "harvestEndMounth": 12
+    },
+    {
+        "name": "Panais",
+        "harvestStartMounth": 1,
+        "harvestEndMounth": 12
+    },
+    {
+        "name": "Radis",
+        "harvestStartMounth": 1,
+        "harvestEndMounth": 12
+    },
+    {
+        "name": "Pomme de terre",
+        "harvestStartMounth": 9,
+        "harvestEndMounth": 3
+    },
+    {
+        "name": "Asperge",
+        "harvestStartMounth": 1,
+        "harvestEndMounth": 12
+    },
+    {
+        "name": "Betterave",
+        "harvestStartMounth": 1,
+        "harvestEndMounth": 12
+    },
+    {
+        "name": "Carotte",
+        "harvestStartMounth": 1,
+        "harvestEndMounth": 12
+    },
+    {
+        "name": "Céleri-rave",
+        "harvestStartMounth": 1,
+        "harvestEndMounth": 12
+    },
+    {
+        "name": "Navet",
+        "harvestStartMounth": 1,
+        "harvestEndMounth": 12
+    },
+    {
+        "name": "Oignon",
+        "harvestStartMounth": 1,
+        "harvestEndMounth": 12
+    },
+    {
+        "name": "Poireau",
+        "harvestStartMounth": 1,
+        "harvestEndMounth": 12
+    },
+    {
+        "name": "Ail",
+        "harvestStartMounth": 1,
+        "harvestEndMounth": 12
+    },
+    {
+        "name": "Échalote",
+        "harvestStartMounth": 1,
+        "harvestEndMounth": 12
+    },
+    {
+        "name": "Salade",
+        "harvestStartMounth": 1,
+        "harvestEndMounth": 12
+    },
+    {
+        "name": "Épinard",
+        "harvestStartMounth": 10,
+        "harvestEndMounth": 5
+    },
+    {
+        "name": "Fenouil",
+        "harvestStartMounth": 10,
+        "harvestEndMounth": 5
+    },
+    {
+        "name": "Artichaut",
+        "harvestStartMounth": 1,
+        "harvestEndMounth": 6
+    },
+    {
+        "name": "Blette",
+        "harvestStartMounth": 1,
+        "harvestEndMounth": 12
+    },
+    {
+        "name": "Céleri-branche",
+        "harvestStartMounth": 10,
+        "harvestEndMounth": 12
+    },
+    {
+        "name": "Fève",
+        "harvestStartMounth": 5,
+        "harvestEndMounth": 6
+    },
+    {
+        "name": "Courges et potirons",
+        "harvestStartMounth": 10,
+        "harvestEndMounth": 12
+    },
+    {
+        "name": "Potiron",
+        "harvestStartMounth": 10,
+        "harvestEndMounth": 1
+    },
+    {
+        "name": "Coing",
+        "harvestStartMounth": 10,
+        "harvestEndMounth": 12
+    },
+    {
+        "name": "Poire",
+        "harvestStartMounth": 9,
+        "harvestEndMounth": 12
+    },
+    {
+        "name": "Pomme",
+        "harvestStartMounth": 10,
+        "harvestEndMounth": 5
+    },
+    {
+        "name": "Abricot",
+        "harvestStartMounth": 5,
+        "harvestEndMounth": 8
+    },
+    {
+        "name": "Cerise",
+        "harvestStartMounth": 5,
+        "harvestEndMounth": 7
+    },
+    {
+        "name": "Mirabelle",
+        "harvestStartMounth": 8,
+        "harvestEndMounth": 9
+    },
+    {
+        "name": "Pêche, Nectarine",
+        "harvestStartMounth": 6,
+        "harvestEndMounth": 9
+    },
+    {
+        "name": "Prune",
+        "harvestStartMounth": 1,
+        "harvestEndMounth": 10
+    },
+    {
+        "name": "Kiwi",
+        "harvestStartMounth": 11,
+        "harvestEndMounth": 5
+    },
+    {
+        "name": "Raisin",
+        "harvestStartMounth": 8,
+        "harvestEndMounth": 11
+    },
+    {
+        "name": "Noisette",
+        "harvestStartMounth": 9,
+        "harvestEndMounth": 12
+    },
+    {
+        "name": "Figue",
+        "harvestStartMounth": 1,
+        "harvestEndMounth": 10
+    },
+    {
+        "name": "Germe de haricot mungo Soja vert",
+        "harvestStartMounth": 1,
+        "harvestEndMounth": 12
+    },
+    {
+        "name": "Haricot vert",
+        "harvestStartMounth": 6,
+        "harvestEndMounth": 10
+    },
+    {
+        "name": "Lentille",
+        "harvestStartMounth": 1,
+        "harvestEndMounth": 12
+    },
+    {
+        "name": "Petit pois",
+        "harvestStartMounth": 4,
+        "harvestEndMounth": 12
+    },
+    {
+        "name": "Pois gourmand",
+        "harvestStartMounth": 1,
+        "harvestEndMounth": 12
+    },
+    {
+        "name": "Avocat",
+        "harvestStartMounth": 1,
+        "harvestEndMounth": 12
+    },
+    {
+        "name": "Grenade",
+        "harvestStartMounth": 1,
+        "harvestEndMounth": 12
+    },
+    {
+        "name": "Figue de Barbarie",
+        "harvestStartMounth": 1,
+        "harvestEndMounth": 10
+    },
+    {
+        "name": "Datte",
+        "harvestStartMounth": 10,
+        "harvestEndMounth": 12
+    },
+    {
+        "name": "Groseille",
+        "harvestStartMounth": 6,
+        "harvestEndMounth": 9
+    },
+    {
+        "name": "Mûre",
+        "harvestStartMounth": 7,
+        "harvestEndMounth": 10
+    },
+    {
+        "name": "Myrtille",
+        "harvestStartMounth": 1,
+        "harvestEndMounth": 9
+    },
+    {
+        "name": "Cassis",
+        "harvestStartMounth": 1,
+        "harvestEndMounth": 9
+    },
+    {
+        "name": "Fraise",
+        "harvestStartMounth": 1,
+        "harvestEndMounth": 6
+    },
+    {
+        "name": "Framboise",
+        "harvestStartMounth": 5,
+        "harvestEndMounth": 10
+    },
+    {
+        "name": "Orange",
+        "harvestStartMounth": 11,
+        "harvestEndMounth": 5
+    },
+    {
+        "name": "Clémentine, Mandarine",
+        "harvestStartMounth": 11,
+        "harvestEndMounth": 3
+    },
+    {
+        "name": "Citron, Citron vert",
+        "harvestStartMounth": 12,
+        "harvestEndMounth": 5
+    },
+    {
+        "name": "Pignon de pin",
+        "harvestStartMounth": 1,
+        "harvestEndMounth": 12
+    },
+    {
+        "name": "Amande",
+        "harvestStartMounth": 9,
+        "harvestEndMounth": 10
+    },
+    {
+        "name": "Châtaigne",
+        "harvestStartMounth": 10,
+        "harvestEndMounth": 12
+    },
+    {
+        "name": "Noix",
+        "harvestStartMounth": 12,
+        "harvestEndMounth": 3
+    },
+    {
+        "name": "Mâche",
+        "harvestStartMounth": 12,
+        "harvestEndMounth": 4
+    },
+    {
+        "name": "Pourpier",
+        "harvestStartMounth": 4,
+        "harvestEndMounth": 11
+    },
+    {
+        "name": "Laitue",
+        "harvestStartMounth": 5,
+        "harvestEndMounth": 9
+    },
+    {
+        "name": "Chicorée",
+        "harvestStartMounth": 10,
+        "harvestEndMounth": 12
+    },
+    {
+        "name": "Cresson",
+        "harvestStartMounth": 9,
+        "harvestEndMounth": 5
+    },
+    {
+        "name": "Endive",
+        "harvestStartMounth": 10,
+        "harvestEndMounth": 4
+    },
+    {
+        "name": "Aubergine",
+        "harvestStartMounth": 5,
+        "harvestEndMounth": 9
+    },
+    {
+        "name": "Pastèque",
+        "harvestStartMounth": 6,
+        "harvestEndMounth": 8
+    },
+    {
+        "name": "Concombre",
+        "harvestStartMounth": 4,
+        "harvestEndMounth": 8
+    },
+    {
+        "name": "Poivron",
+        "harvestStartMounth": 4,
+        "harvestEndMounth": 8
+    },
+    {
+        "name": "Tomate",
+        "harvestStartMounth": 4,
+        "harvestEndMounth": 8
+    },
+    {
+        "name": "Melon",
+        "harvestStartMounth": 6,
+        "harvestEndMounth": 9
+    }
+]

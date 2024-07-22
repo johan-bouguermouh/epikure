@@ -3,6 +3,7 @@ import {
   IsBoolean,
   IsEmail,
   IsInt,
+  IsOptional,
   IsString,
   IsStrongPassword,
 } from 'class-validator';
@@ -62,4 +63,11 @@ export class bodyCreateUserDto {
     },
   )
   password: string;
+
+  @IsOptional()
+  isFarmer: boolean;
+
+  @IsOptional()
+  @IsString()
+  guestUuid: string;
 }

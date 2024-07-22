@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import "./gesture-handler";
+import UserProvider from "./src/contexts/UserContext";
 import { Button, StyleSheet, Text, View } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { NavigationContainer } from "@react-navigation/native";
@@ -49,9 +50,11 @@ export default function App() {
 
   if (onBoarded) {
     return (
-      <NavigationContainer>
-        <MyTabs />
-      </NavigationContainer>
+      <UserProvider>
+        <NavigationContainer>
+          <MyTabs />
+        </NavigationContainer>
+      </UserProvider>
 
       // <View style={styles.container}>
       //   <Text>APPLICATION</Text>
