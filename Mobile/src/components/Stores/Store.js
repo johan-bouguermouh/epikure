@@ -2,6 +2,7 @@ import React from "react";
 import { Button, Text, View } from "react-native";
 
 function Store({ navigation }) {
+  // récup les paramètres de la navigation
   return (
     <View>
       <Text>Magasin</Text>

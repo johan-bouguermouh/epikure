@@ -21,6 +21,8 @@ function ModalPlace({ content, navigation }) {
 
   const imageUrl = content.image.replace("http://localhost", url);
 
+  console.log(content);
+
   return (
     <View style={styles.modalContent}>
       <View style={styles.imageContainer}>
@@ -91,7 +93,7 @@ function ModalPlace({ content, navigation }) {
         <View style={styles.separator}></View>
         <TouchableOpacity
           style={styles.button}
-          onPress={() => navigation.push("Magasin")}
+          onPress={() => navigation.push("Magasin", { place: content.id })}
         >
           <Text style={styles.buttonText}>Voir plus</Text>
         </TouchableOpacity>

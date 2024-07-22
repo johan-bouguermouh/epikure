@@ -77,6 +77,7 @@ function MapScreen({ navigation }) {
                 image: place.urlImage,
                 address: place.address,
                 open: place.openingHours,
+                id: place.id,
               });
               setModalOpen(true);
             }}
