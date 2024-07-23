@@ -11,9 +11,7 @@ export default function FavoritesPlacesList({ places, navigation }) {
     <View style={{ gap: 8 }}>
       {places.map((place) => {
         //on change l'url le localhost de l'url image par l'ip de la machine
-        console.log(place.urlImage);
         place.urlImage = place.urlImage.replace("http://localhost", url);
-        console.log(place.urlImage);
 
         return (
           <TouchableOpacity

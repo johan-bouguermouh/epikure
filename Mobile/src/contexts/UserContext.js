@@ -22,7 +22,6 @@ export const UserProvider = ({ children }) => {
       if (value) {
         setUuid(value);
         const result = await getGuest();
-        console.log(result);
         const { products, farmers, places } = result;
         setFavProducts(products);
         setFavFarmers(farmers);
