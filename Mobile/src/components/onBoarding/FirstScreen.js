@@ -4,7 +4,7 @@ import {vh} from 'react-native-expo-viewport-units';
 import illustration_2 from '../../../assets/illustration_2.png';
 
 
-function FirstScreen({ step }) {
+function FirstScreen() {
   return (
     
     <View style={styles.container}>
