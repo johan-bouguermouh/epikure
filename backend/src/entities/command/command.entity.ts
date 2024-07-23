@@ -24,7 +24,7 @@ export class Command {
   startedDate: Date;
 
   /** places ayant reçuent la commande */
-  @ManyToMany(() => Place)
+  @ManyToMany(() => Place, (place) => place.commands)
   @JoinTable()
   places: Place[];
 

@@ -50,3 +50,17 @@ export const getMap = async (location) => {
     throw error;
   }
 };
+
+export const getInfoPlace = async (id) => {
+  try {
+    const response = await instance.get(`${endpoint}/info/${id}`);
+    return response.data;
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      console.error("Error while fetching place info", error.response.data);
+      throw error.response.data;
+    }
+    console.error("Error while fetching place info", error);
+    throw error;
+  }
+};
