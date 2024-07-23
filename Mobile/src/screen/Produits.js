@@ -1,5 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { SafeAreaView, StatusBar, Text } from "react-native";
+import {
+  ActivityIndicator,
+  SafeAreaView,
+  StatusBar,
+  Text,
+  View,
+} from "react-native";
 import { getProducts } from "../services/product.service";
 import ProductGridComponent from "../components/products/ProductGridComponent";
 import SeasonalFrieze from "../components/products/SeasonalFrieze";
@@ -16,7 +22,18 @@ function Produits({ navigation }) {
   }, []);
 
   if (loading) {
-    return <Text>Loading...</Text>;
+    return (
+      <View
+        style={{
+          height: "100%",
+          width: "100%",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <ActivityIndicator size={"large"} color={"#AD59AD"} />
+      </View>
+    );
   }
 
   return (
