@@ -5,15 +5,17 @@ import {
   Body,
   Param,
   Delete,
-  Query,
   UseInterceptors,
   ClassSerializerInterceptor,
+  Query,
 } from '@nestjs/common';
 import { ProductService } from './product.service';
 import { Product } from './product.entity';
 import { BodyCreateProductDto } from './dto/body-create-pruduct.dto';
 import { CategoryProduct } from '../category-product/category-product.entity';
 import { PublicProductDto } from './dto/public-product.dto';
+import { Coordinates } from 'src/utils/distance.service';
+import { InfoProductDto } from './dto/info-product.dto';
 
 @Controller('product')
 export class ProductController {
@@ -37,6 +39,21 @@ export class ProductController {
     @Query('month') month: number,
   ): Promise<PublicProductDto[]> {
     return this.productService.findAllBySeason(month);
+  }
+
+  @UseInterceptors(ClassSerializerInterceptor)
+  @Get(':id')
+  async findOne(
+    @Param('id') id: number,
+    @Query('latitude') latitude: number,
+    @Query('longitude') longitude: number,
+  ): Promise<InfoProductDto> {
+    if (!latitude || !longitude) {
+      return this.productService.findOne(id);
+    } else {
+      const coord: Coordinates = { latitude, longitude };
+      return this.productService.findOne(id, coord);
+    }
   }
 
   @Post('/category')
