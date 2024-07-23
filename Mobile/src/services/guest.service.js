@@ -85,8 +85,6 @@ export const getGuest = async () => {
 
 export const addFavoriteFarmer = async (farmerId) => {
   const guest = await getUuid();
-  console.log("guest", guest);
-  console.log(`${endpoint}/${guest}/farmers`);
   try {
     const response = await instance.post(`${endpoint}/${guest}/farmers`, {
       farmerId: farmerId,

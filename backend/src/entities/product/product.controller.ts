@@ -23,7 +23,6 @@ export class ProductController {
 
   @Get('/category')
   async findAllCategoryProduct(): Promise<CategoryProduct[]> {
-    console.log('findAllCategoryProduct');
     return this.productService.findAllCategoryProduct();
   }
 

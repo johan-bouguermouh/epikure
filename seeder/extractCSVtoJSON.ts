@@ -16,7 +16,6 @@ csvToJson()
     if (products.length === 0) {
       throw new Error("No products to insert");
     } else {
-      console.log(products);
       //un fois que c'est fait on sauvegarde le fichier dans seeder\data\table\heroBanner.json
       try {
         fs.writeFileSync(

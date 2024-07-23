@@ -41,7 +41,6 @@ export class GuestController {
   @UseInterceptors(ClassSerializerInterceptor)
   @Get(':uuid/products')
   async findProducts(@Param('uuid') uuid: string): Promise<PublicProductDto[]> {
-    console.log('uuid', uuid);
     return this.guestService.findProducts(uuid);
   }
 

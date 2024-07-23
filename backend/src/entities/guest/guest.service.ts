@@ -230,8 +230,6 @@ export class GuestService {
 
     guest.farmers = guest.farmers.filter((farmer) => farmer.id !== farmerId);
 
-    console.log('guest', guest);
-
     const { farmers } = await this.guestRepository.save(guest);
 
     return farmers.map((farmer) => new PublicFarmerDto(farmer));
