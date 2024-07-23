@@ -14,6 +14,10 @@ import HeaderScreen from "../common/HeaderScreen";
 import SeasonalFrieze from "./SeasonalFrieze";
 import { defineMetricPrefixes } from "../../services/distance.service";
 import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
+import {
+  addFavoriteProduct,
+  removeFavoriteProduct,
+} from "../../services/guest.service";
 
 // on récupère l'id du produit envoyer par la navigation et on le passe à la fonction getProducts
 
@@ -53,10 +57,10 @@ function Product({ route, navigation }) {
               title={product.name}
               isFavorite={false}
               addFavoriteHandler={() => {
-                //Ajouter au guest store pour ajouter
+                addFavoriteProduct(product.id);
               }}
               deleteFavoriteHandler={() => {
-                //Ajouter au guest store pour supprimer
+                removeFavoriteProduct(product.id);
               }}
             />
             <View style={{ padding: 12 }}>
