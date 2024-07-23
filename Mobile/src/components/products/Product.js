@@ -18,15 +18,21 @@ import {
   addFavoriteProduct,
   removeFavoriteProduct,
 } from "../../services/guest.service";
+import PlaceList from "../Stores/PlaceList";
 
 // on récupère l'id du produit envoyer par la navigation et on le passe à la fonction getProducts
 
 function Product({ route, navigation }) {
   const { productId } = route.params;
-  const { location, errorMsg } = useContext(UserContext);
+  const {
+    location,
+    errorMsg,
+    thisProductIsFav,
+    removeFavoriteProductStore,
+    addFavoriteProductStore,
+  } = useContext(UserContext);
   const [loading, setLoading] = useState(true);
   const [product, setProduct] = useState(null);
-  const [numberOfPlaces, setNumberOfPlaces] = useState(5);
 
   useEffect(() => {
     getProduct(productId, location).then((result) => {
@@ -55,12 +61,14 @@ function Product({ route, navigation }) {
               urlBannerImage={product.urlBannerImage}
               isCallableFavorite={true}
               title={product.name}
-              isFavorite={false}
+              isFavorite={thisProductIsFav(product.id)}
               addFavoriteHandler={() => {
                 addFavoriteProduct(product.id);
+                addFavoriteProductStore(product);
               }}
               deleteFavoriteHandler={() => {
                 removeFavoriteProduct(product.id);
+                removeFavoriteProductStore(product.id);
               }}
             />
             <View style={{ padding: 12 }}>
@@ -130,76 +138,7 @@ function Product({ route, navigation }) {
               >
                 Où trouver ce produit ?
               </Text>
-              {product.findPlaces.slice(0, numberOfPlaces).map((place) => (
-                <TouchableOpacity
-                  key={place.name}
-                  style={{
-                    flexDirection: "row",
-                    gap: 12,
-                    alignItems: "center",
-                    paddingVertical: 6,
-                    paddingHorizontal: 8,
-                    backgroundColor: "#FFE3DC",
-                    borderRadius: 8,
-                    marginBottom: 8,
-                    borderColor: "#D9B3D9",
-                    borderWidth: 0.5,
-                  }}
-                  onPress={() => {
-                    navigation.navigate("Magasin", { placeId: place.id });
-                  }}
-                >
-                  <View
-                    style={{
-                      flexDirection: "row",
-                      alignItems: "center",
-                      gap: 5,
-                      paddingRight: 8,
-                      borderRightColor: "#913C91",
-                      borderRightWidth: 1.5,
-                      minWidth: 74,
-                    }}
-                  >
-                    <FontAwesome6
-                      name="location-dot"
-                      size={20}
-                      color="#913C91"
-                    />
-                    <Text style={{ fontWeight: 400 }}>
-                      {defineMetricPrefixes(place.distance)}
-                    </Text>
-                  </View>
-                  <Text
-                    numberOfLines={1}
-                    style={{
-                      fontWeight: 500,
-                      flex: 1,
-                      textAlignVertical: "center",
-                      ellipsizeMode: "tail",
-                    }}
-                  >
-                    {place.name}
-                  </Text>
-                </TouchableOpacity>
-              ))}
-              {product.findPlaces.length > numberOfPlaces && (
-                <TouchableOpacity
-                  style={{
-                    flexDirection: "row",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    paddingHorizontal: 12,
-                    paddingVertical: 6,
-                    backgroundColor: "#E6CCE6",
-                    borderRadius: 8,
-                  }}
-                  onPress={() => {
-                    setNumberOfPlaces(numberOfPlaces + 5);
-                  }}
-                >
-                  <Text>Voir d'autres magasins</Text>
-                </TouchableOpacity>
-              )}
+              <PlaceList places={product.findPlaces} navigation={navigation} />
             </View>
           </View>
         </ScrollView>
