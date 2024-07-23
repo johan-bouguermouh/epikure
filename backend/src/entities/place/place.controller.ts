@@ -1,9 +1,20 @@
-import { Controller, Get, Post, Body, Put, Query, Param } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Put,
+  Query,
+  Param,
+  UseInterceptors,
+  ClassSerializerInterceptor,
+} from '@nestjs/common';
 import { PlaceService } from './place.service';
 import { Place } from './place.entity';
 import { BodyCreatePlaceDto } from './dto/body-create-place.dto';
 import { QueryParamsAutocompleteDto } from './dto/query-params-autocomplete.dto';
 import { QueryParamsPlaceIdDto } from './dto/query-params-placeid.dto';
+import { PublicPlaceDto } from './dto/public-place.dto';
 
 @Controller('place')
 export class PlaceController {
@@ -17,6 +28,21 @@ export class PlaceController {
   @Get()
   async findAll(): Promise<Place[]> {
     return this.placeService.findAll();
+  }
+
+  @UseInterceptors(ClassSerializerInterceptor)
+  @Get('map')
+  async findAllMap(
+    @Query('latitude') latitude: number,
+    @Query('longitude') longitude: number,
+  ): Promise<PublicPlaceDto[]> {
+    return this.placeService.findAllByPosition(latitude, longitude);
+  }
+
+  @UseInterceptors(ClassSerializerInterceptor)
+  @Get('/:id')
+  async findOne(@Param('id') id: number): Promise<Place> {
+    return this.placeService.findOne(id);
   }
 
   @Get('auto-complete')
