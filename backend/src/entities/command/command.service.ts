@@ -144,7 +144,12 @@ export class CommandService {
   async findByPlace(id: number): Promise<Command[]> {
     return this.commandRepository.find({
       where: { places: { id } },
-      relations: ['commandProducts', 'commandProducts.product', 'farmer'],
+      relations: [
+        'commandProducts',
+        'commandProducts.product',
+        'commandProducts.product.categoryProduct',
+        'farmer',
+      ],
     });
   }
 }

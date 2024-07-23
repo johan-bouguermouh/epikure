@@ -9,6 +9,7 @@ import {
 } from "react-native";
 import { getPlace } from "../../services/place.service";
 import HeaderScreen from "../common/HeaderScreen";
+import ProductsListCategories from "./ProductsListCategories";
 
 function Store({ route, navigation }) {
   const [place, setPlace] = useState(null);
@@ -200,12 +201,6 @@ function Store({ route, navigation }) {
     }
   }, [place]);
 
-  // useEffect(() => {
-  //   if (openingHours) {
-  //     console.log("openingHours", openingHours);
-  //   }
-  // }, [openingHours]);
-
   return (
     <View>
       {/* <Text>Magasin</Text>
@@ -289,6 +284,7 @@ function Store({ route, navigation }) {
             </View>
 
             <View style={styles.separator}></View>
+            <ProductsListCategories placeId={id} />
           </View>
         </ScrollView>
       )}
