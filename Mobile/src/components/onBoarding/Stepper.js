@@ -4,6 +4,7 @@ import { Entypo } from "@expo/vector-icons";
 
 
 function Stepper({ step, setStep, onBoarding, setLocalStorage }) {
+  
   return (
     <View style={styles.container}>
       <Button  

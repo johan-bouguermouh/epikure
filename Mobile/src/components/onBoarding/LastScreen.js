@@ -3,7 +3,7 @@ import { View,StyleSheet,Text, Image } from "react-native";
 import {vh} from 'react-native-expo-viewport-units';
 import illustration_3 from '../../../assets/illustration_3.png';
 
-function FirstScreen({ step }) {
+function LastScreen() {
   return (
     
     <View style={styles.container}>
@@ -31,4 +31,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default FirstScreen;
+export default LastScreen;
