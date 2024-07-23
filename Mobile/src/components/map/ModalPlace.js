@@ -30,15 +30,6 @@ function ModalPlace({ content, navigation }) {
         isFavorite={false}
         isCallableFavorite={false}
       />
-      {/* <View style={styles.imageContainer}>
-        <Image
-          source={{
-            uri: imageUrl,
-          }}
-          style={styles.modalImage}
-        />
-        <Text style={styles.modalTitle}>{content.title}</Text>
-      </View> */}
       <View style={styles.content}>
         <View style={styles.addressContainer}>
           <Text>{street}</Text>
