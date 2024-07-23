@@ -24,7 +24,13 @@ import PlaceList from "../Stores/PlaceList";
 
 function Product({ route, navigation }) {
   const { productId } = route.params;
-  const { location, errorMsg } = useContext(UserContext);
+  const {
+    location,
+    errorMsg,
+    thisProductIsFav,
+    removeFavoriteProductStore,
+    addFavoriteProductStore,
+  } = useContext(UserContext);
   const [loading, setLoading] = useState(true);
   const [product, setProduct] = useState(null);
 
@@ -55,12 +61,14 @@ function Product({ route, navigation }) {
               urlBannerImage={product.urlBannerImage}
               isCallableFavorite={true}
               title={product.name}
-              isFavorite={false}
+              isFavorite={thisProductIsFav(product.id)}
               addFavoriteHandler={() => {
                 addFavoriteProduct(product.id);
+                addFavoriteProductStore(product);
               }}
               deleteFavoriteHandler={() => {
                 removeFavoriteProduct(product.id);
+                removeFavoriteProductStore(product.id);
               }}
             />
             <View style={{ padding: 12 }}>

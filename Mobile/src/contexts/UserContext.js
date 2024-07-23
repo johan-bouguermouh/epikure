@@ -85,8 +85,11 @@ export const UserProvider = ({ children }) => {
    * @param {Product} product
    * @returns {void}
    */
-  async function addFavoriteProduct(product) {
-    setFavProducts([...favProducts, { product }]);
+  async function addFavoriteProductStore(product) {
+    console.log(product);
+    const currentFavProducts = [...favProducts];
+    currentFavProducts.push(product);
+    setFavProducts(currentFavProducts);
   }
 
   /**
@@ -94,7 +97,7 @@ export const UserProvider = ({ children }) => {
    * @param {number} productId
    * @returns {void}
    */
-  async function removeFavoriteProduct(productId) {
+  async function removeFavoriteProductStore(productId) {
     setFavProducts(favProducts.filter((product) => product.id !== productId));
   }
 
@@ -103,8 +106,10 @@ export const UserProvider = ({ children }) => {
    * @param {Farmer} farmer
    * @returns {void}
    */
-  async function addFavoriteFarmer(farmer) {
-    setFavFarmers([...favFarmers, { farmer }]);
+  async function addFavoriteFarmerStore(farmer) {
+    const currentFavFarmers = [...favFarmers];
+    currentFavFarmers.push(farmer);
+    setFavFarmers(currentFavFarmers);
   }
 
   /**
@@ -112,7 +117,7 @@ export const UserProvider = ({ children }) => {
    * @param {number} farmerId
    * @returns {void}
    */
-  async function removeFavoriteFarmer(farmerId) {
+  async function removeFavoriteFarmerStore(farmerId) {
     setFavFarmers(favFarmers.filter((farmer) => farmer.id !== farmerId));
   }
 
@@ -121,8 +126,10 @@ export const UserProvider = ({ children }) => {
    * @param {Place} place
    * @returns {void}
    */
-  async function addFavoritePlace(place) {
-    setFavPlaces([...favPlaces, { place }]);
+  async function addFavoritePlaceStore(place) {
+    const currentFavPlaces = [...favPlaces];
+    currentFavPlaces.push(place);
+    setFavPlaces(currentFavPlaces);
   }
 
   /**
@@ -130,7 +137,7 @@ export const UserProvider = ({ children }) => {
    * @param {number} placeId
    * @returns {void}
    */
-  async function removeFavoritePlace(placeId) {
+  async function removeFavoritePlaceStore(placeId) {
     setFavPlaces(favPlaces.filter((place) => place.id !== placeId));
   }
 
@@ -147,12 +154,12 @@ export const UserProvider = ({ children }) => {
         thisProductIsFav,
         thisFarmerIsFav,
         thisPlaceIsFav,
-        addFavoriteProduct,
-        removeFavoriteProduct,
-        addFavoriteFarmer,
-        removeFavoriteFarmer,
-        addFavoritePlace,
-        removeFavoritePlace,
+        addFavoriteProductStore,
+        removeFavoriteProductStore,
+        addFavoriteFarmerStore,
+        removeFavoriteFarmerStore,
+        addFavoritePlaceStore,
+        removeFavoritePlaceStore,
       }}
     >
       {children}
