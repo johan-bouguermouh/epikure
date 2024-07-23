@@ -33,3 +33,5 @@ export function haversineDistance(
   //on retourne le resultat arrondi
   return Math.round(result);
 }
+
+export { Coordinates };
