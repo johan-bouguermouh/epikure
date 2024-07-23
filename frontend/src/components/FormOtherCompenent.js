@@ -27,23 +27,19 @@ const formSchema = z.object({
 });
 
 function FormOtherComponent() {
-    // Récupération des données et des fonctions du contexte de formulaire
     const { formData, updateFormData, prevStep } = useFormContext();
-
-    // Initialisation du formulaire avec react-hook-form et le schéma Zod
     const form = useForm({
         resolver: zodResolver(formSchema),
         defaultValues: {
-            gender: formData.gender,
-            city: formData.city,
-            postalCode: formData.postalCode,
-            isBio: formData.isBio,
-            firstName: formData.firstName,
-            lastName: formData.lastName,
+            gender: formData.gender || '',
+            city: formData.city || '',
+            postalCode: formData.postalCode || '',
+            isBio: formData.isBio || false,
+            firstName: formData.firstName || '',
+            lastName: formData.lastName || '',
         },
     });
 
-    // Fonction de soumission du formulaire
     function onSubmit(values) {
         updateFormData(values);
         console.log('Final form data:', values);
@@ -53,6 +49,67 @@ function FormOtherComponent() {
         <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
                 <h2>Vérification des Informations</h2>
+
+                <FormField
+                    control={form.control}
+                    name="isBio"
+                    render={({ field }) => (
+                        <FormItem>
+                            <FormLabel>Label Bio</FormLabel>
+                            <FormControl>
+                                <Checkbox
+                                    checked={field.value}
+                                    onChange={(e) => field.onChange(e.target.checked)}
+                                />
+                            </FormControl>
+                            <FormMessage />
+                        </FormItem>
+                    )}
+                />
+
+                <FormItem>
+                    <FormLabel>Nom de l'Entreprise</FormLabel>
+                    <FormControl>
+                        <Input
+                            value={formData.businessName || ''}
+                            readOnly
+                        />
+                    </FormControl>
+                </FormItem>
+
+                <FormField
+                    control={form.control}
+                    name="city"
+                    render={({ field }) => (
+                        <FormItem>
+                            <FormLabel>Ville</FormLabel>
+                            <FormControl>
+                                <Input
+                                    placeholder="Ville"
+                                    {...field}
+                                />
+                            </FormControl>
+                            <FormMessage />
+                        </FormItem>
+                    )}
+                />
+
+                <FormField
+                    control={form.control}
+                    name="postalCode"
+                    render={({ field }) => (
+                        <FormItem>
+                            <FormLabel>Code Postal</FormLabel>
+                            <FormControl>
+                                <Input
+                                    placeholder="Code Postal"
+                                    {...field}
+                                />
+                            </FormControl>
+                            <FormMessage />
+                        </FormItem>
+                    )}
+                />
 
                 <FormField
                     control={form.control}
@@ -82,51 +139,6 @@ function FormOtherComponent() {
                                     Mm.
                                 </label>
                             </div>
-                            <FormMessage />
-                        </FormItem>
-                    )}
-                />
-
-                <FormField
-                    control={form.control}
-                    name="city"
-                    render={({ field }) => (
-                        <FormItem>
-                            <FormLabel>Ville</FormLabel>
-                            <FormControl>
-                                <Input placeholder="Ville" {...field} />
-                            </FormControl>
-                            <FormMessage />
-                        </FormItem>
-                    )}
-                />
-
-                <FormField
-                    control={form.control}
-                    name="postalCode"
-                    render={({ field }) => (
-                        <FormItem>
-                            <FormLabel>Code Postal</FormLabel>
-                            <FormControl>
-                                <Input placeholder="Code Postal" {...field} />
-                            </FormControl>
-                            <FormMessage />
-                        </FormItem>
-                    )}
-                />
-
-                <FormField
-                    control={form.control}
-                    name="isBio"
-                    render={({ field }) => (
-                        <FormItem>
-                            <FormLabel>Bio</FormLabel>
-                            <FormControl>
-                                <Checkbox
-                                    checked={field.value}
-                                    onChange={(e) => field.onChange(e.target.checked)}
-                                />
-                            </FormControl>
                             <FormMessage />
                         </FormItem>
                     )}

@@ -1,9 +1,11 @@
-"use client"
+"use client";
 
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import { z } from "zod";
-import { Button } from "@/components/ui/button";
+import React from 'react';
+import { useFormContext } from '../context/FormContext';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { z } from 'zod';
+import { Button } from '@/components/ui/button';
 import {
     Form,
     FormControl,
@@ -11,64 +13,70 @@ import {
     FormItem,
     FormLabel,
     FormMessage,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import { useFormContext } from "../context/FormContext";
+} from '@/components/ui/form';
+import { Input } from '@/components/ui/input';
 
 const formSchema = z.object({
-    cis: z.string().min(2).max(50),
-    businessName: z.string().min(2).max(50),
+    siretOrSiren: z.string().min(9).max(14),
+    legalStatus: z.string().optional(),
 });
 
-function FormCompanyInfoComponent() {
-    const { formData, updateFormData, nextStep } = useFormContext();
+function FormFirstComponent() {
+    const { formData, updateFormData, nextStep, fetchCompanyDetails, loading, error } = useFormContext();
     const form = useForm({
         resolver: zodResolver(formSchema),
         defaultValues: {
-            cis: formData.cis,
-            businessName: formData.businessName,
+            siretOrSiren: formData.siretOrSiren || '',
+            legalStatus: formData.legalStatus || '',
         },
     });
 
-    function onSubmit(values) {
+    async function onSubmit(values) {
         updateFormData(values);
-        nextStep();
+        await fetchCompanyDetails(values.siretOrSiren); // Attendre que les données soient chargées
     }
 
     return (
         <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-                <h2>Informations Professionnelles</h2>
+                <h2>Informations de l'entreprise</h2>
+
                 <FormField
                     control={form.control}
-                    name="cis"
+                    name="siretOrSiren"
                     render={({ field }) => (
                         <FormItem>
-                            <FormLabel>SIREN/SIRET</FormLabel>
+                            <FormLabel>SIRET ou SIREN</FormLabel>
                             <FormControl>
-                                <Input placeholder="SIREN/SIRET" {...field} />
+                                <Input placeholder="SIRET ou SIREN" {...field} />
                             </FormControl>
                             <FormMessage />
                         </FormItem>
                     )}
                 />
+
                 <FormField
                     control={form.control}
-                    name="businessName"
+                    name="legalStatus"
                     render={({ field }) => (
                         <FormItem>
-                            <FormLabel>Nom de l'entreprise</FormLabel>
+                            <FormLabel>Statut Juridique</FormLabel>
                             <FormControl>
-                                <Input placeholder="Nom de l'entreprise" {...field} />
+                                <Input placeholder="Statut Juridique" {...field} />
                             </FormControl>
                             <FormMessage />
                         </FormItem>
                     )}
                 />
-                <Button type="submit">Suivant</Button>
+
+                <Button type="submit" disabled={loading}>
+                    {loading ? 'Chargement...' : 'Suivant'}
+                </Button>
+
+                {error && <p className="text-red-500">{error}</p>}
             </form>
         </Form>
     );
 }
 
-export default FormCompanyInfoComponent;
+export default FormFirstComponent;
