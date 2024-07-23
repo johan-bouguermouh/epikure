@@ -67,3 +67,18 @@ export const removeFavoriteProduct = async (productId) => {
     throw error;
   }
 };
+
+export const getGuest = async () => {
+  const guest = await getUuid();
+  try {
+    const response = await instance.get(`${endpoint}/${guest}`);
+    return response.data;
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      console.error("Error while getting guest", error.response.data);
+      throw error.response.data;
+    }
+    console.error("Error while getting guest", error);
+    throw error;
+  }
+};
