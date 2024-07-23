@@ -9,9 +9,9 @@ import { QueryParamsAutocompleteDto } from './dto/query-params-autocomplete.dto'
 import { findPlaceById } from 'src/utils/googleApi.service';
 import { QueryParamsPlaceIdDto } from './dto/query-params-placeid.dto';
 import { Command } from '../command/command.entity';
-import { plainToClass } from 'class-transformer';
-import { isOpen } from 'src/utils/openHourPlaces.service';
 import { PublicPlaceDto } from './dto/public-place.dto';
+import { PublicProductDto } from '../product/dto/public-product.dto';
+import { PublicFarmerDto } from '../farmer/dto/public-farmer.dto';
 
 interface AuthorAttribution {
   displayName: string;
@@ -207,6 +207,78 @@ export class PlaceService {
     newPlace.rating = placeData.rating;
 
     return newPlace;
+  }
+
+  async getPlaceInfo(id: number): Promise<any> {
+    const newDate = new Date();
+    newDate.setHours(0, 0, 0, 0);
+
+    const place = await this.placeRepository.findOne({
+      where: { id },
+      relations: [
+        'commands',
+        'commands.commandProducts',
+        'commands.commandProducts.product',
+        'commands.commandProducts.product.categoryProduct',
+        'commands.farmer',
+      ],
+    });
+
+    if (!place) {
+      throw new NotFoundException('Place not found');
+    }
+
+    const { commands, ...rest } = place;
+    const currentCommands: Command[] = commands.filter((command: Command) => {
+      const startedDate = new Date(command.startedDate);
+      return startedDate >= newDate;
+    });
+
+    let currentCommandsProducts = [];
+    currentCommands.forEach((command) => {
+      const { farmer } = command;
+      command.commandProducts.forEach((commandProduct) => {
+        const { product, endedDate } = commandProduct;
+        const endedDateProduct = new Date(endedDate);
+        if (endedDateProduct >= newDate) {
+          currentCommandsProducts.push({
+            product: new PublicProductDto(product),
+            farmer: new PublicFarmerDto(farmer),
+          });
+        }
+      });
+    });
+
+    const aggragateFarmersByProduct = currentCommandsProducts.reduce(
+      (acc, { product, farmer }) => {
+        if (!acc[product.id]) {
+          acc[product.id] = [];
+        }
+        acc[product.id].push(farmer);
+        return acc;
+      },
+      {},
+    );
+
+    //on enleve les produit en doublon
+    const currentProducts = currentCommandsProducts.filter(
+      (product, index, self) =>
+        index === self.findIndex((t) => t.product.id === product.product.id),
+    );
+
+    const currentProductsDto = currentProducts.map((product) => {
+      const farmers = aggragateFarmersByProduct[product.product.id];
+      return { ...product, farmers };
+    });
+
+    const newResult = {
+      ...rest,
+      command: currentProductsDto.map((element) => {
+        const { product, farmers } = element;
+        return { product, farmers };
+      }),
+    };
+    return newResult;
   }
 }
 

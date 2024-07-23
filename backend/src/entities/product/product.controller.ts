@@ -21,6 +21,12 @@ import { InfoProductDto } from './dto/info-product.dto';
 export class ProductController {
   constructor(private readonly productService: ProductService) {}
 
+  @Get('/category')
+  async findAllCategoryProduct(): Promise<CategoryProduct[]> {
+    console.log('findAllCategoryProduct');
+    return this.productService.findAllCategoryProduct();
+  }
+
   @Post()
   async create(
     @Body() bodyCreateProductDto: BodyCreateProductDto,
@@ -47,7 +53,7 @@ export class ProductController {
     @Param('id') id: number,
     @Query('latitude') latitude: number,
     @Query('longitude') longitude: number,
-  ): Promise<InfoProductDto> {
+  ): Promise<InfoProductDto | Product> {
     if (!latitude || !longitude) {
       return this.productService.findOne(id);
     } else {
@@ -61,10 +67,5 @@ export class ProductController {
     @Body() body: { name: string },
   ): Promise<CategoryProduct> {
     return this.productService.insertCategoryProduct(body.name);
-  }
-
-  @Get('/category')
-  async findAllCategoryProduct(): Promise<CategoryProduct[]> {
-    return this.productService.findAllCategoryProduct();
   }
 }
