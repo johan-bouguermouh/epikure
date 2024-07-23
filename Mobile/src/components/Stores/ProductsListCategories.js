@@ -64,22 +64,6 @@ function ProductsListCategories({ navigation, commands }) {
     getOthers();
   }, [commands]);
 
-  useEffect(() => {
-    console.log("VEGETABLES", Vegetables.length);
-  }, [Vegetables]);
-
-  useEffect(() => {
-    console.log("FRUITS", Fruits.length);
-  }, [Fruits]);
-
-  useEffect(() => {
-    console.log("MEATS", Meats.length);
-  }, [Meats]);
-
-  useEffect(() => {
-    console.log("OTHERS", Others.length);
-  }, [Others]);
-
   return (
     <View>
       <View style={styles.categories}>

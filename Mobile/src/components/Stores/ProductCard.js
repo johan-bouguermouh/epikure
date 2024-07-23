@@ -1,20 +1,47 @@
 import React from "react";
 import { Text, TouchableOpacity, View, StyleSheet, Image } from "react-native";
+import Avatar from "../common/Avatar";
 
 function ProductCard({ navigation, command }) {
-  console.log("COMMANDE", command);
+  const { id, name, thumbnail, farmers } = command;
+
   return (
     <View style={styles.card}>
       <TouchableOpacity
         style={styles.containerImage}
-        onPress={() =>
-          navigation.navigate("Produit", { productId: command.id })
-        }
+        onPress={() => navigation.navigate("Produit", { productId: id })}
       >
-        <Image source={{ uri: command.thumbnail }} style={styles.image} />
+        <Image source={{ uri: thumbnail }} style={styles.image} />
       </TouchableOpacity>
       <View style={styles.containerOthers}>
-        <Text style={styles.name}>{command.name}</Text>
+        <Text style={styles.name}>{name}</Text>
+        <View style={styles.farmers}>
+          {farmers.map((farmer, index) => {
+            if (index <= 2) {
+              return (
+                <View style={styles.avatarFarmer} key={index}>
+                  <Avatar
+                    // key={index}
+                    uriImage={farmer.avatarUrl}
+                    size={50}
+                    isPressable={true}
+                    onPressHandler={() =>
+                      navigation.navigate("Producteur", {
+                        producerId: farmer.id,
+                      })
+                    }
+                  />
+                </View>
+              );
+            } else if (index === 3) {
+              return (
+                <Text key={index} style={styles.moreFarmers}>
+                  +{farmers.length - 3}
+                </Text>
+              );
+            }
+          })}
+        </View>
       </View>
     </View>
   );
@@ -38,8 +65,6 @@ const styles = StyleSheet.create({
   containerImage: {
     width: 95,
     height: 92,
-    // borderWidth: 1,
-    // borderColor: "#E6CCE6",
   },
 
   image: {
@@ -58,6 +83,21 @@ const styles = StyleSheet.create({
   name: {
     fontSize: 16,
     fontWeight: "semibold",
+  },
+
+  //les producteurs doivent se chevaucher
+  farmers: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
+
+  avatarFarmer: {
+    marginRight: -25,
+  },
+
+  moreFarmers: {
+    fontSize: 14,
+    marginLeft: +25,
   },
 });
 
