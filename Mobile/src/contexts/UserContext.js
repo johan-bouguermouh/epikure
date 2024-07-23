@@ -59,6 +59,7 @@ export const UserProvider = ({ children }) => {
    * @returns {boolean}
    */
   function thisProductIsFav(productId) {
+    if (!favProducts) return false;
     return favProducts.some((product) => product.id === productId);
   }
 
@@ -68,6 +69,7 @@ export const UserProvider = ({ children }) => {
    * @returns {boolean}
    */
   function thisFarmerIsFav(farmerId) {
+    if (!favFarmers) return false;
     return favFarmers.some((farmer) => farmer.id === farmerId);
   }
 
@@ -77,6 +79,7 @@ export const UserProvider = ({ children }) => {
    * @returns {boolean}
    */
   function thisPlaceIsFav(placeId) {
+    if (!favPlaces) return false;
     return favPlaces.some((place) => place.id === placeId);
   }
 
@@ -86,8 +89,7 @@ export const UserProvider = ({ children }) => {
    * @returns {void}
    */
   async function addFavoriteProductStore(product) {
-    console.log(product);
-    const currentFavProducts = [...favProducts];
+    const currentFavProducts = favProducts ? [...favProducts] : [];
     currentFavProducts.push(product);
     setFavProducts(currentFavProducts);
   }
@@ -107,7 +109,7 @@ export const UserProvider = ({ children }) => {
    * @returns {void}
    */
   async function addFavoriteFarmerStore(farmer) {
-    const currentFavFarmers = [...favFarmers];
+    const currentFavFarmers = favFarmers ? [...favFarmers] : [];
     currentFavFarmers.push(farmer);
     setFavFarmers(currentFavFarmers);
   }
@@ -127,7 +129,7 @@ export const UserProvider = ({ children }) => {
    * @returns {void}
    */
   async function addFavoritePlaceStore(place) {
-    const currentFavPlaces = [...favPlaces];
+    const currentFavPlaces = favPlaces ? [...favPlaces] : [];
     currentFavPlaces.push(place);
     setFavPlaces(currentFavPlaces);
   }

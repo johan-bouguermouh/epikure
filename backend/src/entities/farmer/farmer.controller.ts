@@ -1,10 +1,21 @@
-import { Controller, Get, Post, Body, Put, Param, Query } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Put,
+  Param,
+  Query,
+  UseInterceptors,
+  ClassSerializerInterceptor,
+} from '@nestjs/common';
 import { FarmerService } from './farmer.services';
 import { Farmer } from './farmer.entity';
 import { GetIforFarmerDto } from './dto/get-ifor-farmer.dto';
 import { BodyCreateFarmerDto } from './dto/body-create-farmer.dto';
 import { BodyUpdateProductFarmerDto } from './dto/body-update-product-farme.dto';
 import { query } from 'express';
+import { Coordinates } from 'src/utils/distance.service';
 
 @Controller('farmer')
 export class FarmerController {
@@ -37,12 +48,15 @@ export class FarmerController {
     return await this.farmerService.updateFarmerProducts(body);
   }
 
+  @UseInterceptors(ClassSerializerInterceptor)
   @Get('/public/:id')
   async getPublicFarmer(
     @Param('id') id: number,
-    @Query('query') query: any,
+    @Query('latitude') latitude: number,
+    @Query('longitude') longitude: number,
   ): Promise<any> {
-    return await this.farmerService.getPublicFarmer(id, query);
+    const coord: Coordinates = { latitude, longitude };
+    return await this.farmerService.getPublicFarmer(id, coord);
   }
 
   @Get(':id/products')

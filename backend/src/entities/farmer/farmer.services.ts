@@ -5,7 +5,7 @@ import { User } from '../user/user.entity';
 import { BodyCreateFarmerDto } from './dto/body-create-farmer.dto';
 import { Product } from '../product/product.entity';
 import { BodyUpdateProductFarmerDto } from './dto/body-update-product-farme.dto';
-import { haversineDistance } from 'src/utils/distance.service';
+import { Coordinates, haversineDistance } from 'src/utils/distance.service';
 import { isOpen } from 'src/utils/openHourPlaces.service';
 import { PublicProductDto } from '../product/dto/public-product.dto';
 import {
@@ -135,11 +135,9 @@ export class FarmerService {
     return this.farmerRepository.save(farmer);
   }
 
-  async getPublicFarmer(id: number, query: any): Promise<any> {
+  async getPublicFarmer(id: number, coord: Coordinates): Promise<any> {
     const dateNow = new Date();
     const numberMounthNow = dateNow.getMonth() + 1;
-    const userLatitude = 43.3101197;
-    const userLongitude = 5.3632159;
 
     const farmer = await this.farmerRepository.findOne({
       where: { id },
@@ -161,8 +159,15 @@ export class FarmerService {
     const filteredProducts: Product[] = filterProductByPeriodHarvest(
       farmer.products,
     );
-    const simplifyProducts: PublicProductDto[] =
+    let simplifyProducts: PublicProductDto[] =
       sanitizeToPublicProduct(filteredProducts);
+
+    simplifyProducts = simplifyProducts.sort((a, b) => {
+      return (
+        Math.abs(a.harvestStartMounth.valueOf() - numberMounthNow) -
+        Math.abs(b.harvestStartMounth.valueOf() - numberMounthNow)
+      );
+    });
 
     const filteredPlacesByCurrentCommand: Command[] =
       filterCommandPlaceByCurrentCommand(farmer.command);
@@ -172,17 +177,11 @@ export class FarmerService {
         filteredPlacesByCurrentCommand,
         (places: Place[]) => {
           return places.map((place) => {
-            const { latitude, longitude } = place;
-            const distance = haversineDistance(
-              { latitude: userLatitude, longitude: userLongitude },
-              { latitude, longitude },
-            );
-            return {
-              id: place.id,
-              name: place.name,
-              distance: Math.round(distance),
-              opening: isOpen(place.openingHours),
-            };
+            const publicPlace = new PublicPlaceDto(place);
+            if (coord) {
+              publicPlace.setDistance(coord.latitude, coord.longitude);
+            }
+            return publicPlace;
           });
         },
       );
@@ -193,6 +192,7 @@ export class FarmerService {
       publicName: farmer.publicName,
       avatarUrl: farmer.avatarUrl,
       bannerUrl: farmer.bannerUrl,
+      isBio: farmer.isBio,
       shortDescription: farmer.shortDescription,
       description: farmer.description,
       localisation: {

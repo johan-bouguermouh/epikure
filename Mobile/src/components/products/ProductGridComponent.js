@@ -36,6 +36,13 @@ const ProductGridComponent = ({ products, navigation }) => {
       <TouchableOpacity
         key={`${item._id}-${index}`}
         onPress={() => navigation.navigate("Produit", { productId: item.id })}
+        style={{
+          elevation: 2,
+          shadowColor: "#000",
+          shadowOffset: { width: 0, height: 2 },
+          shadowOpacity: 0.25,
+          shadowRadius: 3.84,
+        }}
       >
         <Image
           source={{ uri: item.thumbnail }}
