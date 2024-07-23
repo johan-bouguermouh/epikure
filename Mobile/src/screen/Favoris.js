@@ -53,11 +53,15 @@ function Favoris({ navigation }) {
           >
             Mes produits favoris
           </Text>
-          {favProducts.length > 0 && (
+          {favProducts.length > 0 ? (
             <ProductGridComponent
               products={favProducts}
               navigation={navigation}
             />
+          ) : (
+            <Text style={{ textAlign: "center" }}>
+              Vous n'avez pas encore de produits favoris
+            </Text>
           )}
           <Text
             style={{
@@ -70,8 +74,12 @@ function Favoris({ navigation }) {
           >
             Mes Producteurs favoris
           </Text>
-          {favFarmers.length > 0 && (
+          {favFarmers.length > 0 ? (
             <FarmerList farmers={favFarmers} navigation={navigation} />
+          ) : (
+            <Text style={{ textAlign: "center" }}>
+              Vous n'avez pas encore de producteurs favoris
+            </Text>
           )}
           <Text
             style={{
@@ -84,8 +92,12 @@ function Favoris({ navigation }) {
           >
             Mes magasins favoris
           </Text>
-          {favPlaces.length > 0 && (
+          {favPlaces.length > 0 ? (
             <FavoritesPlacesList places={favPlaces} navigation={navigation} />
+          ) : (
+            <Text style={{ textAlign: "center" }}>
+              Vous n'avez pas encore de magasins favoris
+            </Text>
           )}
         </View>
       </ScrollView>
