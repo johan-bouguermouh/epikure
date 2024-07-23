@@ -7,6 +7,17 @@ const ProductGridComponent = ({ products, navigation }) => {
   const imageWidth = displayWidth / 4 - 8 - 24 / 4;
   const [currentPage, setCurrentPage] = useState(0);
   const flatListRef = useRef(null);
+  const heightComponent = () => {
+    if (products.length >= 16) {
+      return displayWidth - 24;
+    } else if (products.length >= 12) {
+      return imageWidth * 3 + 24;
+    } else if (products.length >= 8) {
+      return imageWidth * 2 + 16;
+    } else if (products.length <= 4) {
+      return imageWidth + 8;
+    }
+  };
 
   // Diviser les produits en groupes de 16
   const groupedProducts = [];
@@ -22,8 +33,8 @@ const ProductGridComponent = ({ products, navigation }) => {
         keyExtractor={(item, index) => `${item._id}-${index}`}
         style={{
           width: displayWidth - 24,
-          height: displayWidth - 24,
-          maxWidth: displayWidth - 24,
+          height: heightComponent(),
+          maxWidth: heightComponent(),
         }}
         numColumns={4}
         scrollEnabled={false} // Désactiver le défilement vertical
@@ -96,13 +107,13 @@ const ProductGridComponent = ({ products, navigation }) => {
         horizontal={true} // Défilement horizontal
         contentContainerStyle={{
           flexDirection: "row",
-          height: displayWidth - 24,
-          maxHeight: displayWidth - 24,
+          height: heightComponent(),
+          maxHeight: heightComponent(),
         }} // Disposition en colonnes
         style={{
           width: "100%",
-          height: displayWidth - 24,
-          maxHeight: displayWidth - 24,
+          height: heightComponent(),
+          maxHeight: heightComponent(),
         }} // Hauteur pour 4 lignes
         snapToInterval={displayWidth - 24} // Définit l'intervalle de défilement pour 4 rangées
         decelerationRate="fast" // Rend le défilement plus rapide

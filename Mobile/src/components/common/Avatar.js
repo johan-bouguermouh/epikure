@@ -56,7 +56,6 @@ export default function Avatar({
             width: size,
             height: size,
             borderRadius: size / 2,
-            backgroundColor: "gray",
             justifyContent: "center",
             alignItems: "center",
             elevation: 5,
