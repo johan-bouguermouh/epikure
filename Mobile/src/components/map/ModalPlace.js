@@ -8,6 +8,7 @@ import {
   TouchableOpacity,
   ScrollView,
 } from "react-native";
+import HeaderScreen from "../common/HeaderScreen";
 
 import { Octicons } from "@expo/vector-icons";
 
@@ -23,7 +24,13 @@ function ModalPlace({ content, navigation }) {
 
   return (
     <View style={styles.modalContent}>
-      <View style={styles.imageContainer}>
+      <HeaderScreen
+        urlBannerImage={imageUrl}
+        title={content.title}
+        isFavorite={false}
+        isCallableFavorite={false}
+      />
+      {/* <View style={styles.imageContainer}>
         <Image
           source={{
             uri: imageUrl,
@@ -31,7 +38,7 @@ function ModalPlace({ content, navigation }) {
           style={styles.modalImage}
         />
         <Text style={styles.modalTitle}>{content.title}</Text>
-      </View>
+      </View> */}
       <View style={styles.content}>
         <View style={styles.addressContainer}>
           <Text>{street}</Text>
@@ -91,7 +98,7 @@ function ModalPlace({ content, navigation }) {
         <View style={styles.separator}></View>
         <TouchableOpacity
           style={styles.button}
-          onPress={() => navigation.push("Magasin", { place: content.id })}
+          onPress={() => navigation.push("Magasin", { placeId: content.id })}
         >
           <Text style={styles.buttonText}>Voir plus</Text>
         </TouchableOpacity>
