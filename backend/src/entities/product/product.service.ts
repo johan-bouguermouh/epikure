@@ -147,7 +147,8 @@ export function filterProductByPeriodHarvest(
   month?: number,
 ): Product[] {
   const dateNow = new Date();
-  const numberMonthNow = month ? month : dateNow.getMonth();
+
+  const numberMonthNow = month ? month + 1 : dateNow.getMonth() + 1;
 
   const filteredProducts: Product[] = products.filter((product) => {
     if (
@@ -156,6 +157,14 @@ export function filterProductByPeriodHarvest(
     ) {
       return product;
     }
+  });
+
+  //On classe les produit selon les périod spécifique, les produit avec le moins d'écart entre la numberMonthNow et la harvestStartMounth seront en premier
+  filteredProducts.sort((a, b) => {
+    return (
+      Math.abs(a.harvestStartMounth.valueOf() - numberMonthNow) -
+      Math.abs(b.harvestStartMounth.valueOf() - numberMonthNow)
+    );
   });
 
   return filteredProducts;
