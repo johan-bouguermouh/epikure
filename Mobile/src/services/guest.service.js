@@ -82,3 +82,45 @@ export const getGuest = async () => {
     throw error;
   }
 };
+
+export const addFavoriteFarmer = async (farmerId) => {
+  const guest = await getUuid();
+  console.log("guest", guest);
+  console.log(`${endpoint}/${guest}/farmers`);
+  try {
+    const response = await instance.post(`${endpoint}/${guest}/farmers`, {
+      farmerId: farmerId,
+    });
+    return response.data;
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      console.error(
+        "Error while adding favorite farmer store",
+        error.response.data
+      );
+      throw error.response.data;
+    }
+    console.error("Error while adding favorite farmer store", error);
+    throw error;
+  }
+};
+
+export const deleteFavoriteFarmer = async (farmerId) => {
+  const guest = await getUuid();
+  try {
+    const response = await instance.delete(
+      `${endpoint}/${guest}/farmers/${farmerId}`
+    );
+    return response.data;
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      console.error(
+        "Error while deleting favorite farmer store",
+        error.response.data
+      );
+      throw error.response.data;
+    }
+    console.error("Error while deleting favorite farmer store", error);
+    throw error;
+  }
+};

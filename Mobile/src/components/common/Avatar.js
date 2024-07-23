@@ -32,6 +32,11 @@ export default function Avatar({
             justifyContent: "center",
             alignItems: "center",
             boxShadow: "0px 0px 5px 0px rgba(0,0,0,0.75)",
+            elevation: 5,
+            shadowColor: "black",
+            shadowOpacity: 0.5,
+            shadowOffset: { width: 0, height: 2 },
+            shadowRadius: 10,
           }}
         >
           <Image
@@ -54,6 +59,8 @@ export default function Avatar({
             backgroundColor: "gray",
             justifyContent: "center",
             alignItems: "center",
+            elevation: 5,
+            shadowColor: "black",
           }}
         >
           <Image
@@ -62,7 +69,8 @@ export default function Avatar({
               width: size,
               height: size,
               borderRadius: size / 2,
-              backgroundColor: "gray",
+              borderWidth: borderWidth,
+              borderColor: "white",
               justifyContent: "center",
               alignItems: "center",
               boxShadow: "0px 0px 5px 0px rgba(0,0,0,0.75)",
