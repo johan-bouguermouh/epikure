@@ -8,6 +8,7 @@ import {
 import { OpeningHoursDto } from './dto/openinghours.dto';
 import { Farmer } from '../farmer/farmer.entity';
 import { Guest } from '../guest/guest.entity';
+import { Exclude } from 'class-transformer';
 
 @Entity()
 export class Place {
@@ -54,6 +55,7 @@ export class Place {
   @JoinTable()
   farmers: Farmer[];
 
+  @Exclude()
   @ManyToMany(() => Guest, (guest) => guest.places)
   @JoinTable()
   guests: Guest[];

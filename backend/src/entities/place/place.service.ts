@@ -11,6 +11,7 @@ import { QueryParamsPlaceIdDto } from './dto/query-params-placeid.dto';
 import { Command } from '../command/command.entity';
 import { plainToClass } from 'class-transformer';
 import { isOpen } from 'src/utils/openHourPlaces.service';
+import { PublicPlaceDto } from './dto/public-place.dto';
 
 interface AuthorAttribution {
   displayName: string;
@@ -105,6 +106,32 @@ export class PlaceService {
 
   async findAll(): Promise<Place[]> {
     return this.placeRepository.find();
+  }
+
+  async findOne(id: number): Promise<Place> {
+    return this.placeRepository.findOne({
+      where: { id },
+      relations: ['farmers', 'guests'],
+    });
+  }
+
+  async findAllByPosition(
+    latitude: number,
+    longitude: number,
+  ): Promise<PublicPlaceDto[]> {
+    if (!latitude || !longitude) {
+      throw new NotFoundException('Latitude and longitude are required');
+    }
+
+    const places: Place[] = await this.placeRepository.find();
+
+    return places
+      .map((place) => {
+        const publicPlace = new PublicPlaceDto(place);
+        publicPlace.setDistance(latitude, longitude);
+        return publicPlace;
+      })
+      .filter((place: PublicPlaceDto) => Number(place.distance) < 30000);
   }
 
   async getAutoCompletePlace(params: QueryParamsAutocompleteDto): Promise<any> {

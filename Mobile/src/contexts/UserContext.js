@@ -6,8 +6,8 @@ export const UserContext = createContext();
 
 export const UserProvider = ({ children }) => {
   const [location, setLocation] = useState({
-    latitude: 43.3,
-    longitude: 5.4,
+    latitude: null,
+    longitude: null,
   });
   const [errorMsg, setErrorMsg] = useState(null);
   const [uuid, setUuid] = useState("");
