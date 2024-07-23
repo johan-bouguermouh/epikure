@@ -21,8 +21,6 @@ function ModalPlace({ content, navigation }) {
 
   const imageUrl = content.image.replace("http://localhost", url);
 
-  console.log(content);
-
   return (
     <View style={styles.modalContent}>
       <View style={styles.imageContainer}>
