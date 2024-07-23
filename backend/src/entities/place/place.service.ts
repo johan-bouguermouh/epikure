@@ -275,7 +275,7 @@ export class PlaceService {
       ...rest,
       command: currentProductsDto.map((element) => {
         const { product, farmers } = element;
-        return { product, farmers };
+        return { ...product, farmers };
       }),
     };
     return newResult;
