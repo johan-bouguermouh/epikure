@@ -21,6 +21,22 @@ function ProductsListCategories({ navigation, commands }) {
   const [Meats, setMeats] = useState([]);
   const [Others, setOthers] = useState([]);
 
+  /**
+   * Verifies si un catégorie n'a pas de produits
+   * @param {*} categories
+   * @returns {boolean} true si la catégorie n'a pas de produits, false sinon
+   */
+  function isCategoriesHasNoProducts(categorie) {
+    let hasNoProducts = true;
+    const categoriesHasFind = commands.findIndex(
+      (product) => product.categoryProduct.name == categorie
+    );
+    if (categoriesHasFind !== -1) {
+      hasNoProducts = false;
+    }
+    return hasNoProducts;
+  }
+
   const getVegetables = () => {
     setVegetables([]);
     commands.map((command) => {
@@ -70,7 +86,14 @@ function ProductsListCategories({ navigation, commands }) {
         {categs.map((categ, index) => (
           <TouchableOpacity
             key={index}
-            style={categ[Object.keys(categ)] ? styles.active : styles.inactive}
+            disabled={isCategoriesHasNoProducts(Object.keys(categ))}
+            style={
+              !isCategoriesHasNoProducts(Object.keys(categ))
+                ? categ[Object.keys(categ)]
+                  ? styles.active
+                  : styles.inactive
+                : styles.disabled
+            }
             onPress={() => {
               setCategs((prev) => {
                 return prev.map((categ, i) => {
@@ -151,8 +174,8 @@ const styles = StyleSheet.create({
 
   active: {
     borderWidth: 1,
-    borderColor: "#FFE3DC",
-    backgroundColor: "#FFFFFF",
+    borderColor: "#FFC3B3",
+    backgroundColor: "#FFF6F4",
     borderRadius: 20,
     paddingVertical: 8,
     paddingHorizontal: 16,
@@ -161,11 +184,20 @@ const styles = StyleSheet.create({
   inactive: {
     borderWidth: 1,
     borderColor: "#FFE3DC",
-    backgroundColor: "#FFF6F4",
+    backgroundColor: "white",
     borderRadius: 20,
     paddingVertical: 8,
     paddingHorizontal: 16,
-    opacity: 0.33,
+  },
+
+  disabled: {
+    borderWidth: 1,
+    borderColor: "#FFE3DC",
+    backgroundColor: "white",
+    borderRadius: 20,
+    paddingVertical: 8,
+    paddingHorizontal: 16,
+    opacity: 0.5,
   },
 
   list: {
