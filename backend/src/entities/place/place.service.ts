@@ -275,7 +275,13 @@ export class PlaceService {
       ...rest,
       command: currentProductsDto.map((element) => {
         const { product, farmers } = element;
-        return { ...product, farmers };
+        //on supprime les doublons de farmer
+        const farmersDto = farmers.filter(
+          (farmer, index, self) =>
+            index === self.findIndex((t) => t.id === farmer.id),
+        );
+
+        return { ...product, farmers: farmersDto };
       }),
     };
     return newResult;
