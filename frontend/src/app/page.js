@@ -22,7 +22,7 @@ export default function HomePage() {
         isProducer={isProducer}
         onConsoAction={scrollToProductSection}
       />
-      <div ref={productSectionRef} className="bg-primary/500 text-white p-5 text-center">
+      <div ref={productSectionRef} className="bg-secondary/500 text-white p-5 text-center">
         <h4>EPIKURE: Votre épicerie locale, notre fierté agricole</h4>
       </div>
       <ExplanationCardComponent
