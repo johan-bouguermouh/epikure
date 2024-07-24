@@ -20,7 +20,7 @@ function NavComponent() {
                     className="cursor-pointer w-40 h-10"
                     onClick={handleProducer}
                 />
-                <button className="bg-primary/500 text-white px-4 py-2 rounded">
+                <button className="bg-primary-500 text-white px-4 py-2 rounded">
                     Espace Agriculteur(trice)
                 </button>
             </nav>
