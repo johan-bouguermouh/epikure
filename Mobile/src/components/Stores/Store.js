@@ -14,36 +14,6 @@ import ProductsListCategories from "./ProductsListCategories";
 function Store({ route, navigation }) {
   const [infoPlace, setInfoPlace] = useState(null);
   const [commands, setCommands] = useState([null]);
-  const [openingHours, setOpeningHours] = useState({
-    lundi: {
-      open: null,
-      close: null,
-    },
-    mardi: {
-      open: null,
-      close: null,
-    },
-    mercredi: {
-      open: null,
-      close: null,
-    },
-    jeudi: {
-      open: null,
-      close: null,
-    },
-    vendredi: {
-      open: null,
-      close: null,
-    },
-    samedi: {
-      open: null,
-      close: null,
-    },
-    dimanche: {
-      open: null,
-      close: null,
-    },
-  });
   const [street, setStreet] = useState("");
   const [postalCode, setPostalCode] = useState("");
   const [image, setImage] = useState("");
@@ -56,194 +26,27 @@ function Store({ route, navigation }) {
     navigation.navigate("Map");
   }
 
-  const getHours = () => {
-    infoPlace.openingHours.periods.forEach((period) => {
-      switch (period.close.day) {
-        case 0:
-          setOpeningHours((prev) => ({
-            ...prev,
-            dimanche: {
-              open: `${
-                period.open.hour < 10
-                  ? `0${period.open.hour}`
-                  : period.open.hour
-              }h${
-                period.open.minute < 10
-                  ? `0${period.open.minute}`
-                  : period.open.minute
-              }`,
-              close: `${
-                period.close.hour < 10
-                  ? `0${period.close.hour}`
-                  : period.close.hour
-              }h${
-                period.close.minute < 10
-                  ? `0${period.close.minute}`
-                  : period.close.minute
-              }`,
-            },
-          }));
-          break;
-        case 1:
-          setOpeningHours((prev) => ({
-            ...prev,
-            lundi: {
-              open: `${
-                period.open.hour < 10
-                  ? `0${period.open.hour}`
-                  : period.open.hour
-              }h${
-                period.open.minute < 10
-                  ? `0${period.open.minute}`
-                  : period.open.minute
-              }`,
-              close: `${
-                period.close.hour < 10
-                  ? `0${period.close.hour}`
-                  : period.close.hour
-              }h${
-                period.close.minute < 10
-                  ? `0${period.close.minute}`
-                  : period.close.minute
-              }`,
-            },
-          }));
-          break;
-        case 2:
-          setOpeningHours((prev) => ({
-            ...prev,
-            mardi: {
-              open: `${
-                period.open.hour < 10
-                  ? `0${period.open.hour}`
-                  : period.open.hour
-              }h${
-                period.open.minute < 10
-                  ? `0${period.open.minute}`
-                  : period.open.minute
-              }`,
-              close: `${
-                period.close.hour < 10
-                  ? `0${period.close.hour}`
-                  : period.close.hour
-              }h${
-                period.close.minute < 10
-                  ? `0${period.close.minute}`
-                  : period.close.minute
-              }`,
-            },
-          }));
-          break;
-        case 3:
-          setOpeningHours((prev) => ({
-            ...prev,
-            mercredi: {
-              open: `${
-                period.open.hour < 10
-                  ? `0${period.open.hour}`
-                  : period.open.hour
-              }h${
-                period.open.minute < 10
-                  ? `0${period.open.minute}`
-                  : period.open.minute
-              }`,
-              close: `${
-                period.close.hour < 10
-                  ? `0${period.close.hour}`
-                  : period.close.hour
-              }h${
-                period.close.minute < 10
-                  ? `0${period.close.minute}`
-                  : period.close.minute
-              }`,
-            },
-          }));
-          break;
-        case 4:
-          setOpeningHours((prev) => ({
-            ...prev,
-            jeudi: {
-              open: `${
-                period.open.hour < 10
-                  ? `0${period.open.hour}`
-                  : period.open.hour
-              }h${
-                period.open.minute < 10
-                  ? `0${period.open.minute}`
-                  : period.open.minute
-              }`,
-              close: `${
-                period.close.hour < 10
-                  ? `0${period.close.hour}`
-                  : period.close.hour
-              }h${
-                period.close.minute < 10
-                  ? `0${period.close.minute}`
-                  : period.close.minute
-              }`,
-            },
-          }));
-          break;
-        case 5:
-          setOpeningHours((prev) => ({
-            ...prev,
-            vendredi: {
-              open: `${
-                period.open.hour < 10
-                  ? `0${period.open.hour}`
-                  : period.open.hour
-              }h${
-                period.open.minute < 10
-                  ? `0${period.open.minute}`
-                  : period.open.minute
-              }`,
-              close: `${
-                period.close.hour < 10
-                  ? `0${period.close.hour}`
-                  : period.close.hour
-              }h${
-                period.close.minute < 10
-                  ? `0${period.close.minute}`
-                  : period.close.minute
-              }`,
-            },
-          }));
-          break;
-        case 6:
-          setOpeningHours((prev) => ({
-            ...prev,
-            samedi: {
-              open: `${
-                period.open.hour < 10
-                  ? `0${period.open.hour}`
-                  : period.open.hour
-              }h${
-                period.open.minute < 10
-                  ? `0${period.open.minute}`
-                  : period.open.minute
-              }`,
-              close: `${
-                period.close.hour < 10
-                  ? `0${period.close.hour}`
-                  : period.close.hour
-              }h${
-                period.close.minute < 10
-                  ? `0${period.close.minute}`
-                  : period.close.minute
-              }`,
-            },
-          }));
-          break;
-        default:
-          break;
-      }
-    });
-  };
+  const daysTranslate = [
+    { name: "Lundi", short: "Lun", value: 1 },
+    { name: "Mardi", short: "Mar", value: 2 },
+    { name: "Mercredi", short: "Mer", value: 3 },
+    { name: "Jeudi", short: "Jeu", value: 4 },
+    { name: "Vendredi", short: "Ven", value: 5 },
+    { name: "Samedi", short: "Sam", value: 6 },
+    { name: "Dimanche", short: "Dim", value: 0 },
+  ];
 
   useEffect(() => {
     getInfoPlace(id).then((result) => {
       // mettre le tableau result.command dans le state commands et le restant dans infoPlace
       const { command, ...rest } = result;
+      if (
+        result.openingHours.periods.length &&
+        result.openingHours.periods[0].open.day === 0
+      ) {
+        const lastDayOfWeek = result.openingHours.periods.shift();
+        result.openingHours.periods.push(lastDayOfWeek);
+      }
       setCommands(command);
       setInfoPlace(rest);
     });
@@ -258,109 +61,88 @@ function Store({ route, navigation }) {
       setPostalCode(splitAddress[1].trim());
 
       setImage(infoPlace?.urlImage.replace("http://localhost", url));
-
-      getHours();
     }
   }, [infoPlace]);
 
+  if (loading) {
+    return (
+      <View
+        style={{
+          height: "100%",
+          width: "100%",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <ActivityIndicator size={"large"} color={"#AD59AD"} />
+      </View>
+    );
+  }
+
   return (
     <View>
-      {/* <Text>Magasin</Text>
-      <Button
-        title="Go to Produit"
-        onPress={() => navigation.push("Produit")}
-      />
-      <Button
-        title="Go to Producteur"
-        onPress={() => navigation.push("Producteur")}
-      /> */}
-
-      {loading ? (
-        <View
-          style={{
-            height: "100%",
-            width: "100%",
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-        >
-          <ActivityIndicator size={"large"} color={"#AD59AD"} />
-        </View>
-      ) : (
-        <View>
-          <ScrollView>
-            <HeaderScreen
-              urlBannerImage={image}
-              title={infoPlace?.name}
-              addFavoriteHandler={() => console.log("Add favorite")}
-              isFavorite={false}
-              deleteFavoriteHandler={() => console.log("Delete favorite")}
-              isCallableFavorite={true}
-            />
-            <View style={styles.content}>
-              <View style={styles.addressContainer}>
-                <Text style={{ fontSize: 18 }}>{street}</Text>
-                <Text style={{ fontSize: 18 }}>{postalCode}</Text>
-              </View>
-
-              <View style={styles.timeContainer}>
-                <Text style={styles.timingTitle}>Horaires d'ouverture: </Text>
-                <View style={styles.timing}>
-                  <Text>
-                    Lundi: {openingHours.lundi.open} -{" "}
-                    {openingHours.lundi.close}
-                  </Text>
-                </View>
-                <View style={styles.timing}>
-                  <Text>
-                    Mardi: {openingHours.mardi.open} -{" "}
-                    {openingHours.mardi.close}
-                  </Text>
-                </View>
-                <View style={styles.timing}>
-                  <Text>
-                    Mercredi: {openingHours.mercredi.open} -{" "}
-                    {openingHours.mercredi.close}
-                  </Text>
-                </View>
-                <View style={styles.timing}>
-                  <Text>
-                    Jeudi: {openingHours.jeudi.open} -{" "}
-                    {openingHours.jeudi.close}
-                  </Text>
-                </View>
-                <View style={styles.timing}>
-                  <Text>
-                    Vendredi: {openingHours.vendredi.open} -{" "}
-                    {openingHours.vendredi.close}
-                  </Text>
-                </View>
-                <View style={styles.timing}>
-                  <Text>
-                    Samedi: {openingHours.samedi.open} -{" "}
-                    {openingHours.samedi.close}
-                  </Text>
-                </View>
-                <View style={styles.timing}>
-                  <Text>
-                    Dimanche: {openingHours.dimanche.open} -{" "}
-                    {openingHours.dimanche.close}
-                  </Text>
-                </View>
-              </View>
+      <View>
+        <ScrollView>
+          <HeaderScreen
+            urlBannerImage={image}
+            title={infoPlace?.name}
+            addFavoriteHandler={() => console.log("Add favorite")}
+            isFavorite={false}
+            deleteFavoriteHandler={() => console.log("Delete favorite")}
+            isCallableFavorite={true}
+          />
+          <View style={styles.content}>
+            <View style={styles.addressContainer}>
+              <Text style={{ fontSize: 18 }}>{street}</Text>
+              <Text style={{ fontSize: 18 }}>{postalCode}</Text>
             </View>
-            <View style={styles.separator}></View>
-            {commands.length ? (
-              <ProductsListCategories
-                commands={commands}
-                navigation={navigation}
-              />
-            ) : (
-              <Text>Aucun produit disponible</Text>
-            )}
-          </ScrollView>
-        </View>
-      )}
+
+            <View style={styles.timeContainer}>
+              <Text style={styles.timingTitle}>Horaires d'ouverture: </Text>
+              {infoPlace.openingHours.periods.length &&
+                daysTranslate.map((period, index) => {
+                  const { name, value } = period;
+                  const day = infoPlace.openingHours.periods.find(
+                    (period) => period?.open?.day === value
+                  );
+                  return (
+                    <View key={index} style={styles.timing}>
+                      <Text style={{ fontWeight: 500 }}>{name}</Text>
+                      <View
+                        style={{
+                          marginHorizontal: 8,
+                          flex: 1,
+                          height: 1,
+                          borderStyle: "dotted",
+                          borderBottomWidth: 2,
+                          borderBottomColor: "#D9B3D9",
+                        }}
+                      ></View>
+                      <Text style={{ fontWeight: 300 }}>
+                        {!day
+                          ? "Fermé"
+                          : `${day.open.hour}:${
+                              day.open.minute == 0 ? "00" : day.open.minute
+                            } - ${day.close.hour}:${
+                              day.close.minute == 0 ? "00" : day.close.minute
+                            }`}
+                      </Text>
+                    </View>
+                  );
+                })}
+            </View>
+          </View>
+          <View style={styles.separator}></View>
+          {commands.length ? (
+            <ProductsListCategories
+              commands={commands}
+              navigation={navigation}
+            />
+          ) : (
+            <Text>Aucun produit disponible</Text>
+          )}
+        </ScrollView>
+      </View>
     </View>
   );
 }
@@ -423,7 +205,7 @@ const styles = StyleSheet.create({
   },
   timing: {
     flexDirection: "row",
-    justifyContent: "space-between",
+    justifyContent: "space-arround",
     alignItems: "center",
     width: "100%",
   },
