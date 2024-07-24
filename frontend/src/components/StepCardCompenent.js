@@ -3,40 +3,44 @@
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 
 import Image from "next/image";
-
+import Image01 from "../../public/step_img/image01.png";
+import Image02 from "../../public/step_img/image02.png";
+import Image03 from "../../public/step_img/image03.png";
+import Image11 from "../../public/step_img/image11.png";
+import Image12 from "../../public/step_img/image12.png";
+import Image13 from "../../public/step_img/image13.png";
 import Number_one from "../../public/numbers_img/number-one.svg";
 import Number_two from "../../public/numbers_img/number-two.svg";
 import Number_three from "../../public/numbers_img/number-three.svg";
-import test from "../../public/next.svg";
 
 function StepCardCompenent({ isProducer }) {
   const cardContent = isProducer
     ? [
         {
           text: "Inscription : Rejoignez notre plateforme en créant un profil de producteur, et mettez en avant vos produits et pratiques agricoles.",
-          img: test,
+          img: Image11,
         },
         {
           text: "Vente : Utilisez notre application pour informer les consommateurs des produits disponible et des points de collectes ou de ventes dans les commerces partenaires.",
-          img: test,
+          img: Image12,
         },
         {
           text: "Engagement : Renforcez les liens avec vos clients grâce à des échanges directes et transparent, tout en recevant des retours sur vos produits pour continuellement améliorer votre offre.  ",
-          img: test,
+          img: Image13,
         },
       ]
     : [
         {
           text: "Accessibilité : Trouvez facilement des produits locaux et de qualité près de chez vous grâce à notre application.",
-          img: test,
+          img: Image01,
         },
         {
           text: "Sélection : Découvrez une large gamme de produits locaux et de qualité, et trouvez ceux qui correspondent à vos besoins et vos envies.",
-          img: test,
+          img: Image02,
         },
         {
           text: "Engagement : Renforcez les liens avec les producteurs locaux en échangeant directement avec eux, et en leur donnant des retours sur leurs produits pour les aider à s'améliorer.",
-          img: test,
+          img: Image03,
         },
       ];
 
@@ -65,7 +69,7 @@ function StepCardCompenent({ isProducer }) {
               alt="test img"
               className="w-4/5 self-end h-auto"
             />
-            <p className="w-4/5 z-10 -mt-8">{cardContent[0].text}</p>
+            <p className="w-4/5 z-10">{cardContent[0].text}</p>
           </CardContent>
         </Card>
 
@@ -79,7 +83,7 @@ function StepCardCompenent({ isProducer }) {
               alt="test img"
               className="w-4/5 h-auto"
             />
-            <p className="w-4/5 z-10 -mt-8 self-end">{cardContent[1].text}</p>
+            <p className="w-4/5 z-10 self-end">{cardContent[1].text}</p>
           </CardContent>
         </Card>
 
@@ -93,7 +97,7 @@ function StepCardCompenent({ isProducer }) {
               alt="test img"
               className="w-4/5 self-end h-auto"
             />
-            <p className="w-4/5 z-10 -mt-8">{cardContent[2].text}</p>
+            <p className="w-4/5 z-10">{cardContent[2].text}</p>
           </CardContent>
         </Card>
       </div>
