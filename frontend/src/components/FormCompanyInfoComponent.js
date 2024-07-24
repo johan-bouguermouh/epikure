@@ -19,6 +19,12 @@ import { useFormContext } from "../context/FormContext";
 const formSchema = z.object({
   siretOrSiren: z.string().min(9).max(14),
   legalStatus: z.string().optional(),
+  email: z.string().email({ message: "Invalid email address" }),
+  password: z.string().min(6, { message: "Password must be at least 6 characters long" }),
+  confirmPassword: z.string().min(6, { message: "Password must be at least 6 characters long" }),
+}).refine(data => data.password === data.confirmPassword, {
+  message: "Passwords don't match",
+  path: ["confirmPassword"],
 });
 
 function FormCompanyInfoComponent() {
@@ -35,11 +41,15 @@ function FormCompanyInfoComponent() {
     defaultValues: {
       siretOrSiren: formData.siretOrSiren || "",
       legalStatus: formData.legalStatus || "",
+      email: formData.email || "",
+      password: "",
+      confirmPassword: "",
     },
   });
 
   async function onSubmit(values) {
-    updateFormData(values);
+    const { confirmPassword, ...rest } = values;
+    updateFormData(rest);
     await fetchCompanyDetails(values.siretOrSiren);
   }
 
@@ -70,6 +80,48 @@ function FormCompanyInfoComponent() {
               <FormLabel>Statut Juridique</FormLabel>
               <FormControl>
                 <Input placeholder="Statut Juridique" {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <FormField
+          control={form.control}
+          name="email"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Email</FormLabel>
+              <FormControl>
+                <Input placeholder="Email" {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <FormField
+          control={form.control}
+          name="password"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Mot de passe</FormLabel>
+              <FormControl>
+                <Input type="password" placeholder="Mot de passe" {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <FormField
+          control={form.control}
+          name="confirmPassword"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Confirmer le mot de passe</FormLabel>
+              <FormControl>
+                <Input type="password" placeholder="Confirmer le mot de passe" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>

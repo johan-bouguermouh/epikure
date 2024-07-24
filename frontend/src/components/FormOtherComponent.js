@@ -59,7 +59,7 @@ function FormOtherComponent() {
               <FormControl>
                 <Checkbox
                   checked={field.value}
-                  onChange={(e) => field.onChange(e.target.checked)}
+                  onCheckedChange={field.onChange}
                 />
               </FormControl>
               <FormMessage />

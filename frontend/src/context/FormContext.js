@@ -1,5 +1,3 @@
-"use client";
-
 import React, { createContext, useContext, useState } from 'react';
 import axios from 'axios';
 
@@ -7,7 +5,7 @@ const FormContext = createContext();
 
 export function FormProvider({ children }) {
   const [formData, setFormData] = useState({
-    cis: '',
+    siretOrSiren: '',
     legalStatus: '',
     businessName: '',
     postalCode: '',
@@ -16,6 +14,10 @@ export function FormProvider({ children }) {
     isBio: false,
     firstName: '',
     lastName: '',
+    email: '',
+    password: '',
+    shortDescription: '', // Nouveau champ pour la courte description
+    longDescription: '',  // Nouveau champ pour la longue description
   });
 
   const [step, setStep] = useState(1);
@@ -40,7 +42,6 @@ export function FormProvider({ children }) {
       const isSIRET = siretOrSiren.length === 14;
 
       if (isSIREN) {
-        // Requête pour SIREN
         response = await axios.get(
           `https://api.insee.fr/entreprises/sirene/V3.11/siren/${siretOrSiren}`,
           {
@@ -57,12 +58,10 @@ export function FormProvider({ children }) {
           new Date(current.dateDebut) > new Date(latest.dateDebut) ? current : latest
         );
 
-        // Extraction des informations pour SIREN
         updateFormData({
           businessName: latestPeriod.denominationUniteLegale,
         });
       } else if (isSIRET) {
-        // Requête pour SIRET
         response = await axios.get(
           `https://api.insee.fr/entreprises/sirene/V3.11/siret/${siretOrSiren}`,
           {
@@ -75,7 +74,6 @@ export function FormProvider({ children }) {
 
         const { etablissement } = response.data;
 
-        // Extraction des informations pour SIRET
         const denominationUniteLegale = etablissement.uniteLegale.denominationUniteLegale;
         const codePostalEtablissement = etablissement.adresseEtablissement.codePostalEtablissement;
         const libelleCommuneEtablissement = etablissement.adresseEtablissement.libelleCommuneEtablissement;
@@ -87,10 +85,10 @@ export function FormProvider({ children }) {
         });
       } else {
         setError('Le numéro SIRET/SIREN est invalide.');
-        return; // Ne pas passer à l'étape suivante si le numéro est invalide
+        return;
       }
 
-      nextStep(); // Passer à l'étape suivante seulement si les données sont chargées avec succès
+      nextStep();
     } catch (error) {
       console.error('Erreur lors de la recherche:', error);
       setError('Une erreur s\'est produite lors de la recherche.');

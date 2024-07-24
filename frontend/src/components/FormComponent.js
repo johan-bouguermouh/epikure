@@ -4,6 +4,7 @@ import { useFormContext } from "../context/FormContext";
 import FormCompanyInfoComponent from "./FormCompanyInfoComponent";
 import FormOtherComponent from "./FormOtherComponent";
 import FormProfilComponent from "./FormProfilComponent";
+import FormWelcomeToEpikure from "./FormWelcomeToEpikure";
 
 function FormComponent() {
   const { step } = useFormContext();
@@ -25,6 +26,12 @@ function FormComponent() {
       return (
         <div className="w-full rounded-lg shadow-md p-4">
           <FormProfilComponent />
+        </div>
+      );
+    case 4:
+      return (
+        <div className="w-full rounded-lg shadow-md p-4">
+          <FormWelcomeToEpikure />
         </div>
       );
     default:
