@@ -122,3 +122,37 @@ export const deleteFavoriteFarmer = async (farmerId) => {
     throw error;
   }
 };
+
+export const addFavoritePlace = async (placeId) => {
+  const guest = await getUuid();
+  try {
+    const response = await instance.post(`${endpoint}/${guest}/places`, {
+      placeId: placeId,
+    });
+    return response.data;
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      console.error("Error while adding favorite place", error.response.data);
+      throw error.response.data;
+    }
+    console.error("Error while adding favorite place", error);
+    throw error;
+  }
+};
+
+export const deleteFavoritePlace = async (placeId) => {
+  const guest = await getUuid();
+  try {
+    const response = await instance.delete(
+      `${endpoint}/${guest}/places/${placeId}`
+    );
+    return response.data;
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      console.error("Error while deleting favorite place", error.response.data);
+      throw error.response.data;
+    }
+    console.error("Error while deleting favorite place", error);
+    throw error;
+  }
+};

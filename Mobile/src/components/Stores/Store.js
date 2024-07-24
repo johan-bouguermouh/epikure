@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import {
   Button,
   Text,
@@ -10,8 +10,15 @@ import {
 import { getInfoPlace } from "../../services/place.service";
 import HeaderScreen from "../common/HeaderScreen";
 import ProductsListCategories from "./ProductsListCategories";
+import {
+  addFavoritePlace,
+  deleteFavoritePlace,
+} from "../../services/guest.service";
+import { UserContext } from "../../contexts/UserContext";
 
 function Store({ route, navigation }) {
+  const { addFavoritePlaceStore, removeFavoritePlaceStore, thisPlaceIsFav } =
+    useContext(UserContext);
   const [infoPlace, setInfoPlace] = useState(null);
   const [commands, setCommands] = useState([null]);
   const [street, setStreet] = useState("");
@@ -86,9 +93,15 @@ function Store({ route, navigation }) {
           <HeaderScreen
             urlBannerImage={image}
             title={infoPlace?.name}
-            addFavoriteHandler={() => console.log("Add favorite")}
-            isFavorite={false}
-            deleteFavoriteHandler={() => console.log("Delete favorite")}
+            isFavorite={thisPlaceIsFav(id)}
+            addFavoriteHandler={() => {
+              addFavoritePlace(id);
+              addFavoritePlaceStore(infoPlace);
+            }}
+            deleteFavoriteHandler={() => {
+              deleteFavoritePlace(id);
+              removeFavoritePlaceStore(id);
+            }}
             isCallableFavorite={true}
           />
           <View style={styles.content}>
