@@ -1,26 +1,19 @@
-import { Button } from "@/components/ui/button";
-import SideBarComponent from "./SidebarComponent";
+"use client"
+import { useRouter } from 'next/router';
 
-export default function Dashboard() {
+export default function DashboardViewComponent() {
+  const router = useRouter();
+  const { pathname } = router;
+
   return (
-        <main className="flex flex-1 flex-col gap-4 p-4 lg:gap-6 lg:p-6">
-          <div className="flex items-center">
-            <h1 className="text-lg font-semibold md:text-2xl">Inventory</h1>
-          </div>
-          <div
-            className="flex flex-1 items-center justify-center rounded-lg border border-dashed shadow-sm"
-            x-chunk="dashboard-02-chunk-1"
-          >
-            <div className="flex flex-col items-center gap-1 text-center">
-              <h3 className="text-2xl font-bold tracking-tight">
-                You have no products
-              </h3>
-              <p className="text-sm text-muted-foreground">
-                You can start selling as soon as you add a product.
-              </p>
-              <Button className="mt-4">Add Product</Button>
-            </div>
-          </div>
-        </main>
+    <main className="flex flex-1 flex-col gap-4 p-4 lg:gap-6 lg:p-6">
+      {pathname === '/dashboard' && (
+        <div>
+          <h1 className="text-lg font-semibold md:text-2xl">Welcome to the Dashboard</h1>
+          <p>Select an option from the sidebar to get started.</p>
+        </div>
+      )}
+      {/* Other default content */}
+    </main>
   );
 }

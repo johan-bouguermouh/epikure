@@ -1,13 +1,13 @@
 "use client";
 
-import { useSidebar } from "@/context/SidebarContext";
+import { useSidebar } from "@/context/DashboardSideBarContext";
 import { Search } from "lucide-react";
 import MobileSidebarComponent from "./MobileSidebarComponent";
 import { Input } from "./ui/input";
 import { ModeToggle } from "./ui/mode-toggle";
 
 function DashboardHeaderComponent() {
-  const { isOpen } = useSidebar(); // Utilisation du hook pour obtenir l'état de la sidebar
+  const { isOpen } = useSidebar(); 
 
   return (
     <header

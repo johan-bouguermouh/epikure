@@ -1,15 +1,16 @@
-import "./globals.css";
+import DashboardHeaderComponent from "@/components/DashboardHeaderComponent";
+import DashboardSideBarComponent from "@/components/DashboardSideBarComponent";
+import { ThemeProvider } from "@/components/ui/theme-provider";
+import { SidebarProvider } from "@/context/DashboardSideBarContext";
 import { Inter } from "next/font/google";
-import React from "react";
-import IsProducerProvider from '../context/IsProducerContext';
-import NavComponent from "../components/NavComponent";
-import FooterComponent from "../components/FooterComponent";
+import IsProducerProvider from "../context/IsProducerContext";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
   title: "EPIKURE",
-  description: "Application de mise en relation producteur(trice) et consomm'acteur",
+  description:
+    "Application de mise en relation producteur(trice) et consomm'acteur",
 };
 
 export default function RootLayout({ children }) {
@@ -17,10 +18,8 @@ export default function RootLayout({ children }) {
     <html lang="fr">
       <body className={inter.className}>
         <IsProducerProvider>
-          <NavComponent />
-          {children}
+         {children}
         </IsProducerProvider>
-        <FooterComponent />
       </body>
     </html>
   );
