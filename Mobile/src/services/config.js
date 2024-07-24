@@ -8,7 +8,7 @@ import Constants from "expo-constants";
 const baseURL = process.env.EXPO_PUBLIC_BASE_URL;
 
 const instance = axios.create({
-  baseURL: `http://192.168.1.27:3000`, // URL de base de l'API
+  baseURL: `${baseURL}:3000`, // URL de base de l'API
   timeout: 5000, // Temps d'attente maximal en millisecondes
   headers: {
     "Content-Type": "application/json",
