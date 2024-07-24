@@ -350,10 +350,14 @@ function Store({ route, navigation }) {
               </View>
             </View>
             <View style={styles.separator}></View>
-            <ProductsListCategories
-              commands={commands}
-              navigation={navigation}
-            />
+            {commands.length ? (
+              <ProductsListCategories
+                commands={commands}
+                navigation={navigation}
+              />
+            ) : (
+              <Text>Aucun produit disponible</Text>
+            )}
           </ScrollView>
         </View>
       )}
