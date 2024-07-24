@@ -2,7 +2,14 @@
 
 import React from 'react';
 import Image from 'next/image';
-import Image1 from '../../public/next.svg';
+import Image01 from '../../public/explanation_img/image01.png';
+import Image02 from '../../public/explanation_img/image02.png';
+import Image03 from '../../public/explanation_img/image03.png';
+import Image04 from '../../public/explanation_img/image04.png';
+import Image11 from '../../public/explanation_img/image11.png';
+import Image12 from '../../public/explanation_img/image12.png';
+import Image13 from '../../public/explanation_img/image13.png';
+import Image14 from '../../public/explanation_img/image14.png';
 
 import {
     Card,
@@ -17,42 +24,43 @@ const CardComponent = ({ isProducer }) => {
         {
             title: 'Promotions des points de ventes',
             description: 'Notre application met en avant les points de vente des producteurs locaux, facilitant ainsi la connexion entre les agriculteurs et les consommateurs et encourageant la consommation de produits locaux.',
-            image: Image1
+            image: Image11
         },
         {
             title: 'Calendrier saisonnier des produits',
             description: 'Notre plateforme permet aux consommateurs de connaître les fruits et légumes disponibles à chaque saison, ce qui crée une demande ciblée pour les produits des agriculteurs et encourage la consommation de produits saisonniers.',
-            image: Image1
+            image: Image12
         },
         {
             title: 'Inspiration culinaire et conseils',
             description: 'Notre application propose des recettes, idées et conseils pour les consomm\'acteurs, ce qui crée une demande accrue pour les produits des agriculteurs et encourage la créativité culinaire.',
-            image: Image1
+            image: Image13
         },
         {
             title: 'Visibilité et présence en ligne accrue',
             description: ' Notre plateforme permet aux agriculteurs de gagner en visibilité en les aidant à se faire connaître auprès d\'une clientèle plus large et plus engagée, ce qui peut se traduire par une augmentation de leurs revenus et de leur notoriété.',
-            image: Image1
+            image: Image14
         },
     ] : [
         {
             title: 'Proximité',
             description: 'Favoriser les circuit courts pour garantir la fraicheur des produits et soutenir l\'économie locale.',
-            image: Image1
+            image: Image01
         },
         {
             title: 'Qualité',
             description: 'Sélectionner des produits de hautes qualités, issus de pratiques agricoles respectueuses de l\'environnement.',
-            image: Image1
+            image: Image02
         },
         {
             title: 'Transparence',
             description: 'Assurer une traçabilité complète des produits pour une consommation éclairée.',
-            image: Image1
+            image: Image03
         },
         {
             title: 'Communauté',
-            description: 'Créer un lien fort entres Producteurs et Consom\'acteur, basée sur la confiance et l\'échange.', image: Image1
+            description: 'Créer un lien fort entres Producteurs et Consom\'acteur, basée sur la confiance et l\'échange.',
+            image: Image04
         },
     ];
 
