@@ -212,6 +212,7 @@ export class PlaceService {
   async getPlaceInfo(id: number): Promise<any> {
     const newDate = new Date();
     newDate.setHours(0, 0, 0, 0);
+    const numberMonthNow = newDate.getMonth() + 1;
 
     const place = await this.placeRepository.findOne({
       where: { id },
@@ -266,9 +267,17 @@ export class PlaceService {
         index === self.findIndex((t) => t.product.id === product.product.id),
     );
 
-    const currentProductsDto = currentProducts.map((product) => {
+    let currentProductsDto = currentProducts.map((product) => {
       const farmers = aggragateFarmersByProduct[product.product.id];
       return { ...product, farmers };
+    });
+
+    //On sort les currentProductsDto selon le rapprochement de harvestStartDate
+    currentProductsDto.sort((a, b) => {
+      return (
+        Math.abs(a.product.harvestStartMounth.valueOf() - numberMonthNow) -
+        Math.abs(b.product.harvestStartMounth.valueOf() - numberMonthNow)
+      );
     });
 
     const newResult = {
@@ -284,6 +293,7 @@ export class PlaceService {
         return { ...product, farmers: farmersDto };
       }),
     };
+
     return newResult;
   }
 }

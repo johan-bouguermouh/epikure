@@ -34,7 +34,7 @@ const ProductGridComponent = ({ products, navigation }) => {
         style={{
           width: displayWidth - 24,
           height: heightComponent(),
-          maxWidth: heightComponent(),
+          maxWidth: displayWidth - 24,
         }}
         numColumns={4}
         scrollEnabled={false} // Désactiver le défilement vertical

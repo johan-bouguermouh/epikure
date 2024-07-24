@@ -27,7 +27,7 @@ function ProductCard({ navigation, command }) {
                     isPressable={true}
                     onPressHandler={() =>
                       navigation.navigate("Producteur", {
-                        producerId: farmer.id,
+                        farmerId: farmer.id,
                       })
                     }
                   />
@@ -55,7 +55,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: "#E6CCE6",
     borderRadius: 8,
-    margin: 10,
+    marginBottom: 4,
     paddingVertical: 12,
     paddingHorizontal: 12,
     flexDirection: "row",
@@ -65,6 +65,8 @@ const styles = StyleSheet.create({
   containerImage: {
     width: 95,
     height: 92,
+    borderRadius: 8,
+    elevation: 5,
   },
 
   image: {
@@ -82,17 +84,21 @@ const styles = StyleSheet.create({
 
   name: {
     fontSize: 16,
-    fontWeight: "semibold",
+    fontWeight: "500",
+    paddingVertical: 0,
+    marginVertical: 0,
+    width: "100%",
   },
 
   //les producteurs doivent se chevaucher
   farmers: {
     flexDirection: "row",
     alignItems: "center",
+    marginLeft: 24,
   },
 
   avatarFarmer: {
-    marginRight: -25,
+    marginLeft: -33,
   },
 
   moreFarmers: {

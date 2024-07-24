@@ -7,8 +7,8 @@
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./assets/splash.png",
-      "resizeMode": "contain",
+      "image": "./assets/Splash.jpg",
+      "resizeMode": "cover",
       "backgroundColor": "#ffffff"
     },
     "ios": {
@@ -20,7 +20,13 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "com.anonymous.Mobile"
+      "package": "com.anonymous.Mobile",
+      "statusBar": {
+        "hidden": true
+      },
+      "navigationBar": {
+        "visible": false
+      }
     },
     "web": {
       "favicon": "./assets/favicon.png"
