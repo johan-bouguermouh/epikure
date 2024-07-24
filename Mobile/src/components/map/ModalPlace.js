@@ -12,7 +12,7 @@ import HeaderScreen from "../common/HeaderScreen";
 
 import { Octicons } from "@expo/vector-icons";
 
-function ModalPlace({ content, navigation }) {
+function ModalPlace({ content, navigation, handleOpenModal }) {
   // TODO : rajouter le composant banner quand il sera fait
   const url = process.env.EXPO_PUBLIC_BASE_URL;
 
@@ -89,7 +89,10 @@ function ModalPlace({ content, navigation }) {
         <View style={styles.separator}></View>
         <TouchableOpacity
           style={styles.button}
-          onPress={() => navigation.push("Magasin", { placeId: content.id })}
+          onPress={() => {
+            handleOpenModal(false);
+            navigation.push("Magasin", { placeId: content.id });
+          }}
         >
           <Text style={styles.buttonText}>Voir plus</Text>
         </TouchableOpacity>
