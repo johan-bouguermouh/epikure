@@ -9,6 +9,7 @@ import thumbnails from "./data/table/thumbnail.json";
 import harvestSeason from "./data/table/recolte.json";
 import conservation from "./data/table/conservationTime.json";
 import { etractNutriscore } from "./utils/extractNutriscore";
+import heroBanner from "./data/table/heroBanner.json";
 /** IMPORTANTION INTERFACE */
 import Vegetable from "./interfaces/vegetable.interface";
 import CategoryProduct from "./interfaces/category-product.interface";
@@ -17,6 +18,7 @@ import Harvest from "./interfaces/harvest.interface";
 import Conservation from "./interfaces/conservation.interface";
 import Product from "./interfaces/product.interface";
 import { promises } from "dns";
+import HeroBanner from "./interfaces/hero-banner.interface";
 
 console.log("\x1b[35m", "Insertion des produits");
 
@@ -41,7 +43,8 @@ axiosService
       categoryProduct: CategoryProduct,
       thumbnail: Thumbnail,
       harvest: Harvest,
-      conservation: Conservation
+      conservation: Conservation,
+      urlBannerImage: HeroBanner
     ): Product {
       const {
         Nom: name,
@@ -65,7 +68,7 @@ axiosService
         harvestEndMounth,
         conservationTime,
         nutriscore,
-        urlBannerImage: "",
+        urlBannerImage: urlBannerImage.Banner_image,
       };
     }
 
@@ -97,8 +100,17 @@ axiosService
       const conservationDay: Conservation | undefined = conservation.find(
         (conservation: Conservation) => conservation.name === name
       );
+      const urlBannerImage: HeroBanner | undefined = heroBanner.find(
+        (heroBanner: HeroBanner) => heroBanner.Nom === name
+      );
 
-      if (!categoryProduct || !thumbnail || !harvest || !conservationDay) {
+      if (
+        !categoryProduct ||
+        !thumbnail ||
+        !harvest ||
+        !conservationDay ||
+        !urlBannerImage
+      ) {
         throw new Error(`Missing data for product ${vegetable.Nom}`);
       }
 
@@ -107,7 +119,8 @@ axiosService
         categoryProduct,
         thumbnail,
         harvest,
-        conservationDay
+        conservationDay,
+        urlBannerImage
       );
     });
 

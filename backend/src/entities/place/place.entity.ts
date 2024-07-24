@@ -8,6 +8,8 @@ import {
 import { OpeningHoursDto } from './dto/openinghours.dto';
 import { Farmer } from '../farmer/farmer.entity';
 import { Guest } from '../guest/guest.entity';
+import { Exclude } from 'class-transformer';
+import { Command } from '../command/command.entity';
 
 @Entity()
 export class Place {
@@ -54,6 +56,10 @@ export class Place {
   @JoinTable()
   farmers: Farmer[];
 
+  @ManyToMany(() => Command, (command) => command.places)
+  commands: Command[];
+
+  @Exclude()
   @ManyToMany(() => Guest, (guest) => guest.places)
   @JoinTable()
   guests: Guest[];

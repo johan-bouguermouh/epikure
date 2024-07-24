@@ -2,11 +2,14 @@ import React from "react";
 import { Button, View, TouchableOpacity, StyleSheet } from "react-native";
 import { Entypo } from "@expo/vector-icons";
 
+
 function Stepper({ step, setStep, onBoarding, setLocalStorage }) {
+  
   return (
     <View style={styles.container}>
-      <Button
-        title="Back"
+      <Button  
+        color="#C890C8"
+        title="Retour"
         onPress={() => setStep(step - 1)}
         disabled={step === 0}
       />
@@ -16,15 +19,21 @@ function Stepper({ step, setStep, onBoarding, setLocalStorage }) {
             key={index}
             name="dot-single"
             size={24}
-            color={step === index ? "black" : "gray"}
+            color={step === index ? "#AD59AD" : "gray"}
           />
         </TouchableOpacity>
       ))}
       {step < onBoarding.length - 1 && (
-        <Button title="Next" onPress={() => setStep(step + 1)} />
+        <Button 
+        color="#C890C8"
+        title="Suivant" 
+        onPress={() => setStep(step + 1)} />
       )}
       {step === onBoarding.length - 1 && (
-        <Button title="Finish" onPress={() => setLocalStorage()} />
+        <Button 
+        color="#C890C8" 
+        title="Continuer" 
+        onPress={() => setLocalStorage()} />
       )}
     </View>
   );

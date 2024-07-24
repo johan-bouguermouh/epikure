@@ -1,0 +1,842 @@
+{
+	"info": {
+		"_postman_id": "7eb58e4a-98d1-4d8a-933e-a2957b2e2c2a",
+		"name": "Epikure Copy",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "36791798"
+	},
+	"item": [
+		{
+			"name": "Farmer",
+			"item": [
+				{
+					"name": "Get info farmer",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"denomination\" : \"les paniers marseillais\",\n  \"siretorSiren\" : \"50367137200012\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/farmer/info",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"farmer",
+								"info"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all farmer",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/farmer",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"farmer"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add farmers",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"userId\" : 1,\n  \"siretNumber\" : \"50367137200012\",\n  \"sireneNumber\" : \"503671372\",\n  \"socialReasonName\" : \"LES PANIERS MARSEILLAIS\",\n  \"address\": \"CITE DES ASSOCIATIONS BOITE 199 93 VOIE LA CANEBIERE 13001 MARSEILLE\",\n  \"zipCode\": \"13001\",\n  \"city\" : \"MARSEILLE\",\n  \"isBio\": true,\n  \"managerLastName\" : \"Bouguermouh\",\n  \"managerFirstName\" : \"Johan\",\n  \"publicName\" : \"La Famille Bouguermouh\",\n  \"avatarUrl\" : \"https://www.boredpanda.com/blog/wp-content/uploads/2018/12/ai-image-generation-fake-faces-people-nvidia-5c18b20b472c2__700.jpg\",\n  \"bannerUrl\" : \"https://img.freepik.com/premium-photo/portrait-senior-hardworking-farmer-generator-by-ai_911060-48332.jpg\",\n  \"shortDescription\" : \"Nous sommes une famille cultivant la terre de génération en génération\",\n  \"description\" : \"Dans le doux murmure des champs, nous trouvons notre raison d'être. Ensemble, nous embrassons la terre, chaque grain de sable, chaque brin d'herbe, comme un précieux trésor. Nos mains caressent la vie naissante, nos cœurs battent à l'unisson avec le rythme des saisons. Dans l'harmonie de l'agriculture raisonnée, nous célébrons la générosité de la nature, respectant chaque créature, chaque goutte de rosée. Nous semons avec espoir, nous récoltons avec gratitude, bénissant le sol fertile qui nourrit nos rêves. Ici, l'amour de la terre et la passion de cultiver s'unissent pour créer un avenir lumineux et prospère, empreint de respect et de tendresse.\",\n  \"latitude\" : 43.298128,\n  \"longitude\" : 5.381708\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/farmer",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"farmer"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update products Farmers",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"farmerId\" : 1,\n    \"productIds\" : [\n    1, 2\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/farmer/products",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"farmer",
+								"products"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get public info farmer",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/farmer/public/7",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"farmer",
+								"public",
+								"7"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get Farmer products",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/farmer/31/products",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"farmer",
+								"31",
+								"products"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get farmer places",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/farmer/31/places",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"farmer",
+								"31",
+								"places"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "Add User",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"email\" : \"johanGuest@mail.fr\",\n  \"password\" : \"Johan123!best\",\n  \"guestUuid\": \"40030390-f4af-4dab-98b4-7f8e5d48da05\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/user",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"user"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Category-product",
+			"item": [
+				{
+					"name": "add category product",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\" : \"Fruit\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/category-product",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"category-product"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Role",
+			"item": []
+		},
+		{
+			"name": "Product",
+			"item": [
+				{
+					"name": "Add product",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"tomate\",\n  \"description\": \"Rond et savoureux, il fait partie des fruits et légumes d’été préférés des Français. Il se consomme aujourd’hui surtout comme un fruit, mais agrémente également des préparations salées.\",\n  \"categoryProductId\":  1,\n  \"harvestStartMounth\": 6,\n  \"harvestEndMounth\": 9,\n  \"thumbnail\": \"https://www.lesfruitsetlegumesfrais.com/media/lfm-media/Produits/Produit/Melon-descrip.jpg\",\n  \"urlBannerImage\": \"https://www.lesfruitsetlegumesfrais.com/media/lfm-media/Produits/Produit/Melon-banniere.jpg\",\n  \"conservationTime\": 6,\n  \"nutriscore\": [\n    {\n      \"name\": \"Provitamine A Béta-carotène\",\n      \"value\": \"2500 µg\"\n    },\n    {\n      \"name\": \"Vitamine B9\",\n      \"value\": \"58,90 µg\"\n    },\n    {\n      \"name\": \"Potassium\",\n      \"value\": \"380 mg\"\n    }\n  ]\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/product",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"product"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all products",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/product",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"product"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get product by season",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/product/season?mounth=1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"product",
+								"season"
+							],
+							"query": [
+								{
+									"key": "mounth",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Place",
+			"item": [
+				{
+					"name": "Create Place",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"placeId\" : \"ChIJVVXJBm_HyRIR9vTxQyCCA0U\",\n  \"farmerIds\" : [ 1 ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/place",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"place"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Auto-complete",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/place/auto-complete/?input=\"Biocoop La Joliette 13002 Marseille\"&location=43.3091364,5.376953",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"place",
+								"auto-complete",
+								""
+							],
+							"query": [
+								{
+									"key": "input",
+									"value": "\"Biocoop La Joliette 13002 Marseille\""
+								},
+								{
+									"key": "location",
+									"value": "43.3091364,5.376953"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Geat détail place",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/place/details/ChIJF2VVV3vAyRIRRp89Ox47fgo",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"place",
+								"details",
+								"ChIJF2VVV3vAyRIRRp89Ox47fgo"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Command",
+			"item": [
+				{
+					"name": "Add new command",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"farmerId\" : 1,\n  \"startedDate\" : \"2024-07-18T20:48:00.000Z\",\n  \"productIds\" : [ 1, 2],\n  \"placeIds\" : [ 2 ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/command",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"command"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get command by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/command/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"command",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all command",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/command/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"command",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Commands by farmer",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/command/farmer/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"command",
+								"farmer",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get command by places",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/command/place/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"command",
+								"place",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Guest",
+			"item": [
+				{
+					"name": "Inser new guest",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"uuid\" : \"40030390-f4af-4dab-98b4-7f8e5d48da05\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/guest",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"guest"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all uuid",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/guest",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"guest"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Find One Guest",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/guest/40030390-f4af-4dab-98b4-7f8e5d48da05",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"guest",
+								"40030390-f4af-4dab-98b4-7f8e5d48da05"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Favorites Product",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/guest/40030390-f4af-4dab-98b4-7f8e5d48da05/products",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"guest",
+								"40030390-f4af-4dab-98b4-7f8e5d48da05",
+								"products"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add favorite products",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"productId\" : 1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/guest/40030390-f4af-4dab-98b4-7f8e5d48da05/products",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"guest",
+								"40030390-f4af-4dab-98b4-7f8e5d48da05",
+								"products"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Favorite Place",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"placeId\" : 1,\n  \"userLatitude\" : 43.2504832,\n  \"userLongitude\": 5.3805056\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/guest/40030390-f4af-4dab-98b4-7f8e5d48da05/places",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"guest",
+								"40030390-f4af-4dab-98b4-7f8e5d48da05",
+								"places"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all Favorite Places",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/guest/40030390-f4af-4dab-98b4-7f8e5d48da05/places?latitude=43.2504832&longitude=5.3805056",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"guest",
+								"40030390-f4af-4dab-98b4-7f8e5d48da05",
+								"places"
+							],
+							"query": [
+								{
+									"key": "latitude",
+									"value": "43.2504832"
+								},
+								{
+									"key": "longitude",
+									"value": "5.3805056"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Favorite Farmer",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"farmerId\": 1,\n  \"userLatitude\" : 43.2504832,\n  \"userLongitude\": 5.3805056\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/guest/40030390-f4af-4dab-98b4-7f8e5d48da05/farmers",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"guest",
+								"40030390-f4af-4dab-98b4-7f8e5d48da05",
+								"farmers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Favorite Farmer",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/guest/40030390-f4af-4dab-98b4-7f8e5d48da05/farmers/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"guest",
+								"40030390-f4af-4dab-98b4-7f8e5d48da05",
+								"farmers",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Favorite Places",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/guest/40030390-f4af-4dab-98b4-7f8e5d48da05/places/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"guest",
+								"40030390-f4af-4dab-98b4-7f8e5d48da05",
+								"places",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Favorite Products",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/guest/40030390-f4af-4dab-98b4-7f8e5d48da05/products/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"guest",
+								"40030390-f4af-4dab-98b4-7f8e5d48da05",
+								"products",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Favorite Farmers",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/guest/40030390-f4af-4dab-98b4-7f8e5d48da05/farmers?latitude=43.2504832&longitude=5.3805056",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"guest",
+								"40030390-f4af-4dab-98b4-7f8e5d48da05",
+								"farmers"
+							],
+							"query": [
+								{
+									"key": "latitude",
+									"value": "43.2504832"
+								},
+								{
+									"key": "longitude",
+									"value": "5.3805056"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

@@ -48,7 +48,7 @@ export class PublicPlaceDto {
     Object.assign(this, partial);
   }
 
-  setDistance(userLongitude: number, userLatitude: number): void {
+  setDistance(userLatitude: number, userLongitude: number): void {
     this.distance = haversineDistance(
       { latitude: this.latitude, longitude: this.longitude },
       { latitude: userLatitude, longitude: userLongitude },

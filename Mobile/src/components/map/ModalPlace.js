@@ -8,46 +8,91 @@ import {
   TouchableOpacity,
   ScrollView,
 } from "react-native";
+import HeaderScreen from "../common/HeaderScreen";
 
-function ModalPlace({ content, navigation }) {
+import { Octicons } from "@expo/vector-icons";
+
+function ModalPlace({ content, navigation, handleOpenModal }) {
   // TODO : rajouter le composant banner quand il sera fait
+  const url = process.env.EXPO_PUBLIC_BASE_URL;
+
+  const splitAddress = content.address.split(",");
+  const street = splitAddress[0].trim();
+  const postalCode = splitAddress[1].trim();
+
+  const imageUrl = content.image.replace("http://localhost", url);
 
   return (
     <View style={styles.modalContent}>
-      <View style={styles.imageContainer}>
-        <Image source={content.image} style={styles.modalImage} />
-        <Text style={styles.modalTitle}>{content.title}</Text>
-      </View>
-      <ScrollView
-        contentContainerStyle={styles.content}
-        showsVerticalScrollIndicator={true}
-      >
+      <HeaderScreen
+        urlBannerImage={imageUrl}
+        title={content.title}
+        isFavorite={false}
+        isCallableFavorite={false}
+      />
+      <View style={styles.content}>
         <View style={styles.addressContainer}>
-          <Text>{content.address.street}</Text>
+          <Text>{street}</Text>
           <View style={styles.cityContainer}>
-            <Text>{content.address.postalCode}</Text>
-            <Text>{content.address.city}</Text>
+            <Text>{postalCode}</Text>
           </View>
         </View>
 
         <View style={styles.timeContainer}>
-          <Text
-            style={{
-              fontSize: 16,
-              fontWeight: "bold",
-              color: "#000000",
-            }}
-          >
-            Horaires d'ouverture:{" "}
-          </Text>
-          <Text style={styles.modalDescription}>{content.description}</Text>
+          <View style={{ flexDirection: "row", gap: 10 }}>
+            {content.open.isOpen ? (
+              <View style={styles.pastilleOpen}>
+                <Octicons
+                  name="verified"
+                  size={12}
+                  color="#492549"
+                  style={{
+                    marginTop: 1.5,
+                  }}
+                />
+                <Text
+                  style={{
+                    height: 20,
+                    margin: 0,
+                    color: "#492549",
+                  }}
+                >
+                  ouvert
+                </Text>
+              </View>
+            ) : (
+              <View style={styles.pastilleClose}>
+                <Octicons
+                  name="x-circle"
+                  size={12}
+                  color="#6B453B"
+                  style={{
+                    marginTop: 1.5,
+                  }}
+                />
+                <Text
+                  style={{
+                    height: 20,
+                    margin: 0,
+                    color: "#6B453B",
+                  }}
+                >
+                  fermé
+                </Text>
+              </View>
+            )}
+            <Text>{content.open.message}</Text>
+          </View>
         </View>
-      </ScrollView>
+      </View>
       <View style={styles.navigation}>
         <View style={styles.separator}></View>
         <TouchableOpacity
           style={styles.button}
-          onPress={() => navigation.push("Magasin")}
+          onPress={() => {
+            handleOpenModal(false);
+            navigation.push("Magasin", { placeId: content.id });
+          }}
         >
           <Text style={styles.buttonText}>Voir plus</Text>
         </TouchableOpacity>
@@ -66,10 +111,9 @@ const styles = StyleSheet.create({
     gap: 10,
   },
   imageContainer: {
+    position: "relative",
     width: "100%",
-    height: "45%",
-    // borderRadius: 10,
-    overflow: "hidden",
+    height: 200,
     backgroundColor: "black",
   },
   modalImage: {
@@ -114,7 +158,37 @@ const styles = StyleSheet.create({
     alignItems: "flex-start",
   },
 
-  modalDescription: {},
+  pastilleOpen: {
+    height: 24,
+    verticalAlign: "middle",
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+    gap: 4,
+    backgroundColor: "#F7EEF7",
+    borderColor: "#E6CCE6",
+    borderWidth: 1,
+    textAlign: "center",
+    borderRadius: 12,
+    paddingHorizontal: 8,
+    paddingVertical: 0,
+  },
+
+  pastilleClose: {
+    height: 24,
+    verticalAlign: "middle",
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+    gap: 4,
+    backgroundColor: "#FFF6F4",
+    borderColor: "#FFE3DC",
+    borderWidth: 1,
+    textAlign: "center",
+    borderRadius: 12,
+    paddingHorizontal: 8,
+    paddingVertical: 0,
+  },
 
   navigation: {
     width: "100%",
