@@ -16,6 +16,7 @@ function MapScreen({ navigation }) {
     address: null,
     open: null,
   });
+  const [delta, setDelta] = useState(0.008);
 
   const handleCloseModal = (e) => {
     if (e.nativeEvent.action !== "marker-press") {
@@ -28,6 +29,14 @@ function MapScreen({ navigation }) {
     if (location.latitude) {
       getMap(location).then((result) => {
         setPlaces(result);
+        //on récupère le magasin le plus proche
+        console.log(result[0].distance / 111000);
+        const nearestPlace = (result[0].distance + 1000) / 111000;
+        if (nearestPlace < 0.008) {
+          setDelta(0.008);
+        } else {
+          setDelta(nearestPlace);
+        }
       });
     }
   }, [location]);
@@ -56,8 +65,8 @@ function MapScreen({ navigation }) {
         region={{
           latitude: location.latitude,
           longitude: location.longitude,
-          latitudeDelta: 0.008,
-          longitudeDelta: 0.008,
+          latitudeDelta: delta,
+          longitudeDelta: delta,
         }}
         showsUserLocation
         loadingEnabled
@@ -89,7 +98,11 @@ function MapScreen({ navigation }) {
 
       {modalOpen && (
         <View style={styles.modal}>
-          <ModalPlace content={modalContent} navigation={navigation} />
+          <ModalPlace
+            content={modalContent}
+            navigation={navigation}
+            handleOpenModal={setModalOpen}
+          />
         </View>
       )}
     </View>
