@@ -17,7 +17,7 @@ function ProductCard({ navigation, command }) {
         <Text style={styles.name}>{name}</Text>
         <View style={styles.farmers}>
           {farmers.map((farmer, index) => {
-            if (index <= 3) {
+            if (index <= 2) {
               return (
                 <View style={styles.avatarFarmer} key={index}>
                   <Avatar
@@ -33,7 +33,7 @@ function ProductCard({ navigation, command }) {
                   />
                 </View>
               );
-            } else if (index > 3) {
+            } else if (index === 3) {
               return (
                 <Text key={index} style={styles.moreFarmers}>
                   +{farmers.length - 3}
