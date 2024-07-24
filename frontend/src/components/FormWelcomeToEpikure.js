@@ -8,8 +8,7 @@ function FormWelcomeToEpikure() {
     const router = useRouter();
 
     const handleGoToDashboard = () => {
-        // Redirige l'utilisateur vers le tableau de bord
-        // router.push('/dashboard'); // Assurez-vous que ce chemin correspond à celui de votre tableau de bord
+        router.push('/dashboard');
     };
 
     return (

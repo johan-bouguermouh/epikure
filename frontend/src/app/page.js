@@ -29,7 +29,7 @@ export default function HomePage() {
         />
         <div
           ref={productSectionRef}
-          className="bg-primary/500 text-white p-5 text-center"
+          className="bg-primary-500 text-white p-5 text-center"
         >
           <h4>EPIKURE: Votre épicerie locale, notre fierté agricole</h4>
         </div>
