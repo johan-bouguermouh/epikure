@@ -181,7 +181,7 @@ function Productor({ route, navigation }) {
               borderBottomWidth: 1,
             }}
           >
-            Mes produits du moments
+            Mes produits du moment
           </Text>
           <ProductGridComponent products={products} navigation={navigation} />
           <Text

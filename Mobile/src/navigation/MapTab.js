@@ -12,7 +12,7 @@ function MapTab({ renderHeaderLeft }) {
   return (
     <Stack.Navigator
       initialRouteName="Map"
-      // screenOptions={{ headerShown : false }}
+      // screenOptions={{ headerShown: false }}
     >
       <Stack.Group>
         <Stack.Screen name="Map" component={MapScreen} />

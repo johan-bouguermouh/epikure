@@ -122,7 +122,7 @@ export default function SeasonalFrieze({
             fontStyle: "italic",
           }}
         >
-          Disponnible tout le long de l'année
+          Disponible tout au long de l'année
         </Text>
       )}
     </View>

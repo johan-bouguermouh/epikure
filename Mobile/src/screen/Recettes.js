@@ -21,7 +21,7 @@ function Recettes({ navigation }) {
           marginVertical: 12,
         }}
       >
-        Working progress !
+        Work in progress !
       </Text>
       <Text
         style={{
