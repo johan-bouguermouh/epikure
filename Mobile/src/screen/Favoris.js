@@ -60,7 +60,7 @@ function Favoris({ navigation }) {
             />
           ) : (
             <Text style={{ textAlign: "center" }}>
-              Vous n'avez pas encore de produits favoris
+              Vous n'avez pas encore de produit favoris
             </Text>
           )}
           <Text
@@ -72,13 +72,13 @@ function Favoris({ navigation }) {
               borderBottomWidth: 1,
             }}
           >
-            Mes Producteurs favoris
+            Mes producteurs favoris
           </Text>
           {favFarmers.length > 0 ? (
             <FarmerList farmers={favFarmers} navigation={navigation} />
           ) : (
             <Text style={{ textAlign: "center" }}>
-              Vous n'avez pas encore de producteurs favoris
+              Vous n'avez pas encore de producteur favoris
             </Text>
           )}
           <Text
@@ -96,7 +96,7 @@ function Favoris({ navigation }) {
             <FavoritesPlacesList places={favPlaces} navigation={navigation} />
           ) : (
             <Text style={{ textAlign: "center" }}>
-              Vous n'avez pas encore de magasins favoris
+              Vous n'avez pas encore de magasin favoris
             </Text>
           )}
         </View>

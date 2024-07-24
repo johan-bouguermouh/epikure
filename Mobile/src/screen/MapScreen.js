@@ -30,7 +30,7 @@ function MapScreen({ navigation }) {
       getMap(location).then((result) => {
         setPlaces(result);
         //on récupère le magasin le plus proche
-        console.log(result[0].distance / 111000);
+        // console.log(result[0].distance / 111000);
         const nearestPlace = (result[0].distance + 1000) / 111000;
         if (nearestPlace < 0.008) {
           setDelta(0.008);

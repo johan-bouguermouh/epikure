@@ -82,7 +82,7 @@ function Product({ route, navigation }) {
                   borderBottomWidth: 1,
                 }}
               >
-                Saisonalité
+                Saisonnalité
               </Text>
               <SeasonalFrieze
                 harvestStartMounth={product.harvestStartMounth}

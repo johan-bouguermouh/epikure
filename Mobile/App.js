@@ -7,13 +7,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import MyTabs from "./src/navigation/MyTabs";
 import OnBoarding from "./src/screen/OnBoarding";
 
-
-
-
 export default function App() {
-
-
-
   const [loading, setLoading] = useState(true);
   const [onBoarded, setOnBoarded] = useState(false);
 
@@ -21,7 +15,6 @@ export default function App() {
     try {
       const value = await AsyncStorage.getItem("onBoarded");
       if (value) {
-        console.log("VALUE", value);
         setOnBoarded(true);
       }
       setLoading(false);
@@ -69,8 +62,6 @@ export default function App() {
       <OnBoarding setOnBoarded={setOnBoarded} />
     </View>
   );
-
-
 }
 
 const styles = StyleSheet.create({
@@ -80,11 +71,4 @@ const styles = StyleSheet.create({
     alignItems: "center",
     marginTop: 50,
   },
-
-  
-  
 });
-
-
-
-

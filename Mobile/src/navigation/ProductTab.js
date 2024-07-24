@@ -4,6 +4,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import Produits from "../screen/Produits";
 import Product from "../components/products/Product";
 import Recipe from "../components/Recipes/Recipe";
+import Store from "../components/Stores/Store";
 
 const Stack = createStackNavigator();
 
@@ -22,6 +23,13 @@ function ProductTab({ renderHeaderLeft }) {
         <Stack.Screen
           name="Recette"
           component={Recipe}
+          options={({ navigation }) => ({
+            headerLeft: () => renderHeaderLeft({ navigation }),
+          })}
+        />
+        <Stack.Screen
+          name="Magasin"
+          component={Store}
           options={({ navigation }) => ({
             headerLeft: () => renderHeaderLeft({ navigation }),
           })}
