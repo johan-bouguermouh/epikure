@@ -1,15 +1,27 @@
 "use client";
 
+import React, { useState } from 'react';
 import Image from 'next/image';
 import Logo from '../../public/logo/Epikure_dark.svg';
 import { useIsProducerContext } from '../context/IsProducerContext';
+import FormLoginComponent from './FormLoginComponent'; // Assurez-vous que le chemin est correct
+import ModalComponent from './ModalComponent'; // Assurez-vous que le chemin est correct
 
 function NavComponent() {
     const { setIsProducer } = useIsProducerContext();
+    const [isModalOpen, setIsModalOpen] = useState(false); // État pour gérer la modal
 
     const handleProducer = () => {
         setIsProducer(false);
-    }
+    };
+
+    const openModal = () => {
+        setIsModalOpen(true);
+    };
+
+    const closeModal = () => {
+        setIsModalOpen(false);
+    };
 
     return (
         <header>
@@ -20,10 +32,16 @@ function NavComponent() {
                     className="cursor-pointer w-40 h-10"
                     onClick={handleProducer}
                 />
-                <button className="bg-primary-500 text-white px-4 py-2 rounded">
-                    Espace Agriculteur(trice)
+                <button
+                    onClick={openModal}
+                    className="bg-primary-500 text-white px-4 py-2 rounded"
+                >
+                    Espace Producteur(trice)
                 </button>
             </nav>
+            <ModalComponent isOpen={isModalOpen} onClose={closeModal}>
+                <FormLoginComponent />
+            </ModalComponent>
         </header>
     );
 }

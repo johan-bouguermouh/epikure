@@ -14,6 +14,7 @@ import {
     FormLabel,
     FormMessage,
 } from "@/components/ui/form"; // Assurez-vous que ce chemin est correct
+import { useRouter } from 'next/navigation'; // Importer le hook useRouter pour la redirection
 
 // Définir le schéma de validation
 const loginSchema = z.object({
@@ -31,11 +32,16 @@ function LoginComponent() {
     });
 
     const { handleSubmit, control, formState: { errors } } = form;
+    const router = useRouter(); // Hook pour la redirection
 
     const onSubmit = async (data) => {
         console.log('Connexion avec:', data);
         // Remplacez cette ligne par l'appel API approprié
         // Exemple : await loginUser(data.email, data.password);
+    };
+
+    const handleSignUpRedirect = () => {
+        router.push('/auth/signUp'); // Redirige vers la page d'inscription
     };
 
     return (
@@ -82,6 +88,19 @@ function LoginComponent() {
                 <Button type="submit" className="bg-primary-500 text-white hover:bg-primary-600">
                     Se connecter
                 </Button>
+
+                <div className="text-center mt-4">
+                    <p className="text-sm text-gray-600">
+                        Vous n'avez pas de compte ?
+                        <button
+                            type="button"
+                            onClick={handleSignUpRedirect}
+                            className="text-primary-500 hover:underline ml-1"
+                        >
+                            Inscrivez-vous
+                        </button>
+                    </p>
+                </div>
             </form>
         </Form>
     );
