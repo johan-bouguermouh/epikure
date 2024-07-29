@@ -4,7 +4,7 @@
 import { BadgeCheck, Info, Mail, Rocket, UserRoundPen } from "lucide-react";
 import Image from "next/image";
 import BgImg from "../../public/bg-sidebar.jpg";
-import { useFormContext } from "../context/FormContext";
+import { useFormContext } from "../../context/FormContext";
 
 const steps = [
   {

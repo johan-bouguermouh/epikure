@@ -15,15 +15,16 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import { useFormContext } from "../context/FormContext";
+import { useFormContext } from "../../context/FormContext";
+import { useEffect } from "react";
 
 const formSchema = z.object({
   gender: z.string(),
   city: z.string().min(2).max(50),
-  postalCode: z.string().min(2).max(10),
+  zipCode: z.string().min(2).max(10),
   isBio: z.boolean(),
-  firstName: z.string().min(2).max(50),
-  lastName: z.string().min(2).max(50),
+  managerFirstName: z.string().min(2).max(50),
+  managerLastName: z.string().min(2).max(50),
 });
 
 function FormOtherComponent() {
@@ -33,10 +34,10 @@ function FormOtherComponent() {
     defaultValues: {
       gender: formData.gender || "",
       city: formData.city || "",
-      postalCode: formData.postalCode || "",
+      zipCode: formData.zipCode || "",
       isBio: formData.isBio || false,
-      firstName: formData.firstName || "",
-      lastName: formData.lastName || "",
+      managerFirstName: formData.managerFirstName || "",
+      managerLastName: formData.managerLastName || "",
     },
   });
 
@@ -68,9 +69,11 @@ function FormOtherComponent() {
         />
 
         <FormItem>
-          <FormLabel className="font-bold font-rubik">Nom de l'Entreprise</FormLabel>
+          <FormLabel className="font-bold font-rubik">
+            Nom de l'Entreprise
+          </FormLabel>
           <FormControl>
-            <Input value={formData.businessName || ""} readOnly />
+            <Input value={formData.publicName || ""} readOnly />
           </FormControl>
         </FormItem>
 
@@ -90,10 +93,12 @@ function FormOtherComponent() {
 
         <FormField
           control={form.control}
-          name="postalCode"
+          name="zipCode"
           render={({ field }) => (
             <FormItem>
-              <FormLabel className="font-bold font-rubik">Code Postal</FormLabel>
+              <FormLabel className="font-bold font-rubik">
+                Code Postal
+              </FormLabel>
               <FormControl>
                 <Input placeholder="Code Postal" {...field} />
               </FormControl>
@@ -137,7 +142,7 @@ function FormOtherComponent() {
 
         <FormField
           control={form.control}
-          name="firstName"
+          name="managerFirstName"
           render={({ field }) => (
             <FormItem>
               <FormLabel className="font-bold font-rubik">Prénom</FormLabel>
@@ -151,7 +156,7 @@ function FormOtherComponent() {
 
         <FormField
           control={form.control}
-          name="lastName"
+          name="managerLastName"
           render={({ field }) => (
             <FormItem>
               <FormLabel className="font-bold font-rubik">Nom</FormLabel>
