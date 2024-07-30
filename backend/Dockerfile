@@ -23,6 +23,9 @@ RUN npm rebuild bcrypt
 
 RUN npm install @nestjs/jwt @nestjs/passport passport passport-jwt --legacy-peer-deps
 
+RUN npm install
+
+
 
 # Copy the rest of the application code
 COPY . .

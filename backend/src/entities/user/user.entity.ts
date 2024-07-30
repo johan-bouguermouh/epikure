@@ -6,6 +6,7 @@ import {
   OneToOne,
 } from 'typeorm';
 import { Role } from '../roles/role.entity';
+import { Exclude } from 'class-transformer';
 
 @Entity()
 export class User {
@@ -31,6 +32,7 @@ export class User {
   /**
    * Création du password
    */
+  @Exclude()
   @Column({ nullable: false, length: 255 })
   password: string;
 }

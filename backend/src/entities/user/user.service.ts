@@ -65,6 +65,14 @@ export class UserService {
     return this.userRepository.find();
   }
 
+  async findOne(id: number): Promise<User> {
+    return this.userRepository.findOne({ where: { id } });
+  }
+
+  async findOneByEmail(email: string): Promise<User> {
+    return this.userRepository.findOne({ where: { email } });
+  }
+
   async insertRole(name: string): Promise<Role> {
     const role = new Role();
     role.name = name;
