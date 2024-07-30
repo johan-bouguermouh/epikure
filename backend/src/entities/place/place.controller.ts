@@ -16,6 +16,7 @@ import { QueryParamsAutocompleteDto } from './dto/query-params-autocomplete.dto'
 import { QueryParamsPlaceIdDto } from './dto/query-params-placeid.dto';
 import { PublicPlaceDto } from './dto/public-place.dto';
 import { Farmer } from '../farmer/farmer.entity';
+import { Public } from 'src/decorator/public-acess.decorator';
 
 @Controller('place')
 export class PlaceController {
@@ -31,6 +32,7 @@ export class PlaceController {
     return this.placeService.findAll();
   }
 
+  @Public()
   @UseInterceptors(ClassSerializerInterceptor)
   @Get('map')
   async findAllMap(
@@ -40,12 +42,14 @@ export class PlaceController {
     return this.placeService.findAllByPosition(latitude, longitude);
   }
 
+  @Public()
   @UseInterceptors(ClassSerializerInterceptor)
   @Get('/:id')
   async findOne(@Param('id') id: number): Promise<Place> {
     return this.placeService.findOne(id);
   }
 
+  @Public()
   @UseInterceptors(ClassSerializerInterceptor)
   @Get('/info/:id')
   async getPlaceInfo(@Param('id') id: number): Promise<any> {
@@ -59,6 +63,7 @@ export class PlaceController {
     return this.placeService.getAutoCompletePlace(params);
   }
 
+  @Public()
   @Get('details/:placeId')
   async getDetailsPlace(@Param() params: QueryParamsPlaceIdDto): Promise<any> {
     return this.placeService.getPlaceByPlaceId(params);

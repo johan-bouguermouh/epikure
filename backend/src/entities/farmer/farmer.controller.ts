@@ -16,6 +16,7 @@ import { BodyCreateFarmerDto } from './dto/body-create-farmer.dto';
 import { BodyUpdateProductFarmerDto } from './dto/body-update-product-farme.dto';
 import { query } from 'express';
 import { Coordinates } from 'src/utils/distance.service';
+import { Public } from 'src/decorator/public-acess.decorator';
 
 @Controller('farmer')
 export class FarmerController {
@@ -48,6 +49,7 @@ export class FarmerController {
     return await this.farmerService.updateFarmerProducts(body);
   }
 
+  @Public()
   @UseInterceptors(ClassSerializerInterceptor)
   @Get('/public/:id')
   async getPublicFarmer(
@@ -59,11 +61,13 @@ export class FarmerController {
     return await this.farmerService.getPublicFarmer(id, coord);
   }
 
+  @Public()
   @Get(':id/products')
   async getProducts(@Param('id') id: number): Promise<any> {
     return await this.farmerService.getProducts(id);
   }
 
+  @Public()
   @Get(':id/places')
   async getPlaces(@Param('id') id: number): Promise<any> {
     return await this.farmerService.getPlaces(id);

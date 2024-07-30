@@ -29,23 +29,24 @@ export class GuestController {
     return this.guestService.create(uuid);
   }
 
-  @Public()
   @Get()
   async findAll(): Promise<Guest[]> {
     return this.guestService.findAll();
   }
-
+  @Public()
   @Get(':uuid')
   async findOne(@Param('uuid') uuid: string): Promise<Guest> {
     return this.guestService.findOne(uuid);
   }
 
+  @Public()
   @UseInterceptors(ClassSerializerInterceptor)
   @Get(':uuid/products')
   async findProducts(@Param('uuid') uuid: string): Promise<PublicProductDto[]> {
     return this.guestService.findProducts(uuid);
   }
 
+  @Public()
   @UseInterceptors(ClassSerializerInterceptor)
   @Get(':uuid/places')
   async findPlaces(
@@ -56,6 +57,7 @@ export class GuestController {
     return this.guestService.findPlaces(uuid, latitude, longitude);
   }
 
+  @Public()
   @UseInterceptors(ClassSerializerInterceptor)
   @Get(':uuid/farmers')
   async findFarmers(
@@ -66,6 +68,7 @@ export class GuestController {
     return this.guestService.findFarmers(uuid, latitude, longitude);
   }
 
+  @Public()
   @UseInterceptors(ClassSerializerInterceptor)
   @Post(':uuid/products')
   async guestAddOneProduct(
@@ -76,6 +79,7 @@ export class GuestController {
     return this.guestService.addFavoriteProduct(uuid, productId);
   }
 
+  @Public()
   @UseInterceptors(ClassSerializerInterceptor)
   @Post(':uuid/places')
   async guestAddOnePlace(
@@ -86,6 +90,7 @@ export class GuestController {
     return this.guestService.addFavoritePlace(uuid, body);
   }
 
+  @Public()
   @UseInterceptors(ClassSerializerInterceptor)
   @Post(':uuid/farmers')
   async guestAddOneFarmer(
@@ -95,6 +100,7 @@ export class GuestController {
     return this.guestService.addFavoriteFarmer(uuid, body);
   }
 
+  @Public()
   @UseInterceptors(ClassSerializerInterceptor)
   @Delete(':uuid/farmers/:farmerId')
   async guestDeleteOneFarmer(
@@ -104,6 +110,7 @@ export class GuestController {
     return this.guestService.deleteMyFavoriteFarmer(uuid, farmerId);
   }
 
+  @Public()
   @UseInterceptors(ClassSerializerInterceptor)
   @Delete(':uuid/places/:placeId')
   async guestDeleteOnePlace(
@@ -113,6 +120,7 @@ export class GuestController {
     return this.guestService.deleteMyFavoritePlace(uuid, placeId);
   }
 
+  @Public()
   @UseInterceptors(ClassSerializerInterceptor)
   @Delete(':uuid/products/:productId')
   async guestDeleteOneProduct(
