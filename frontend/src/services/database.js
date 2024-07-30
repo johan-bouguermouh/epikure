@@ -22,6 +22,37 @@ class AxiosService {
         return this.handleResponseError(error);
       }
     );
+
+    this.instance.interceptors.request.use(
+      (config) => {
+        // Traiter les requêtes avant envoi
+        return config;
+      },
+      (error) => {
+        // Traiter les erreurs de requête
+        return Promise.reject(error);
+      }
+    );
+  }
+
+  // Méthode pour ajouter un intercepteur de requête
+  addRequestInterceptor(onFulfilled, onRejected) {
+    return this.instance.interceptors.request.use(onFulfilled, onRejected);
+  }
+
+  // Méthode pour supprimer un intercepteur de requête
+  removeRequestInterceptor(interceptorId) {
+    this.instance.interceptors.request.eject(interceptorId);
+  }
+
+  // Méthode pour ajouter un intercepteur de réponse
+  addResponseInterceptor(onFulfilled, onRejected) {
+    return this.instance.interceptors.response.use(onFulfilled, onRejected);
+  }
+
+  // Méthode pour supprimer un intercepteur de réponse
+  removeResponseInterceptor(interceptorId) {
+    this.instance.interceptors.response.eject(interceptorId);
   }
 
   // Méthode pour les requêtes GET
