@@ -4,11 +4,11 @@ import React, { useEffect, useRef, useState } from "react";
 import { Pencil } from "lucide-react";
 import { Button } from "../ui/button";
 import Image from "next/image";
-import BannerImg from "../../public/bannerProfil.jpg";
+import BannerImg from "../../../public/bannerProfil.jpg";
 // import ProfilImg from "../../public/profil.jpg";
-import profilImgM from "../../public/default_profil_M.png";
-import profilImgF from "../../public/default_profil_F.png";
-import { useFormContext } from "../../context/FormContext"; // Importer le contexte
+import profilImgM from "../../../public/default_profil_M.png";
+import profilImgF from "../../../public/default_profil_F.png";
+import { useFormContext } from "../../context/FormContext";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 
 function FormProfilComponent() {
@@ -76,7 +76,17 @@ function FormProfilComponent() {
     // Mettre à jour les données du formulaire globales
     updateFormData({ username, shortDescription, description });
     // Afficher les données du formulaire dans la console
-    insertFarmerInfos();
+    try {
+      insertFarmerInfos()
+        .then((res) => {
+          nextStep();
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
