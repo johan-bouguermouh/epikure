@@ -1,6 +1,6 @@
 "use client";
 
-import { useFormContext } from "../context/FormContext";
+import { useFormContext } from "../../context/FormContext";
 import FormCompanyInfoComponent from "./FormCompanyInfoComponent";
 import FormOtherComponent from "./FormOtherComponent";
 import FormProfilComponent from "./FormProfilComponent";

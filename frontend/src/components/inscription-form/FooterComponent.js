@@ -2,9 +2,9 @@
 
 import { Facebook, Instagram, Linkedin, Twitter } from "lucide-react";
 import Image from "next/image";
-import AppStoreBadge from "../../public/download_plateforms/App_store_badge.svg";
-import PlayStoreBadge from "../../public/download_plateforms/Play_store_badge.png";
-import Logo from "../../public/logo/Epikure_light.svg";
+import AppStoreBadge from "../../../public/download_plateforms/App_store_badge.svg";
+import PlayStoreBadge from "../../../public/download_plateforms/Play_store_badge.png";
+import Logo from "../../../public/logo/Epikure_light.svg";
 
 function FooterComponent() {
   return (
@@ -15,14 +15,10 @@ function FooterComponent() {
             <h4>EPIKURE</h4>
             <ul>
               <li>
-                <a href="#">
-                  Nos valeurs
-                </a>
+                <a href="#">Nos valeurs</a>
               </li>
               <li>
-                <a href="#">
-                  Nous contacter
-                </a>
+                <a href="#">Nous contacter</a>
               </li>
             </ul>
           </div>
@@ -39,9 +35,7 @@ function FooterComponent() {
           </div>
         </div>
         <div className="space-y-4">
-          <h4>
-            Télécharger EPIKURE
-          </h4>
+          <h4>Télécharger EPIKURE</h4>
           <p className="mx-3 text-black">
             Téléchargez l'application mobile pour accéder à tous nos services
           </p>

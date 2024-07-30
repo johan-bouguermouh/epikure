@@ -1,49 +1,92 @@
 "use client";
 
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Pencil } from "lucide-react";
-import { Button } from "./ui/button";
+import { Button } from "../ui/button";
 import Image from "next/image";
-import BannerImg from "../../public/bannerProfil.jpg";
-import ProfilImg from "../../public/profil.jpg";
-import { useFormContext } from "../context/FormContext"; // Importer le contexte
+import BannerImg from "../../../public/bannerProfil.jpg";
+// import ProfilImg from "../../public/profil.jpg";
+import profilImgM from "../../../public/default_profil_M.png";
+import profilImgF from "../../../public/default_profil_F.png";
+import { useFormContext } from "../../context/FormContext";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 
 function FormProfilComponent() {
-  const { formData, updateFormData, prevStep, nextStep } = useFormContext(); // Accéder aux données du formulaire depuis le contexte
+  const {
+    formData,
+    updateFormData,
+    prevStep,
+    nextStep,
+    setBannerImage,
+    setAvatarImage,
+    insertFarmerInfos,
+    genderIs,
+  } = useFormContext(); // Accéder aux données du formulaire depuis le contexte
   const [bannerImg, setBannerImg] = useState(BannerImg);
-  const [profileImg, setProfileImg] = useState(ProfilImg); // Ajout de l'état pour l'image de profil
+  const [profileImg, setProfileImg] = useState(
+    genderIs() === "M." ? profilImgM : profilImgF
+  ); // État local pour l'image de profil
   const [username, setUsername] = useState(formData.username || ""); // État local pour le nom d'utilisateur
-  const [shortDescription, setShortDescription] = useState(formData.shortDescription || ""); // État local pour la courte description
-  const [longDescription, setLongDescription] = useState(formData.longDescription || ""); // État local pour la longue description
-
+  const [shortDescription, setShortDescription] = useState(
+    formData.shortDescription || ""
+  ); // État local pour la courte description
+  const [description, setDescription] = useState(formData.description || ""); // État local pour la longue description
+  const textareaDescriptionRef = useRef(null);
+  const textareaShortDescriptionRef = useRef(null); // Référence pour le champ de texte de la courte description
   const bannerFileInputRef = useRef(null);
   const profileFileInputRef = useRef(null); // Référence pour l'input de type file pour l'image de profil
+
+  useEffect(() => {
+    if (textareaDescriptionRef.current) {
+      textareaDescriptionRef.current.style.height = "auto";
+      textareaDescriptionRef.current.style.height = `${textareaDescriptionRef.current.scrollHeight}px`;
+    }
+  }, [description]);
+
+  useEffect(() => {
+    if (textareaShortDescriptionRef.current) {
+      textareaShortDescriptionRef.current.style.height = "auto";
+      textareaShortDescriptionRef.current.style.height = `${textareaShortDescriptionRef.current.scrollHeight}px`;
+    }
+  }, [shortDescription]);
 
   const handleBannerImg = (e) => {
     const file = e.target.files[0];
     const reader = new FileReader();
     reader.onloadend = () => {
       setBannerImg(reader.result);
+      setBannerImage(file);
     };
     reader.readAsDataURL(file);
   };
 
-  const handleProfileImg = (e) => { // Fonction pour gérer le changement de l'image de profil
+  const handleProfileImg = (e) => {
+    // Fonction pour gérer le changement de l'image de profil
     const file = e.target.files[0];
     const reader = new FileReader();
     reader.onloadend = () => {
       setProfileImg(reader.result);
+      setAvatarImage(file);
     };
     reader.readAsDataURL(file);
   };
 
   const handleFinalizeClick = () => {
-    nextStep();
+    //nextStep();
     // Mettre à jour les données du formulaire globales
-    updateFormData({ username, shortDescription, longDescription });
+    updateFormData({ username, shortDescription, description });
     // Afficher les données du formulaire dans la console
-    console.log("Form Data:", { ...formData, username, shortDescription, longDescription });
+    try {
+      insertFarmerInfos()
+        .then((res) => {
+          nextStep();
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -115,6 +158,7 @@ function FormProfilComponent() {
       {/* Short Description Textarea */}
       <div className="mt-4">
         <textarea
+          ref={textareaShortDescriptionRef}
           placeholder="Présentez-vous en quelques mots (255 caractères max)..."
           className="w-full px-4 py-2 border border-gray-300 rounded-md overflow-hidden resize-none"
           rows="2"
@@ -126,12 +170,12 @@ function FormProfilComponent() {
       {/* Long Description Textarea */}
       <div className="mt-4">
         <textarea
+          ref={textareaDescriptionRef}
           placeholder="Décrivez votre métier et votre rapport à la terre (720 caractères max)..."
-          className="w-full px-4 py-2 border border-gray-300 rounded-md overflow-hidden resize-none"
-          rows="4"
+          className="w-full px-4 py-2 border border-gray-300 rounded-md overflow-hidden resize-none h-auto"
           maxLength="720"
-          value={longDescription}
-          onChange={(e) => setLongDescription(e.target.value)}
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
         />
       </div>
       {/* Submit Button */}
@@ -144,7 +188,11 @@ function FormProfilComponent() {
         <Button type="button" onClick={prevStep}>
           <ArrowLeft />
         </Button>
-        <Button type="submit" className="bg-primary-500 text-white hover:bg-dark-primary-500" onClick={handleFinalizeClick}>
+        <Button
+          type="submit"
+          className="bg-primary-500 text-white hover:bg-dark-primary-500"
+          onClick={handleFinalizeClick}
+        >
           Finaliser le profil
         </Button>
       </div>

@@ -3,7 +3,7 @@
 import { useRef } from "react";
 import CommentaryComponent from "../components/CommentaryComponent";
 import ExplanationCardComponent from "../components/ExplanationCardComponent";
-import FooterComponent from "../components/FooterComponent";
+import FooterComponent from "../components/inscription-form/FooterComponent";
 import HeroBannerComponent from "../components/HeroBannerComponent";
 import NavComponent from "../components/NavComponent";
 import StepCardComponent from "../components/StepCardCompenent";

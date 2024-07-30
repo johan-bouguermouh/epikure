@@ -37,7 +37,7 @@ export class FarmerController {
   async getInfoFarmer(@Body() body: GetIforFarmerDto): Promise<any> {
     return await this.farmerService.getInfoFarmer(
       body.denomination,
-      body.siretorSiren,
+      body.siretOrSiren,
     );
   }
 

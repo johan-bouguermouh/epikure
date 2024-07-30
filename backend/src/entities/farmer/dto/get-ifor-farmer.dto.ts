@@ -5,5 +5,5 @@ export class GetIforFarmerDto {
   denomination: string;
 
   @IsNumberString()
-  siretorSiren: string;
+  siretOrSiren: string;
 }

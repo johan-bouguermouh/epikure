@@ -77,11 +77,11 @@ export class FarmerService {
 
   async getInfoFarmer(
     denomination: string,
-    siretorSiren: string,
+    siretOrSiren: string,
   ): Promise<any> {
     //On verifi si on récupère le siret ou le siren en question
 
-    const siretOrSirenNumber: SiretOrSiren = isSiretOrSiren(siretorSiren);
+    const siretOrSirenNumber: SiretOrSiren = isSiretOrSiren(siretOrSiren);
 
     const response: any = await fetch(
       `https://recherche-entreprises.api.gouv.fr/search?q=?${denomination}`,
@@ -94,11 +94,11 @@ export class FarmerService {
     switch (siretOrSirenNumber.type) {
       case 'siret':
         return response.results.filter(
-          (etablissement: any) => etablissement.siege.siret === siretorSiren,
+          (etablissement: any) => etablissement.siege.siret === siretOrSiren,
         );
       case 'siren':
         return response.results.filter(
-          (etablissement: any) => etablissement.siren === siretorSiren,
+          (etablissement: any) => etablissement.siren === siretOrSiren,
         );
       default:
         return response.etablissement;

@@ -5,7 +5,7 @@ class AxiosService {
     this.endpoint = endpoint;
     this.instance = axios.create({
       baseURL: `${process.env.NEXT_PUBLIC_API_URL}:${process.env.NEXT_PUBLIC_API_PORT}/`,
-      timeout: 1000,
+      timeout: 5000,
       headers: {
         "Content-Type": "application/json",
       },
@@ -26,23 +26,24 @@ class AxiosService {
 
   // Méthode pour les requêtes GET
   get(url, config = {}) {
-    console.log(`GET URL: ${this.endpoint}/${url}`);
+    console.log(`GET URL: ${this.endpoint}${url}`);
     return this.instance.get(`${this.endpoint}${url}`, config);
   }
 
   // Méthode pour les requêtes POST
   post(url, data, config = {}) {
-    return this.instance.post(`${this.endpoint}/${url}`, data, config);
+    console.log(`GET URL: ${this.endpoint}${url}`);
+    return this.instance.post(`${this.endpoint}${url}`, data, config);
   }
 
   // Méthode pour les requêtes PUT
   put(url, data, config = {}) {
-    return this.instance.put(`${this.endpoint}/${url}`, data, config);
+    return this.instance.put(`${this.endpoint}${url}`, data, config);
   }
 
   // Méthode pour les requêtes DELETE
   delete(url, config = {}) {
-    return this.instance.delete(`${this.endpoint}/${url}`, config);
+    return this.instance.delete(`${this.endpoint}${url}`, config);
   }
 
   // Méthode pour gérer les erreurs de réponse

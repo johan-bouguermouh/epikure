@@ -14,20 +14,40 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { ArrowRight } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import { useFormContext } from "../context/FormContext";
+import { useFormContext } from "../../context/FormContext";
+import FarmerService from "@/services/farmer.services";
+
+const passwordSchema = z
+  .string()
+  .min(8, { message: "Le mot de passe doit contenir au moins 8 caractères" })
+  .refine((value) => /[a-z]/.test(value), {
+    message: "Le mot de passe doit contenir au moins une minuscule",
+  })
+  .refine((value) => /[A-Z]/.test(value), {
+    message: "Le mot de passe doit contenir au moins une majuscule",
+  })
+  .refine((value) => /[0-9]/.test(value), {
+    message: "Le mot de passe doit contenir au moins un chiffre",
+  })
+  .refine((value) => /[!@#$%^&*(),.?":{}|<>]/.test(value), {
+    message: "Le mot de passe doit contenir au moins un caractère spécial",
+  });
 
 const formSchema = z.object({
   siretOrSiren: z.string().min(9).max(14),
-  legalStatus: z.string().optional(),
-  email: z.string().email({ message: "Invalid email address" }),
-  password: z.string().min(6, { message: "Password must be at least 6 characters long" }),
-  confirmPassword: z.string().min(6, { message: "Password must be at least 6 characters long" }),
-}).refine(data => data.password === data.confirmPassword, {
-  message: "Passwords don't match",
-  path: ["confirmPassword"],
+  socialReasonName: z.string().optional(),
+  email: z.string().email({ message: "Email invalide" }),
+  password: passwordSchema,
+  confirmPassword: z
+    .string()
+    .refine((data) => data.password === data.confirmPassword, {
+      message: "Les mots de passe ne correspondent pas",
+      path: ["confirmPassword"],
+    }),
 });
 
 function FormCompanyInfoComponent() {
+  const farmerService = new FarmerService();
   const {
     formData,
     updateFormData,
@@ -36,11 +56,12 @@ function FormCompanyInfoComponent() {
     loading,
     error,
   } = useFormContext();
+  // const farmerService = new FarmerService();
   const form = useForm({
     resolver: zodResolver(formSchema),
     defaultValues: {
       siretOrSiren: formData.siretOrSiren || "",
-      legalStatus: formData.legalStatus || "",
+      socialReasonName: formData.socialReasonName || "",
       email: formData.email || "",
       password: "",
       confirmPassword: "",
@@ -50,7 +71,8 @@ function FormCompanyInfoComponent() {
   async function onSubmit(values) {
     const { confirmPassword, ...rest } = values;
     updateFormData(rest);
-    await fetchCompanyDetails(values.siretOrSiren);
+    const { siretOrSiren, socialReasonName: denomination } = rest;
+    await fetchCompanyDetails({ siretOrSiren, denomination });
   }
 
   return (
@@ -74,7 +96,7 @@ function FormCompanyInfoComponent() {
 
         <FormField
           control={form.control}
-          name="legalStatus"
+          name="socialReasonName"
           render={({ field }) => (
             <FormItem>
               <FormLabel>Statut Juridique</FormLabel>
@@ -121,7 +143,11 @@ function FormCompanyInfoComponent() {
             <FormItem>
               <FormLabel>Confirmer le mot de passe</FormLabel>
               <FormControl>
-                <Input type="password" placeholder="Confirmer le mot de passe" {...field} />
+                <Input
+                  type="password"
+                  placeholder="Confirmer le mot de passe"
+                  {...field}
+                />
               </FormControl>
               <FormMessage />
             </FormItem>
