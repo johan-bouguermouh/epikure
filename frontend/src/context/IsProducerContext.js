@@ -1,19 +1,30 @@
 "use client";
 
-import React, { createContext, useContext, useState } from 'react';
+import React, { createContext, useState, useContext } from "react";
 
-const IsProducerContext = createContext();
+const FarmerContext = createContext();
 
-export function useIsProducerContext() {
-    return useContext(IsProducerContext);
+export default function FarmerProvider({ children } = {}) {
+  const [isProducer, setIsProducer] = useState(false);
+  const [farmer, setFarmer] = useState(null);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
+  return (
+    <FarmerContext.Provider
+      value={{
+        isProducer,
+        setIsProducer,
+        setFarmer,
+        farmer,
+        isSidebarOpen,
+        setIsSidebarOpen,
+      }}
+    >
+      {children}
+    </FarmerContext.Provider>
+  );
 }
 
-export default function IsProducerProvider({ children }) {
-    const [isProducer, setIsProducer] = useState(false);
-
-    return (
-        <IsProducerContext.Provider value={{ isProducer, setIsProducer }}>
-            {children}
-        </IsProducerContext.Provider>
-    );
+export function useFarmerContext() {
+  return useContext(FarmerContext);
 }

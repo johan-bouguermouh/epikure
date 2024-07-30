@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
-import { useIsProducerContext } from "../context/IsProducerContext";
+import { useFarmerContext } from "../context/IsProducerContext";
 import Modal from "./ModalComponent";
 import FormLoginComponent from "./inscription-form/FormLoginComponent";
 import Image from "next/image";
@@ -10,7 +10,7 @@ import BannerImg from "../../public/bg-landing-page.jpg";
 
 function HeroBannerComponent({ isProducer, onConsoAction }) {
   const router = useRouter();
-  const { setIsProducer } = useIsProducerContext();
+  const { setIsProducer } = useFarmerContext();
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleConsoAction = () => {
