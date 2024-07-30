@@ -3,12 +3,12 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import Logo from "../../public/logo/Epikure_dark.svg";
-import { useIsProducerContext } from "../context/IsProducerContext";
+import { useFarmerContext } from "../context/IsProducerContext";
 import FormLoginComponent from "./inscription-form/FormLoginComponent"; // Assurez-vous que le chemin est correct
 import ModalComponent from "./ModalComponent"; // Assurez-vous que le chemin est correct
 
 function NavComponent() {
-  const { setIsProducer } = useIsProducerContext();
+  const { setIsProducer } = useFarmerContext();
   const [isModalOpen, setIsModalOpen] = useState(false); // État pour gérer la modal
 
   const handleProducer = () => {

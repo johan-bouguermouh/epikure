@@ -7,10 +7,10 @@ import FooterComponent from "../components/inscription-form/FooterComponent";
 import HeroBannerComponent from "../components/HeroBannerComponent";
 import NavComponent from "../components/NavComponent";
 import StepCardComponent from "../components/StepCardCompenent";
-import { useIsProducerContext } from "../context/IsProducerContext";
+import { useFarmerContext } from "../context/IsProducerContext";
 
 export default function HomePage() {
-  const { isProducer } = useIsProducerContext();
+  const { isProducer } = useFarmerContext();
   const productSectionRef = useRef(null);
 
   const scrollToProductSection = () => {
