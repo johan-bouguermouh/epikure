@@ -18,6 +18,7 @@ import { PublicProductDto } from '../product/dto/public-product.dto';
 import { BodyGuestAddPlaceDto } from './dto/body-add-place.dto';
 import { PublicPlaceDto } from '../place/dto/public-place.dto';
 import { BodyGuestAddFarmerDto } from './dto/body-add-farmer.dto';
+import { Public } from 'src/decorator/public-acess.decorator';
 
 @Controller('guest')
 export class GuestController {
@@ -28,6 +29,7 @@ export class GuestController {
     return this.guestService.create(uuid);
   }
 
+  @Public()
   @Get()
   async findAll(): Promise<Guest[]> {
     return this.guestService.findAll();
