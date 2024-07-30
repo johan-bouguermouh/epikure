@@ -26,6 +26,10 @@ class AxiosService {
     this.instance.interceptors.request.use(
       (config) => {
         // Traiter les requêtes avant envoi
+        const token = Cookies.get("jwtToken");
+        if (token) {
+          config.headers.Authorization = `Bearer ${token}`;
+        }
         return config;
       },
       (error) => {
